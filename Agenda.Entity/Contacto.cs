@@ -12,14 +12,14 @@ namespace Agenda.Entity
         public const string areaDefault = "TODOS";
         public const string activoDefault = "TODOS";
 
-        private string nombre;
-        private string apellido;
-        private string localidad;
-        private string fechaIngresoDesde;
-        private string fechaIngresoHasta;
-        private string contactoInterno; // TODOS (DEF), SI, NO.
-        private string organizacion;
-        private string area; //TODOS (DEF), Marketing, Finanzas, RRHH, Operaciones.
-        private string activo; // TODOS (DEF), SI, NO.
+        private int id { get; set; } // ID de contacto
+        private string apellidoYnombre { get; set; }
+        private string localidad { get; set; }
+        private string fechaIngresoDesde { get; set; }
+        private string fechaIngresoHasta { get; set; }
+        private string contactoInterno { get; set; } // TODOS (DEF), SI, NO.
+        private string organizacion { get; set; }
+        private string area { get; set; } //TODOS (DEF), Marketing, Finanzas, RRHH, Operaciones.
+        private string activo { get; set; } // TODOS (DEF), SI, NO.
     }
 }

@@ -3,8 +3,14 @@ using Agenda.Entity;
 
 namespace Agenda.BLL
 {
-    interface IAgendaContactos
+    interface IAgendaContacto 
     {
-        Contacto getContacto(Contacto contactoBuscar);
+        Contacto getContactoById(Contacto contactoBuscar);
+        List<Contacto> getlistaContactosPorFiltro(string idFiltro); // recibe un string que espeficia que campo se usara para filtrar.
+        void modificarContacto();
+        void insertarContacto();
+        void eliminarContacto();
+
+
     }
 }
