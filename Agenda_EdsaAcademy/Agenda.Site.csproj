@@ -223,6 +223,16 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Agenda.BLL\Agenda.BLL.csproj">
+      <Project>{9CFA5158-7FFB-4DD4-B971-D7DFCDF55A34}</Project>
+      <Name>Agenda.BLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Agenda.Entity\Agenda.Entity.csproj">
+      <Project>{B6871BEA-6C40-4182-A604-7107346BAB47}</Project>
+      <Name>Agenda.Entity</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

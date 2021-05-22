@@ -1,0 +1,9 @@
+D:\New folder (6)\MAURO\GitHub\Agenda_EdsaAcademy\Agenda.BLL\obj\Debug\Agenda.BLL.csprojAssemblyReference.cache
+D:\New folder (6)\MAURO\GitHub\Agenda_EdsaAcademy\Agenda.BLL\obj\Debug\Agenda.BLL.csproj.CoreCompileInputs.cache
+D:\New folder (6)\MAURO\GitHub\Agenda_EdsaAcademy\Agenda.BLL\bin\Debug\Agenda.BLL.dll
+D:\New folder (6)\MAURO\GitHub\Agenda_EdsaAcademy\Agenda.BLL\bin\Debug\Agenda.BLL.pdb
+D:\New folder (6)\MAURO\GitHub\Agenda_EdsaAcademy\Agenda.BLL\bin\Debug\Agenda.Entity.dll
+D:\New folder (6)\MAURO\GitHub\Agenda_EdsaAcademy\Agenda.BLL\bin\Debug\Agenda.Entity.pdb
+D:\New folder (6)\MAURO\GitHub\Agenda_EdsaAcademy\Agenda.BLL\obj\Debug\Agenda.BLL.csproj.CopyComplete
+D:\New folder (6)\MAURO\GitHub\Agenda_EdsaAcademy\Agenda.BLL\obj\Debug\Agenda.BLL.dll
+D:\New folder (6)\MAURO\GitHub\Agenda_EdsaAcademy\Agenda.BLL\obj\Debug\Agenda.BLL.pdb
