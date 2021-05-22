@@ -9,68 +9,68 @@ namespace Agenda.BLL
 {
     public class AgendaContactos : IAgendaContactos
     {
-        public const int idFiltroPorApellidoYnombre = 1;
-        public const int idFiltroPorLocalidad = 2;
-        public const int idFiltroPorFechaDeIngresoDesde = 3;
-        public const int idFiltroPorFechaDeIngresoHasta = 4;
-        public const int idFiltroPorContactoInterno = 5;
-        public const int idFiltroPorOrganizacion = 6;
-        public const int idFiltroPorArea = 7;
-       // public const int idFiltroPorEstadoActivo = 8;
+        enum OPCIONES_FILTRO
+        {
+            APELLIDO_Y_NOMBRE,
+            LOCALIDAD,
+            FECHA_DE_INGRESO_DESDE,
+            FECHA_DE_INGRESO_HASTA,
+            CONTACTO_INTERNO,
+            ORGANIZACION,
+            AREA,
+            ACTIVO
+        }
 
         public List<Contacto> listaContactos;
+
 
         public AgendaContactos(List<Contacto> listaContactos)
         {
             this.listaContactos = listaContactos;
         }
-
         public Contacto getContactoById(Contacto contactoBuscar)
         {
             return this.listaContactos.Single(p => p.id.Equals(contactoBuscar.id));
         }
         public List<Contacto> getlistaContactosPorFiltro(FiltroContacto filtro)
         {
-            if (!string.IsNullOrEmpty(filtro.valorFiltro))
+            if (!string.IsNullOrEmpty(filtro.valorFiltro) && filtro.valorFiltro != null)
             {
-                if (filtro.idFiltro == idFiltroPorApellidoYnombre)
+                switch (filtro.idFiltro)
                 {
-                    return this.listaContactos.FindAll(p => p.apellidoYnombre.Contains(filtro.valorFiltro)).OrderBy(p => p.id).ToList();
-                }
-                else if (filtro.idFiltro == idFiltroPorLocalidad)
-                {
-                    return this.listaContactos.FindAll(p => p.localidad.Contains(filtro.valorFiltro)).OrderBy(p => p.id).ToList();
-                }
-                else if (filtro.idFiltro == idFiltroPorFechaDeIngresoDesde)
-                {
-                    return this.listaContactos.FindAll(p => p.fechaIngresoDesde.Contains(filtro.valorFiltro)).OrderBy(p => p.id).ToList();
-                }
-                else if (filtro.idFiltro == idFiltroPorFechaDeIngresoHasta)
-                {
-                    return this.listaContactos.FindAll(p => p.fechaIngresoHasta.Contains(filtro.valorFiltro)).OrderBy(p => p.id).ToList();
-                }
-                else if (filtro.idFiltro == idFiltroPorContactoInterno)
-                {
-                    return this.listaContactos.FindAll(p => p.contactoInterno.Contains(filtro.valorFiltro)).OrderBy(p => p.id).ToList();
-                }
-                else if (filtro.idFiltro == idFiltroPorOrganizacion)
-                {
-                    return this.listaContactos.FindAll(p => p.organizacion.Contains(filtro.valorFiltro)).OrderBy(p => p.id).ToList();
-                }
-                else if (filtro.idFiltro == idFiltroPorArea)
-                {
-                    return this.listaContactos.FindAll(p => p.area.Contains(filtro.valorFiltro)).OrderBy(p => p.id).ToList();
-                }
-                else
-                {
-                    return this.listaContactos.FindAll(p => p.activo.Contains(filtro.valorFiltro)).OrderBy(p => p.id).ToList();
+                    case (int)OPCIONES_FILTRO.APELLIDO_Y_NOMBRE:
+                        return this.listaContactos.FindAll(p => p.apellidoYnombre.Contains(filtro.valorFiltro)).OrderBy(p => p.id).ToList();
+
+                    case (int)OPCIONES_FILTRO.LOCALIDAD:
+                        return this.listaContactos.FindAll(p => p.localidad.Contains(filtro.valorFiltro)).OrderBy(p => p.id).ToList();
+
+                    case (int)OPCIONES_FILTRO.FECHA_DE_INGRESO_DESDE:
+                        return this.listaContactos.FindAll(p => p.fechaIngresoDesde.Contains(filtro.valorFiltro)).OrderBy(p => p.id).ToList();
+
+                    case (int)OPCIONES_FILTRO.FECHA_DE_INGRESO_HASTA:
+                        return this.listaContactos.FindAll(p => p.fechaIngresoHasta.Contains(filtro.valorFiltro)).OrderBy(p => p.id).ToList();
+
+                    case (int)OPCIONES_FILTRO.CONTACTO_INTERNO:
+                        return this.listaContactos.FindAll(p => p.contactoInterno.Equals(filtro.valorFiltro)).OrderBy(p => p.id).ToList();
+
+                    case (int)OPCIONES_FILTRO.ORGANIZACION:
+                        return this.listaContactos.FindAll(p => p.organizacion.Contains(filtro.valorFiltro)).OrderBy(p => p.id).ToList();
+
+                    case (int)OPCIONES_FILTRO.AREA:
+                        return this.listaContactos.FindAll(p => p.area.Contains(filtro.valorFiltro)).OrderBy(p => p.id).ToList();
+
+                    case (int)OPCIONES_FILTRO.ACTIVO:
+                        return this.listaContactos.FindAll(p => p.activo.Equals(filtro.valorFiltro)).OrderBy(p => p.id).ToList();
+
+                    default:
+                        return this.listaContactos.OrderBy(p => p.id).ToList();
                 }
             }
             else
             {
                 return this.listaContactos.OrderBy(p => p.id).ToList();
             }
-        }
+        } // SEGUN QUE ID DE FILTRO LLEGUE, SE FILTRA POR ESE PARAMETRO. SE UTILIZA UN ENUM PARA EL CASE SWITCH.
         public Contacto insertarContacto(Contacto contactoInsertar)
         {
             int maxIdAcutal = this.listaContactos.OrderByDescending(p => p.id).First().id;
@@ -80,18 +80,14 @@ namespace Agenda.BLL
 
             return contactoInsertar;
         }
-        public void modificarContacto(Contacto contactoModificar)
+        public void modificarContacto(Contacto contactoModificar) //LLEGA EL CONTACTO YA MODIFICADO PERO MANTIENE EL ID, ENTONCES BORRA EL CONTACTO VIEJO Y ALMACENA EL MODIFICADO.
         {
-            
+            this.eliminarContacto(contactoModificar);
+            this.insertarContacto(contactoModificar);
         }
         public void eliminarContacto(Contacto contactoEliminar)
         {
-            
-        }
-
-        public void eliminarContacto(Contacto contactoEliminar, FiltroContacto filtroBusquedaEditar)
-        {
-            throw new NotImplementedException();
+            this.listaContactos.Remove(this.listaContactos.Single(p => p.id.Equals(contactoEliminar.id)));
         }
     }
 }

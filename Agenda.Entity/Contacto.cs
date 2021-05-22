@@ -17,9 +17,9 @@ namespace Agenda.Entity
         public string localidad { get; set; }
         public string fechaIngresoDesde { get; set; }
         public string fechaIngresoHasta { get; set; }
-        public string contactoInterno { get; set; } // TODOS (DEF), SI, NO.
+        public Boolean contactoInterno { get; set; } // TODOS (DEF), SI, NO.
         public string organizacion { get; set; }
         public string area { get; set; } //TODOS (DEF), Marketing, Finanzas, RRHH, Operaciones.
-        public string activo { get; set; } // TODOS (DEF), SI, NO.
+        public Boolean activo { get; set; } // TODOS (DEF), SI, NO.
     }
 }
