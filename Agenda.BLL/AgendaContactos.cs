@@ -9,7 +9,7 @@ namespace Agenda.BLL
 {
     public class AgendaContactos : IAgendaContactos
     {
-        enum OPCIONES_FILTRO
+        enum OPCIONES_FILTRO // enum de filtros disponibles.
         {
             APELLIDO_Y_NOMBRE,
             LOCALIDAD,
