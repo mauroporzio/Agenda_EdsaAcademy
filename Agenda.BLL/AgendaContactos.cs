@@ -23,7 +23,6 @@ namespace Agenda.BLL
 
         public List<Contacto> listaContactos;
 
-
         public AgendaContactos(List<Contacto> listaContactos)
         {
             this.listaContactos = listaContactos;
@@ -34,7 +33,7 @@ namespace Agenda.BLL
         }
         public List<Contacto> getlistaContactosPorFiltro(FiltroContacto filtro)
         {
-            if (!string.IsNullOrEmpty(filtro.valorFiltro) && filtro.valorFiltro != null)
+            if (!string.IsNullOrEmpty(filtro.valorFiltro))
             {
                 switch (filtro.idFiltro)
                 {
