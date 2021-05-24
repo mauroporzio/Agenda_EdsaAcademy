@@ -21,7 +21,7 @@ namespace Agenda.BLL
             ACTIVO
         }
 
-        public List<Contacto> listaContactos;
+        public List<Contacto> listaContactos { get; }
 
         public AgendaContactos(List<Contacto> listaContactos)
         {
@@ -31,45 +31,60 @@ namespace Agenda.BLL
         {
             return this.listaContactos.Single(p => p.id.Equals(contactoBuscar.id));
         }
-        public List<Contacto> getlistaContactosPorFiltro(FiltroContacto filtro)
+        public List<Contacto> getlistaContactosPorFiltro(List<FiltroContacto> listaFiltros)
         {
-            if (!string.IsNullOrEmpty(filtro.valorFiltro))
+            if (listaFiltros.Count != 0)
             {
-                switch (filtro.idFiltro)
+                List<Contacto> listaFiltrar = copiarLista(this.listaContactos); // SE COPIA LA LISTA PARA QUE LOS CAMBIOS FUTUROS NO AFECTEN A LA LISTA ORIGINAL.
+
+                foreach (FiltroContacto filtroContacto in listaFiltros)
                 {
-                    case (int)OPCIONES_FILTRO.APELLIDO_Y_NOMBRE:
-                        return this.listaContactos.FindAll(p => p.apellidoYnombre.Contains(filtro.valorFiltro)).OrderBy(p => p.id).ToList();
+                    switch (filtroContacto.idFiltro)
+                    {
+                        case (int)OPCIONES_FILTRO.APELLIDO_Y_NOMBRE:
+                            listaFiltrar =  listaFiltrar.FindAll(p => p.apellidoYnombre.Contains(filtroContacto.valorFiltro)).OrderBy(p => p.apellidoYnombre).ToList();
+                            break;
 
-                    case (int)OPCIONES_FILTRO.LOCALIDAD:
-                        return this.listaContactos.FindAll(p => p.localidad.Contains(filtro.valorFiltro)).OrderBy(p => p.id).ToList();
+                        case (int)OPCIONES_FILTRO.LOCALIDAD:
+                            listaFiltrar = listaFiltrar.FindAll(p => p.localidad.Contains(filtroContacto.valorFiltro)).OrderBy(p => p.apellidoYnombre).ToList();
+                            break;
 
-                    case (int)OPCIONES_FILTRO.FECHA_DE_INGRESO_DESDE:
-                        return this.listaContactos.FindAll(p => p.fechaIngresoDesde.Contains(filtro.valorFiltro)).OrderBy(p => p.id).ToList();
+                        case (int)OPCIONES_FILTRO.FECHA_DE_INGRESO_DESDE:
+                            listaFiltrar = listaFiltrar.FindAll(p => p.fechaIngresoDesde.Contains(filtroContacto.valorFiltro)).OrderBy(p => p.apellidoYnombre).ToList();
+                            break;
 
-                    case (int)OPCIONES_FILTRO.FECHA_DE_INGRESO_HASTA:
-                        return this.listaContactos.FindAll(p => p.fechaIngresoHasta.Contains(filtro.valorFiltro)).OrderBy(p => p.id).ToList();
+                        case (int)OPCIONES_FILTRO.FECHA_DE_INGRESO_HASTA:
+                            listaFiltrar = listaFiltrar.FindAll(p => p.fechaIngresoHasta.Contains(filtroContacto.valorFiltro)).OrderBy(p => p.apellidoYnombre).ToList();
+                            break;
 
-                    case (int)OPCIONES_FILTRO.CONTACTO_INTERNO:
-                        return this.listaContactos.FindAll(p => p.contactoInterno.Equals(filtro.valorFiltro)).OrderBy(p => p.id).ToList();
+                        case (int)OPCIONES_FILTRO.CONTACTO_INTERNO:
+                            listaFiltrar = listaFiltrar.FindAll(p => p.contactoInterno.Equals(filtroContacto.valorFiltro)).OrderBy(p => p.apellidoYnombre).ToList();
+                            break;
 
-                    case (int)OPCIONES_FILTRO.ORGANIZACION:
-                        return this.listaContactos.FindAll(p => p.organizacion.Contains(filtro.valorFiltro)).OrderBy(p => p.id).ToList();
+                        case (int)OPCIONES_FILTRO.ORGANIZACION:
+                            listaFiltrar = listaFiltrar.FindAll(p => p.organizacion.Contains(filtroContacto.valorFiltro)).OrderBy(p => p.apellidoYnombre).ToList();
+                            break;
 
-                    case (int)OPCIONES_FILTRO.AREA:
-                        return this.listaContactos.FindAll(p => p.area.Contains(filtro.valorFiltro)).OrderBy(p => p.id).ToList();
+                        case (int)OPCIONES_FILTRO.AREA:
+                            listaFiltrar = listaFiltrar.FindAll(p => p.area.Contains(filtroContacto.valorFiltro)).OrderBy(p => p.apellidoYnombre).ToList();
+                            break;
 
-                    case (int)OPCIONES_FILTRO.ACTIVO:
-                        return this.listaContactos.FindAll(p => p.activo.Equals(filtro.valorFiltro)).OrderBy(p => p.id).ToList();
+                        case (int)OPCIONES_FILTRO.ACTIVO:
+                            listaFiltrar = listaFiltrar.FindAll(p => p.activo.Equals(filtroContacto.valorFiltro)).OrderBy(p => p.apellidoYnombre).ToList();
+                            break;
 
-                    default:
-                        return this.listaContactos.OrderBy(p => p.id).ToList();
+                        default:
+                            listaFiltrar = listaFiltrar.OrderBy(p => p.apellidoYnombre).ToList();
+                            break;
+                    }
                 }
+                return listaFiltrar;
             }
             else
             {
-                return this.listaContactos.OrderBy(p => p.id).ToList();
+                return this.listaContactos.OrderBy(p => p.apellidoYnombre).ToList();
             }
-        } // SEGUN QUE ID DE FILTRO LLEGUE, SE FILTRA POR ESE PARAMETRO. SE UTILIZA UN ENUM PARA EL CASE SWITCH.
+        } // SEGUN LA LISTA DE FILTROS QUE LLEGUE POR PARAMETRO, SE FILTRA POR UNO, LUEGO SE GUARDA LA LISTA RESULTANTE, Y SE CONTINUA FILTRANDO POR TODO EL ARRAY DE FILTROS. (SE UTILIZA UN ENUM PARA EL CASE SWITCH).
         public Contacto insertarContacto(Contacto contactoInsertar)
         {
             int maxIdAcutal = this.listaContactos.OrderByDescending(p => p.id).First().id;
@@ -88,5 +103,16 @@ namespace Agenda.BLL
         {
             this.listaContactos.Remove(this.listaContactos.Single(p => p.id.Equals(contactoEliminar.id)));
         }
+        private List<Contacto> copiarLista(List<Contacto> listaCopiar)
+        {
+            List<Contacto> listaCopiada = new List<Contacto>();
+
+            foreach(Contacto contactoCopiar in listaCopiar)
+            {
+                listaCopiada.Add(contactoCopiar);
+            }
+
+            return listaCopiada;
+        }// FUNCION UTILIZADA PARA HACER LA COPIA DE LA LISTA Y QUE LOS CAMBIOS FUTUROS NO AFECTEN A LA LISTA ORIGINAL.
     }
 }

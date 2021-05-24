@@ -6,12 +6,8 @@ using System.Threading.Tasks;
 
 namespace Agenda.Entity
 {
-    public class Contacto
+    public class Contacto : IContacto
     {
-        public const string contactoInternoDefault = "TODOS";
-        public const string areaDefault = "TODOS";
-        public const string activoDefault = "TODOS";
-
         public int id { get; set; } // ID de contacto
         public string apellidoYnombre { get; set; }
         public string localidad { get; set; }
@@ -21,5 +17,20 @@ namespace Agenda.Entity
         public string organizacion { get; set; }
         public string area { get; set; } //TODOS (DEF), Marketing, Finanzas, RRHH, Operaciones.
         public Boolean activo { get; set; } // TODOS (DEF), SI, NO.
+
+        public void activarContacto()
+        {
+            if (!this.activo)
+            {
+                this.activo = true;
+            }
+        }
+        public void DesactivarContacto()
+        {
+            if (this.activo)
+            {
+                this.activo = false;
+            }
+        }
     }
 }
