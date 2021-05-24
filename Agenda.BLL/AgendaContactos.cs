@@ -1,28 +1,12 @@
 ﻿using Agenda.Entity;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Agenda.BLL
 {
     public class AgendaContactos : IAgendaContactos
     {
-        enum OPCIONES_FILTRO // enum de filtros disponibles.
-        {
-            APELLIDO_Y_NOMBRE,
-            LOCALIDAD,
-            FECHA_DE_INGRESO_DESDE,
-            FECHA_DE_INGRESO_HASTA,
-            CONTACTO_INTERNO,
-            ORGANIZACION,
-            AREA,
-            ACTIVO
-        }
-
-        public List<Contacto> listaContactos { get; }
-
+        public List<Contacto> listaContactos;
         public AgendaContactos(List<Contacto> listaContactos)
         {
             this.listaContactos = listaContactos;
@@ -35,46 +19,45 @@ namespace Agenda.BLL
         {
             if (listaFiltros.Count != 0)
             {
-                List<Contacto> listaFiltrar = copiarLista(this.listaContactos); // SE COPIA LA LISTA PARA QUE LOS CAMBIOS FUTUROS NO AFECTEN A LA LISTA ORIGINAL.
+                List<Contacto> listaFiltrar = copiarLista(this.listaContactos).OrderBy(p => p.apellidoYnombre).ToList(); // SE COPIA LA LISTA PARA QUE LOS CAMBIOS FUTUROS NO AFECTEN A LA LISTA ORIGINAL.
 
                 foreach (FiltroContacto filtroContacto in listaFiltros)
                 {
                     switch (filtroContacto.idFiltro)
                     {
                         case (int)OPCIONES_FILTRO.APELLIDO_Y_NOMBRE:
-                            listaFiltrar =  listaFiltrar.FindAll(p => p.apellidoYnombre.Contains(filtroContacto.valorFiltro)).OrderBy(p => p.apellidoYnombre).ToList();
+                            listaFiltrar =  listaFiltrar.FindAll(p => p.apellidoYnombre.Contains(filtroContacto.valorFiltro));
                             break;
 
                         case (int)OPCIONES_FILTRO.LOCALIDAD:
-                            listaFiltrar = listaFiltrar.FindAll(p => p.localidad.Contains(filtroContacto.valorFiltro)).OrderBy(p => p.apellidoYnombre).ToList();
+                            listaFiltrar = listaFiltrar.FindAll(p => p.localidad.Contains(filtroContacto.valorFiltro));
                             break;
 
                         case (int)OPCIONES_FILTRO.FECHA_DE_INGRESO_DESDE:
-                            listaFiltrar = listaFiltrar.FindAll(p => p.fechaIngresoDesde.Contains(filtroContacto.valorFiltro)).OrderBy(p => p.apellidoYnombre).ToList();
+                            listaFiltrar = listaFiltrar.FindAll(p => p.fechaIngresoDesde.Contains(filtroContacto.valorFiltro));
                             break;
 
                         case (int)OPCIONES_FILTRO.FECHA_DE_INGRESO_HASTA:
-                            listaFiltrar = listaFiltrar.FindAll(p => p.fechaIngresoHasta.Contains(filtroContacto.valorFiltro)).OrderBy(p => p.apellidoYnombre).ToList();
+                            listaFiltrar = listaFiltrar.FindAll(p => p.fechaIngresoHasta.Contains(filtroContacto.valorFiltro));
                             break;
 
                         case (int)OPCIONES_FILTRO.CONTACTO_INTERNO:
-                            listaFiltrar = listaFiltrar.FindAll(p => p.contactoInterno.Equals(filtroContacto.valorFiltro)).OrderBy(p => p.apellidoYnombre).ToList();
+                            listaFiltrar = listaFiltrar.FindAll(p => p.contactoInterno.Equals(filtroContacto.valorFiltro));
                             break;
 
                         case (int)OPCIONES_FILTRO.ORGANIZACION:
-                            listaFiltrar = listaFiltrar.FindAll(p => p.organizacion.Contains(filtroContacto.valorFiltro)).OrderBy(p => p.apellidoYnombre).ToList();
+                            listaFiltrar = listaFiltrar.FindAll(p => p.organizacion.Contains(filtroContacto.valorFiltro));
                             break;
 
                         case (int)OPCIONES_FILTRO.AREA:
-                            listaFiltrar = listaFiltrar.FindAll(p => p.area.Contains(filtroContacto.valorFiltro)).OrderBy(p => p.apellidoYnombre).ToList();
+                            listaFiltrar = listaFiltrar.FindAll(p => p.area.Contains(filtroContacto.valorFiltro));
                             break;
 
                         case (int)OPCIONES_FILTRO.ACTIVO:
-                            listaFiltrar = listaFiltrar.FindAll(p => p.activo.Equals(filtroContacto.valorFiltro)).OrderBy(p => p.apellidoYnombre).ToList();
+                            listaFiltrar = listaFiltrar.FindAll(p => p.activo.Equals(filtroContacto.valorFiltro));
                             break;
 
                         default:
-                            listaFiltrar = listaFiltrar.OrderBy(p => p.apellidoYnombre).ToList();
                             break;
                     }
                 }

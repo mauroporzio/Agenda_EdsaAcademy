@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Agenda.Entity
 {
@@ -15,8 +11,13 @@ namespace Agenda.Entity
         public string fechaIngresoHasta { get; set; }
         public Boolean contactoInterno { get; set; } // TODOS (DEF), SI, NO.
         public string organizacion { get; set; }
-        public string area { get; set; } //TODOS (DEF), Marketing, Finanzas, RRHH, Operaciones.
+        public string area { get; set; } //TODOS (DEF), Marketing, etc.
         public Boolean activo { get; set; } // TODOS (DEF), SI, NO.
+        public string direccion { get; set; }
+        public string telefonoFijoInterno { get; set; }
+        public string telefonoCelular { get; set; }
+        public string eMail { get; set; }
+        public string cuentaSkype { get; set; }
 
         public void activarContacto()
         {

@@ -12,8 +12,10 @@ namespace Agenda_EdsaAcademy
 {
     public partial class Default : Page
     {
+        
         public void print(List<Contacto> listaContactos)
         {
+            
             StringBuilder strBld = new StringBuilder();
 
             foreach(Contacto contacto in listaContactos)
@@ -39,9 +41,11 @@ namespace Agenda_EdsaAcademy
                 Response.Write("<BR/>");
             }
         }
+        
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            
             IAgendaContactos AgendaBuisness = new AgendaContactos((List<Contacto>)Application["listaContactos"]);
 
             Response.Write("-------------------------------------------------------------------------------------");
@@ -65,7 +69,16 @@ namespace Agenda_EdsaAcademy
             Response.Write("<BR/>");
             Response.Write("-------------------------------------------------------------------------------------");
             Response.Write("<BR/>");
-            print(AgendaBuisness.getlistaContactosPorFiltro(new List<FiltroContacto> { new FiltroContacto { idFiltro = 1, valorFiltro = "Buenos Aires" }, new FiltroContacto { idFiltro = 0, valorFiltro = "Mario Benitez" } }));
+            print(AgendaBuisness.getlistaContactosPorFiltro(new List<FiltroContacto> { 
+                new FiltroContacto {
+                        idFiltro = (int)OPCIONES_FILTRO.LOCALIDAD,
+                        valorFiltro = "Buenos Aires" 
+                },
+                new FiltroContacto {
+                    idFiltro = (int)OPCIONES_FILTRO.APELLIDO_Y_NOMBRE,
+                    valorFiltro = "Mario Benitez" 
+                } 
+            }));
             Response.Write("-------------------------------------------------------------------------------------");
             Response.Write("<BR/>");
 
@@ -98,10 +111,11 @@ namespace Agenda_EdsaAcademy
             Response.Write("<BR/>");
             Response.Write("Test modificar un contacto y mostrarlo");
             Response.Write("<BR/>");
-           AgendaBuisness.modificarContacto(new Contacto() { id = 1, apellidoYnombre = "Mauro Porzio", localidad = "Rosario", fechaIngresoDesde = "02/12/2000", activo = true, area = "Programacion", fechaIngresoHasta = "22/05/2021", contactoInterno = true, organizacion = "EDSA" });
+            AgendaBuisness.modificarContacto(new Contacto() { id = 1, apellidoYnombre = "Mauro Porzio", localidad = "Rosario", fechaIngresoDesde = "02/12/2000", activo = true, area = "Programacion", fechaIngresoHasta = "22/05/2021", contactoInterno = true, organizacion = "EDSA" });
             print(AgendaBuisness.getlistaContactosPorFiltro(new List<FiltroContacto>()));
             Response.Write("-------------------------------------------------------------------------------------");
             Response.Write("<BR/>");
         }
+
     }
 }
