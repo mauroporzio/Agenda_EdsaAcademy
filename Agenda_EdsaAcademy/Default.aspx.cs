@@ -38,7 +38,7 @@ namespace Agenda_EdsaAcademy
                 Response.Write(string.Concat("Contacto interno: ", contacto.contactoInterno.ToString()));
                 Response.Write("<BR/>");
                 Response.Write("-------------------------------------------------------------------------------------");
-                Response.Write("<BR/>");
+                Response.Write("<BR/>");;
             }
         }
         
