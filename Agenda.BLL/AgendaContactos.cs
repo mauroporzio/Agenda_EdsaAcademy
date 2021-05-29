@@ -34,11 +34,11 @@ namespace Agenda.BLL
                             break;
 
                         case (int)OPCIONES_FILTRO.FECHA_DE_INGRESO_DESDE:
-                            listaFiltrar = listaFiltrar.FindAll(p => p.fechaIngresoDesde.Contains(filtroContacto.valorFiltro));
+                            listaFiltrar = listaFiltrar.FindAll(p => p.fechaIngresoDesde.Equals(filtroContacto.valorFiltro));
                             break;
 
                         case (int)OPCIONES_FILTRO.FECHA_DE_INGRESO_HASTA:
-                            listaFiltrar = listaFiltrar.FindAll(p => p.fechaIngresoHasta.Contains(filtroContacto.valorFiltro));
+                            listaFiltrar = listaFiltrar.FindAll(p => p.fechaIngresoHasta.Equals(filtroContacto.valorFiltro));
                             break;
 
                         case (int)OPCIONES_FILTRO.CONTACTO_INTERNO:
@@ -56,7 +56,9 @@ namespace Agenda.BLL
                         case (int)OPCIONES_FILTRO.ACTIVO:
                             listaFiltrar = listaFiltrar.FindAll(p => p.activo.Equals(filtroContacto.valorFiltro));
                             break;
-
+                        case (int)OPCIONES_FILTRO.PAIS:
+                            listaFiltrar = listaFiltrar.FindAll(p => p.pais.Contains(filtroContacto.valorFiltro));
+                            break;
                         default:
                             break;
                     }

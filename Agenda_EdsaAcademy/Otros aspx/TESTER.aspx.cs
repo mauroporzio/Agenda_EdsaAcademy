@@ -87,7 +87,7 @@ namespace Agenda_EdsaAcademy
             Response.Write("<BR/>");
             Response.Write("Test insertar un contacto y mostrar toda la lista");
             Response.Write("<BR/>");
-            Contacto nuevoContacto = AgendaBuisness.insertarContacto(new Contacto() { apellidoYnombre = "Sebastian Ramirez", localidad = "Mar del Plata", fechaIngresoDesde = "12/09/2008", activo = true, area = "Programacion", fechaIngresoHasta = "21/04/2020", contactoInterno = true, organizacion = "EDSA" });
+            Contacto nuevoContacto = AgendaBuisness.insertarContacto(new Contacto() { apellidoYnombre = "Sebastian Ramirez", localidad = "Mar del Plata", fechaIngresoDesde = DateTime.Parse("12/09/2008"), activo = true, area = "Programacion", fechaIngresoHasta = DateTime.Parse("21/04/2020"), contactoInterno = true, organizacion = "EDSA" });
             print(AgendaBuisness.getlistaContactosPorFiltro(new List<FiltroContacto>()));
             Response.Write("-------------------------------------------------------------------------------------");
             Response.Write("<BR/>");
@@ -111,7 +111,7 @@ namespace Agenda_EdsaAcademy
             Response.Write("<BR/>");
             Response.Write("Test modificar un contacto y mostrarlo");
             Response.Write("<BR/>");
-            AgendaBuisness.modificarContacto(new Contacto() { id = 1, apellidoYnombre = "Mauro Porzio", localidad = "Rosario", fechaIngresoDesde = "02/12/2000", activo = true, area = "Programacion", fechaIngresoHasta = "22/05/2021", contactoInterno = true, organizacion = "EDSA" });
+            AgendaBuisness.modificarContacto(new Contacto() { id = 1, apellidoYnombre = "Mauro Porzio", localidad = "Rosario", fechaIngresoDesde = DateTime.Parse("02/12/2000"), activo = true, area = "Programacion", fechaIngresoHasta = DateTime.Parse("22/05/2021"), contactoInterno = true, organizacion = "EDSA" });
             print(AgendaBuisness.getlistaContactosPorFiltro(new List<FiltroContacto>()));
             Response.Write("-------------------------------------------------------------------------------------");
             Response.Write("<BR/>");

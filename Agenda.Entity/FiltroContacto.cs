@@ -11,7 +11,8 @@ namespace Agenda.Entity
         CONTACTO_INTERNO,
         ORGANIZACION,
         AREA,
-        ACTIVO
+        ACTIVO,
+        PAIS
     }
     public class FiltroContacto
     {

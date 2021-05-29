@@ -1,0 +1,62 @@
+﻿.Titulo {
+    color: midnightblue;
+    font-family: Arial;
+    font-size: 20pt;
+    font-weight: bolder;
+    padding-bottom: 200px;
+}
+.TextoConsulta {
+    color: midnightblue;
+    font-family: Arial;
+    font-size: 17pt;
+    padding-top:5px;
+}
+
+.TextoConsultaOtraColumna {
+    color: midnightblue;
+    font-family: Arial;
+    font-size: 17pt;
+    padding-left: 100px;
+    padding-top: 5px;
+}
+
+.TituloEspaciado {
+    padding-bottom: 20px;
+}
+
+.CamposConsulta {
+    background-color: lightgray;
+}
+
+.tablaConsulta {
+    border: 1px solid;
+    padding-bottom: 10px;
+}
+
+.botonLimiarCampos {
+    padding-block: 10px;
+    margin-left: 10px;
+}
+
+.botonNuevoContacto {
+    background: lightblue;
+    float: right;
+    margin-top: 10px;
+    padding-block: 5px;
+    margin-right: 10px;
+    color: midnightblue;
+    font-family: Arial;
+    font-size: 10pt;
+}
+
+.botonConsulta{
+    background: lightgreen;
+    float: right;
+    margin-top: 10px;
+    padding-block: 5px;
+    margin-right: 10px;
+    color: midnightblue;
+    font-family: Arial;
+    font-size: 10pt;
+}
+

@@ -7,8 +7,9 @@ namespace Agenda.Entity
         public int id { get; set; } // ID de contacto
         public string apellidoYnombre { get; set; }
         public string localidad { get; set; }
-        public string fechaIngresoDesde { get; set; }
-        public string fechaIngresoHasta { get; set; }
+        public string pais { get; set; }
+        public DateTime fechaIngresoDesde { get; set; }
+        public DateTime fechaIngresoHasta { get; set; }
         public Boolean contactoInterno { get; set; } // TODOS (DEF), SI, NO.
         public string organizacion { get; set; }
         public string area { get; set; } //TODOS (DEF), Marketing, etc.
