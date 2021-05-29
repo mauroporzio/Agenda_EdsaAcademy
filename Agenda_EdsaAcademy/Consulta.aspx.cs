@@ -1,4 +1,5 @@
 ﻿using Agenda.Entity;
+using Agenda.BLL;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,10 +15,11 @@ namespace Agenda_EdsaAcademy
         {
             if (!IsPostBack)
             {
+
                 DropDownListPais.DataSource = Application["listaPaises"];
                 DropDownListPais.DataBind();
 
-                DropDownActivo.DataSource = new List<String> { "TODOS", "Si", "No"};
+                DropDownActivo.DataSource = new List<String> { "TODOS", "Si", "No" };
                 DropDownActivo.DataBind();
 
                 DropDownArea.DataSource = Application["listaAreas"];
@@ -25,7 +27,16 @@ namespace Agenda_EdsaAcademy
 
                 DropDownContactoInterno.DataSource = new List<String> { "TODOS", "Si", "No" };
                 DropDownContactoInterno.DataBind();
+
+
             }
+        }
+
+        public void cambiarIndicePagina(object sender, GridViewPageEventArgs e)
+        {
+            GridViewResultadosConsulta.DataSource = ViewState["listaContactosResultadoConsulta"];
+            GridViewResultadosConsulta.PageIndex = e.NewPageIndex;
+            GridViewResultadosConsulta.DataBind();
         }
 
         public void limpiarFiltros(object sender, ImageClickEventArgs e)
@@ -47,12 +58,19 @@ namespace Agenda_EdsaAcademy
 
             DropDownArea.Enabled = true;
             DropDownArea.BackColor = System.Drawing.Color.Empty;
+
+            GridViewResultadosConsulta.DataSource = null;
+            GridViewResultadosConsulta.DataBind();
+
         }
 
         public void validarFechas(object source, ServerValidateEventArgs fecha)
         {
-            DateTime fechaHasta = DateTime.Parse(textFechaDeIngresoHasta.Text);
-            fecha.IsValid = DateTime.Parse(fecha.Value) <= fechaHasta;
+            if (textFechaDeIngresoHasta.Text.Length > 0)
+            {
+                DateTime fechaHasta = DateTime.Parse(textFechaDeIngresoHasta.Text);
+                fecha.IsValid = DateTime.Parse(fecha.Value) <= fechaHasta;
+            }
         }
 
         public void esContactoInterno(object source, EventArgs e)
@@ -128,7 +146,10 @@ namespace Agenda_EdsaAcademy
                 listaFiltrosUsados.Add(new FiltroContacto { idFiltro = (int)OPCIONES_FILTRO.ACTIVO, valorFiltro = DropDownActivo.SelectedValue });
             }
 
-            //mandat a la grilla de contactos la lista de filtros. Con la funcion de buscar por filtro.
+            ViewState.Add("listaContactosResultadoConsulta",new AgendaContactos((List<Contacto>)Application["listaContactos"]).getlistaContactosPorFiltro(listaFiltrosUsados));
+
+            GridViewResultadosConsulta.DataSource = ViewState["listaContactosResultadoConsulta"];
+            GridViewResultadosConsulta.DataBind();
         }
     }
 }

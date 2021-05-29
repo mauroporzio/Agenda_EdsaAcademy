@@ -34,15 +34,15 @@ namespace Agenda.BLL
                             break;
 
                         case (int)OPCIONES_FILTRO.FECHA_DE_INGRESO_DESDE:
-                            listaFiltrar = listaFiltrar.FindAll(p => p.fechaIngresoDesde.Equals(filtroContacto.valorFiltro));
+                            listaFiltrar = listaFiltrar.FindAll(p => p.fechaIngresoDesde.Contains(filtroContacto.valorFiltro));
                             break;
 
                         case (int)OPCIONES_FILTRO.FECHA_DE_INGRESO_HASTA:
-                            listaFiltrar = listaFiltrar.FindAll(p => p.fechaIngresoHasta.Equals(filtroContacto.valorFiltro));
+                            listaFiltrar = listaFiltrar.FindAll(p => p.fechaIngresoHasta.Contains(filtroContacto.valorFiltro));
                             break;
 
                         case (int)OPCIONES_FILTRO.CONTACTO_INTERNO:
-                            listaFiltrar = listaFiltrar.FindAll(p => p.contactoInterno.Equals(filtroContacto.valorFiltro));
+                            listaFiltrar = listaFiltrar.FindAll(p => p.contactoInterno.Contains(filtroContacto.valorFiltro));
                             break;
 
                         case (int)OPCIONES_FILTRO.ORGANIZACION:
@@ -54,7 +54,7 @@ namespace Agenda.BLL
                             break;
 
                         case (int)OPCIONES_FILTRO.ACTIVO:
-                            listaFiltrar = listaFiltrar.FindAll(p => p.activo.Equals(filtroContacto.valorFiltro));
+                            listaFiltrar = listaFiltrar.FindAll(p => p.activo.Contains(filtroContacto.valorFiltro));
                             break;
                         case (int)OPCIONES_FILTRO.PAIS:
                             listaFiltrar = listaFiltrar.FindAll(p => p.pais.Contains(filtroContacto.valorFiltro));

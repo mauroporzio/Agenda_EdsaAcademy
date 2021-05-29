@@ -64,6 +64,37 @@
 
                     <asp:Button ID="ButtonBuscar" runat="server" Text="Buscar" CssClass="botonConsulta" OnClick="buscarPorFiltro"/>
                 </div>
+                <div>
+                    <asp:GridView ID="GridViewResultadosConsulta" runat="server" Width ="100%" AutoGenerateColumns ="false" RowStyle-HorizontalAlign ="Center" GridLines ="Horizontal" AllowPaging="true" PageSize="5" OnPageIndexChanging="cambiarIndicePagina">
+                        <Columns>
+                            <asp:BoundField DataField="apellidoYnombre" HeaderText="Apellido y Nombre" HeaderStyle-CssClass ="HeaderResultadoConsulta" />
+                            <asp:BoundField DataField="genero" HeaderText="Genero" HeaderStyle-CssClass ="HeaderResultadoConsulta"/>
+                            <asp:BoundField DataField="pais" HeaderText="Pais" HeaderStyle-CssClass ="HeaderResultadoConsulta"/>
+                            <asp:BoundField DataField="localidad" HeaderText="Localidad" HeaderStyle-CssClass ="HeaderResultadoConsulta"/>
+                            <asp:BoundField DataField="contactoInterno" HeaderText="Contacto Interno" HeaderStyle-CssClass ="HeaderResultadoConsulta"/>
+                            <asp:BoundField DataField="organizacion" HeaderText="Organizacion" HeaderStyle-CssClass ="HeaderResultadoConsulta"/>
+                            <asp:BoundField DataField="area" HeaderText="Area" HeaderStyle-CssClass ="HeaderResultadoConsulta"/>
+                            <asp:BoundField DataField="fechaIngresoDesde" HeaderText="Fecha de Ingreso Desde" HeaderStyle-CssClass ="HeaderResultadoConsulta"/>
+                            <asp:BoundField DataField="fechaIngresoHasta" HeaderText="Fecha de Ingreso Hasta" HeaderStyle-CssClass ="HeaderResultadoConsulta"/>
+                            <asp:BoundField DataField="activo" HeaderText="Activo" HeaderStyle-CssClass ="HeaderResultadoConsulta"/>
+                            <asp:BoundField DataField="direccion" HeaderText="Direccion" HeaderStyle-CssClass ="HeaderResultadoConsulta"/>
+                            <asp:BoundField DataField="telefonoFijoInterno" HeaderText="Tel. Fijo Interno" HeaderStyle-CssClass ="HeaderResultadoConsulta"/>
+                            <asp:BoundField DataField="telefonoCelular" HeaderText="Tel. Celular" HeaderStyle-CssClass ="HeaderResultadoConsulta"/>
+                            <asp:BoundField DataField="eMail" HeaderText="E-Mail" HeaderStyle-CssClass ="HeaderResultadoConsulta"/>
+                            <asp:BoundField DataField="cuentaSkype" HeaderText="Cuenta Skype" HeaderStyle-CssClass ="HeaderResultadoConsulta"/>
+                            <asp:TemplateField>
+                                <ItemTemplate>
+                                    <asp:ImageButton ID="ImageButtonBorrarContacto" runat="server" ImageUrl="Imagenes Botones\delete.png" />
+                                    <asp:ImageButton ID="ImageButtonAbrirContacto" runat="server" ImageUrl="Imagenes Botones\zoom.png" />
+                                    <asp:ImageButton ID="ImageButtonEditarContacto" runat="server" ImageUrl="Imagenes Botones\edit.png" />
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                        </Columns>
+                        <PagerStyle HorizontalAlign="Center" CssClass="botonesPagerGridView" />
+                        <PagerSettings Mode="NextPrevious" PageButtonCount="1" NextPageText="Siguiente" PreviousPageText="Anterior"/>
+                        <RowStyle CssClass="HeaderResultadoConsulta"/>
+                    </asp:GridView>
+                </div>
             </div>
         </div>
     </form>
