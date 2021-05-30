@@ -12,7 +12,7 @@
     <form id="form1" runat="server">
         <div>
              <div class="TituloEspaciado">
-                <asp:Label ID ="Labeltitulo" runat ="server" CssClass ="Titulo"></asp:Label>
+                <asp:Label ID ="Labeltitulo" text= "Nuevo Contacto" runat ="server" CssClass ="Titulo"></asp:Label>
              </div>
             <div class="CamposConsulta">
                 <table width="100%" id ="TablaRedireccion" runat ="server" class="TablaConsulta">
@@ -34,7 +34,7 @@
                             <asp:TextBox ID="textBoxLocalidad" runat="server"></asp:TextBox>
 
                             <asp:Label ID="LabelContactoInterno" runat ="server" Text ="Contacto Interno *" Width="14%" CssClass ="TextoConsultaOtraColumna"></asp:Label>
-                            <asp:DropDownList ID="DropDownListContactoInterno" runat="server" Width="10%"></asp:DropDownList>
+                            <asp:DropDownList ID="DropDownListContactoInterno" runat="server" Width="10%" OnSelectedIndexChanged="esContactoInterno" AutoPostBack="true"></asp:DropDownList>
 
                             <asp:Label ID="LabelOrganizacion" runat ="server" Text ="Organizacion *" Width="14%" CssClass ="TextoConsultaOtraColumna"></asp:Label>
                             <asp:TextBox ID="textBoxOrganizacion" runat="server" Width="10%"></asp:TextBox>
@@ -100,9 +100,19 @@
                     </tr>
                     <tr>
                         <td>
-                            <asp:Button ID="Button1" runat="server" Text="cancelar" CssClass="botonNuevoContacto" OnClick="cancelarCreacion" CausesValidation="False"/>
+                            <asp:Button ID="Button1" runat="server" Text="Cancelar" CssClass="botonNuevoContacto" OnClick="cancelarCreacion" CausesValidation="False"/>
 
-                            <asp:Button ID="Button2" runat="server" text="guardar" CssClass="botonConsulta" OnClick="guardarContacto"/>
+                            
+                            <asp:Button ID="Button2" runat="server" text="Guardar" CssClass="botonConsulta" OnClientClick="return validate()" OnClick="guardarContacto"/>
+                            <script>
+                                function validate()
+                                {
+                                    if (Page_ClientValidate())
+                                    {
+                                        return confirm('Desea dar de alta el nuevo contacto?');
+                                    }
+                                }
+                            </script>
                         </td>
                     </tr>
                 </table>

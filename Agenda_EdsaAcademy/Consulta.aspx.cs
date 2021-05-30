@@ -14,7 +14,6 @@ namespace Agenda_EdsaAcademy
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
             if (!IsPostBack)
             {
                 List<String> listaPaises = (List<String>)Application["listaPaisesTODOS"];
@@ -190,7 +189,6 @@ namespace Agenda_EdsaAcademy
                     */
                 }
             }
-
             Application["AgendaContactos"] = agendaContactos; // guardo los cambios.
 
             buscarPorFiltro(sender, e);

@@ -77,8 +77,7 @@
                             <asp:BoundField DataField="contactoInterno" HeaderText="Contacto Interno" HeaderStyle-CssClass ="HeaderResultadoConsulta"/>
                             <asp:BoundField DataField="organizacion" HeaderText="Organizacion" HeaderStyle-CssClass ="HeaderResultadoConsulta"/>
                             <asp:BoundField DataField="area" HeaderText="Area" HeaderStyle-CssClass ="HeaderResultadoConsulta"/>
-                            <asp:BoundField DataField="fechaIngresoDesde" HeaderText="Fecha de Ingreso Desde" HeaderStyle-CssClass ="HeaderResultadoConsulta"/>
-                            <asp:BoundField DataField="fechaIngresoHasta" HeaderText="Fecha de Ingreso Hasta" HeaderStyle-CssClass ="HeaderResultadoConsulta"/>
+                            <asp:BoundField DataField="fechaIngresoDesde" HeaderText="Fecha de Ingreso" HeaderStyle-CssClass ="HeaderResultadoConsulta"/>
                             <asp:BoundField DataField="activo" HeaderText="Activo" HeaderStyle-CssClass ="HeaderResultadoConsulta"/>
                             <asp:BoundField DataField="direccion" HeaderText="Direccion" HeaderStyle-CssClass ="HeaderResultadoConsulta"/>
                             <asp:BoundField DataField="telefonoFijoInterno" HeaderText="Tel. Fijo Interno" HeaderStyle-CssClass ="HeaderResultadoConsulta"/>
