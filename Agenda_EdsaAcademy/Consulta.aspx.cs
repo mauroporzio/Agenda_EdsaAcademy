@@ -27,6 +27,9 @@ namespace Agenda_EdsaAcademy
                 List<String> listaAreas = (List<string>)Application["listaAreasTODOS"];
                 DropDownArea.DataSource = listaAreas;
                 DropDownArea.DataBind();
+                DropDownArea.SelectedValue = "TODOS";
+                DropDownArea.Enabled = false;
+                DropDownArea.BackColor = System.Drawing.Color.LightGray;
 
                 DropDownContactoInterno.DataSource = new List<String> { "TODOS", "Si", "No" };
                 DropDownContactoInterno.DataBind();
@@ -83,8 +86,8 @@ namespace Agenda_EdsaAcademy
                 TextBoxOrganizacion.Enabled = false;
                 TextBoxOrganizacion.BackColor = System.Drawing.Color.LightGray;
 
-                DropDownArea.Enabled = false;
-                DropDownArea.BackColor = System.Drawing.Color.LightGray;
+                DropDownArea.Enabled = true;
+                DropDownArea.BackColor = System.Drawing.Color.Empty;
             }
             else
             {
@@ -94,8 +97,8 @@ namespace Agenda_EdsaAcademy
                 TextBoxOrganizacion.BorderColor = System.Drawing.Color.Empty;
 
                 DropDownArea.SelectedValue = "TODOS";
-                DropDownArea.Enabled = true;
-                DropDownArea.BackColor = System.Drawing.Color.Empty;
+                DropDownArea.Enabled = false;
+                DropDownArea.BackColor = System.Drawing.Color.LightGray;
             }
         }
 
