@@ -9,8 +9,7 @@ namespace Agenda.Entity
         public string apellidoYnombre { get; set; }
         public string localidad { get; set; }
         public string pais { get; set; }
-        public string fechaIngresoDesde { get; set; }
-        public string fechaIngresoHasta { get; set; }
+        public DateTime fechaIngreso { get; set; }
         public string contactoInterno { get; set; } // TODOS (DEF), SI, NO.
         public string organizacion { get; set; }
         public string area { get; set; } //TODOS (DEF), Marketing, etc.

@@ -100,7 +100,7 @@ namespace Agenda_EdsaAcademy
                 pais = DropDownListPais.SelectedValue,
                 telefonoCelular = textBoxTelefonoCelular.Text,
                 telefonoFijoInterno = textBoxTelefonoFijoInterno.Text,
-                fechaIngresoDesde = DateTime.Now.ToShortDateString()
+                fechaIngreso = DateTime.Today
             });
 
 

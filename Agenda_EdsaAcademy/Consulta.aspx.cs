@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.IO;
+using System.Globalization;
 
 namespace Agenda_EdsaAcademy
 {
@@ -68,8 +69,9 @@ namespace Agenda_EdsaAcademy
         {
             if (textFechaDeIngresoHasta.Text.Length > 0)
             {
-                DateTime fechaHasta = DateTime.Parse(textFechaDeIngresoHasta.Text);
-                fecha.IsValid = DateTime.Parse(fecha.Value) <= fechaHasta;
+                DateTime fechaHasta = DateTime.ParseExact(textFechaDeIngresoHasta.Text, new string[] { "dd/MM/yyyy", "d/M/yyyy", "yyyy" }, null, DateTimeStyles.AssumeLocal);
+                fecha.IsValid = DateTime.ParseExact(fecha.Value, new string[] { "dd/MM/yyyy", "d/M/yyyy", "yyyy" }, null, DateTimeStyles.AssumeLocal) <= fechaHasta;
+                
             }
         }
 
@@ -118,12 +120,12 @@ namespace Agenda_EdsaAcademy
 
             if (textFechaDeIngresoDesde.Text.Length > 0)
             {
-                listaFiltrosUsados.Add(new FiltroContacto { idFiltro = (int)OPCIONES_FILTRO.FECHA_DE_INGRESO_DESDE, valorFiltro = textFechaDeIngresoDesde.Text });
+                listaFiltrosUsados.Add(new FiltroContacto { idFiltro = (int)OPCIONES_FILTRO.FECHA_DE_INGRESO_DESDE, valorFiltroDate = DateTime.ParseExact(textFechaDeIngresoDesde.Text, new string[] { "dd/MM/yyyy", "d/M/yyyy", "yyyy" } , null, DateTimeStyles.AssumeLocal) });
             }
 
             if (textFechaDeIngresoHasta.Text.Length > 0)
             {
-                listaFiltrosUsados.Add(new FiltroContacto { idFiltro = (int)OPCIONES_FILTRO.FECHA_DE_INGRESO_HASTA, valorFiltro = textFechaDeIngresoHasta.Text });
+                listaFiltrosUsados.Add(new FiltroContacto { idFiltro = (int)OPCIONES_FILTRO.FECHA_DE_INGRESO_HASTA, valorFiltroDate = DateTime.ParseExact(textFechaDeIngresoHasta.Text, new string[] { "dd/MM/yyyy", "d/M/yyyy", "yyyy" }, null, DateTimeStyles.AssumeLocal) });
             }
 
             if (!DropDownContactoInterno.SelectedValue.Equals("TODOS"))

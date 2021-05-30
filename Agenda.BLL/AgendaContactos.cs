@@ -34,11 +34,11 @@ namespace Agenda.BLL
                             break;
 
                         case (int)OPCIONES_FILTRO.FECHA_DE_INGRESO_DESDE:
-                            listaFiltrar = listaFiltrar.FindAll(p => p.fechaIngresoDesde.Contains(filtroContacto.valorFiltro));
+                            listaFiltrar = listaFiltrar.FindAll(p => p.fechaIngreso >= filtroContacto.valorFiltroDate);
                             break;
 
                         case (int)OPCIONES_FILTRO.FECHA_DE_INGRESO_HASTA:
-                            listaFiltrar = listaFiltrar.FindAll(p => p.fechaIngresoHasta.Contains(filtroContacto.valorFiltro));
+                            listaFiltrar = listaFiltrar.FindAll(p => p.fechaIngreso <= filtroContacto.valorFiltroDate);
                             break;
 
                         case (int)OPCIONES_FILTRO.CONTACTO_INTERNO:

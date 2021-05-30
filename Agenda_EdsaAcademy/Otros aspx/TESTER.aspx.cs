@@ -29,9 +29,7 @@ namespace Agenda_EdsaAcademy
                 Response.Write("<BR/>");
                 Response.Write(string.Concat("Organizacion: ", contacto.organizacion.ToString()));
                 Response.Write("<BR/>");
-                Response.Write(string.Concat("Fecha de ingreso desde: ", contacto.fechaIngresoDesde.ToString()));
-                Response.Write("<BR/>");
-                Response.Write(string.Concat("Fecha de ingreso hasta: ", contacto.fechaIngresoHasta.ToString()));
+                Response.Write(string.Concat("Fecha de ingreso desde: ", contacto.fechaIngreso.ToString()));
                 Response.Write("<BR/>");
                 Response.Write(string.Concat("Activo: ", contacto.activo.ToString()));
                 Response.Write("<BR/>");
@@ -87,7 +85,7 @@ namespace Agenda_EdsaAcademy
             Response.Write("<BR/>");
             Response.Write("Test insertar un contacto y mostrar toda la lista");
             Response.Write("<BR/>");
-            Contacto nuevoContacto = AgendaBuisness.insertarContacto(new Contacto() { apellidoYnombre = "Sebastian Ramirez", localidad = "Mar del Plata", fechaIngresoDesde = "12/09/2008", activo = "Si", area = "Programacion", fechaIngresoHasta = "21/04/2020", contactoInterno = "Si", organizacion = "EDSA" });
+            Contacto nuevoContacto = AgendaBuisness.insertarContacto(new Contacto() { apellidoYnombre = "Sebastian Ramirez", localidad = "Mar del Plata", fechaIngreso = DateTime.ParseExact("12/09/2008", "dd/MM/yyyy", null), activo = "Si", area = "Programacion", contactoInterno = "Si", organizacion = "EDSA" });
             print(AgendaBuisness.getlistaContactosPorFiltro(new List<FiltroContacto>()));
             Response.Write("-------------------------------------------------------------------------------------");
             Response.Write("<BR/>");
@@ -111,7 +109,7 @@ namespace Agenda_EdsaAcademy
             Response.Write("<BR/>");
             Response.Write("Test modificar un contacto y mostrarlo");
             Response.Write("<BR/>");
-            AgendaBuisness.modificarContacto(new Contacto() { id = 1, apellidoYnombre = "Mauro Porzio", localidad = "Rosario", fechaIngresoDesde = "02/12/2000", activo = "Si", area = "Programacion", fechaIngresoHasta = "22/05/2021", contactoInterno = "Si", organizacion = "EDSA" });
+            AgendaBuisness.modificarContacto(new Contacto() { id = 1, apellidoYnombre = "Mauro Porzio", localidad = "Rosario", fechaIngreso = DateTime.ParseExact("02/12/2000", "dd/MM/yyyy", null), activo = "Si", area = "Programacion", contactoInterno = "Si", organizacion = "EDSA" });
             print(AgendaBuisness.getlistaContactosPorFiltro(new List<FiltroContacto>()));
             Response.Write("-------------------------------------------------------------------------------------");
             Response.Write("<BR/>");
