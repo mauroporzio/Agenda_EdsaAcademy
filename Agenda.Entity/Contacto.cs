@@ -22,16 +22,13 @@ namespace Agenda.Entity
         public string cuentaSkype { get; set; }
         public string genero { get; set; }
 
-        public void activarContacto()
+        public void activarDesactivarContacto()
         {
             if (this.activo.Equals("No"))
             {
                 this.activo = "Si";
             }
-        }
-        public void DesactivarContacto()
-        {
-            if (this.activo.Equals("Si"))
+            else
             {
                 this.activo = "No";
             }

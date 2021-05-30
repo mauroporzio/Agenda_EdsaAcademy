@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.IO;
 
 namespace Agenda_EdsaAcademy
 {
@@ -13,22 +14,22 @@ namespace Agenda_EdsaAcademy
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+
             if (!IsPostBack)
             {
-
-                DropDownListPais.DataSource = Application["listaPaises"];
+                List<String> listaPaises = (List<String>)Application["listaPaisesTODOS"];
+                DropDownListPais.DataSource = listaPaises;
                 DropDownListPais.DataBind();
 
                 DropDownActivo.DataSource = new List<String> { "TODOS", "Si", "No" };
                 DropDownActivo.DataBind();
 
-                DropDownArea.DataSource = Application["listaAreas"];
+                List<String> listaAreas = (List<string>)Application["listaAreasTODOS"];
+                DropDownArea.DataSource = listaAreas;
                 DropDownArea.DataBind();
 
                 DropDownContactoInterno.DataSource = new List<String> { "TODOS", "Si", "No" };
                 DropDownContactoInterno.DataBind();
-
-
             }
         }
 
@@ -146,10 +147,58 @@ namespace Agenda_EdsaAcademy
                 listaFiltrosUsados.Add(new FiltroContacto { idFiltro = (int)OPCIONES_FILTRO.ACTIVO, valorFiltro = DropDownActivo.SelectedValue });
             }
 
-            ViewState.Add("listaContactosResultadoConsulta",new AgendaContactos((List<Contacto>)Application["listaContactos"]).getlistaContactosPorFiltro(listaFiltrosUsados));
+            AgendaContactos agendaContactos = (AgendaContactos)Application["AgendaContactos"];
+
+            ViewState.Add("listaContactosResultadoConsulta", agendaContactos.getlistaContactosPorFiltro(listaFiltrosUsados));
 
             GridViewResultadosConsulta.DataSource = ViewState["listaContactosResultadoConsulta"];
             GridViewResultadosConsulta.DataBind();
+        }
+
+        public void botonesGridViewResultadosConsulta(object sender, GridViewCommandEventArgs e)
+        {
+            AgendaContactos agendaContactos = (AgendaContactos)Application["AgendaContactos"]; // recibo la lista que voy a modificar.
+
+            if (e.CommandName.Equals("eliminarContacto"))
+            {
+                agendaContactos.eliminarContacto(new Contacto() { id = Int32.Parse(e.CommandArgument.ToString()) });
+            }
+            else if(e.CommandName.Equals("activarDesactivarContacto"))
+            {
+                ImageButton boton = (ImageButton)e.CommandSource;
+
+                Contacto contactoCambioEstado = agendaContactos.getContactoById(new Contacto() { id = Int32.Parse(e.CommandArgument.ToString()) });
+
+                contactoCambioEstado.activarDesactivarContacto();
+
+                if (contactoCambioEstado.activo.Equals("Si"))
+                {
+                    //boton.ImageUrl = "/Imagenes Botones/play_pause.png";
+
+                    /*
+                    boton.Attributes.Remove("ImageUrl");
+                    boton.Attributes.Add("ImageUrl", "Imagenes Botones/anular.png");
+                    */
+                }
+                else
+                {
+                    //boton.ImageUrl = "/Imagenes Botones/anular.png";
+
+                    /*
+                    boton.Attributes.Remove("ImageUrl");
+                    boton.Attributes.Add("ImageUrl", "Imagenes Botones/play_pause.png");
+                    */
+                }
+            }
+
+            Application["AgendaContactos"] = agendaContactos; // guardo los cambios.
+
+            buscarPorFiltro(sender, e);
+        }
+        
+        public void nuevoContacto(object sender, EventArgs e)
+        {
+            Response.Redirect("ConsultaRedireccion.aspx");
         }
     }
 }

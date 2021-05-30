@@ -36,7 +36,6 @@
                             <asp:Label ID="LabelFechaDeIngresoHasta" runat ="server" Text ="Fecha De Ingreso Hasta" Width="14%" CssClass ="TextoConsultaOtraColumna"></asp:Label>
                             <asp:TextBox ID="textFechaDeIngresoHasta" runat="server" Width="10%"></asp:TextBox>
 
-
                             <asp:Label ID="LabelContactoInterno" runat ="server" Text ="Contacto Interno" Width="10%" CssClass ="TextoConsultaOtraColumna"></asp:Label>
                             <asp:DropDownList ID="DropDownContactoInterno" runat="server" AutoPostBack="true" Width="10%" OnSelectedIndexChanged="esContactoInterno"></asp:DropDownList>
                         </td>
@@ -55,19 +54,23 @@
                     </tr>
                 </table>
                 <div>
-                    <asp:CustomValidator ID="ValidatorFechas" runat="server" OnServerValidate="validarFechas" ErrorMessage="*Fecha de Ingreso Desde debe ser anterior o igual que Fecha de Ingreso Hasta*" ForeColor ="Red" ControlToValidate="textFechaDeIngresoDesde"></asp:CustomValidator>
+                    <asp:CustomValidator ID="ValidatorFechas" runat="server" OnServerValidate="validarFechas" 
+                                         ErrorMessage="*Fecha de Ingreso Desde debe ser anterior o igual que Fecha de Ingreso Hasta*" 
+                                         ForeColor ="Red" ControlToValidate="textFechaDeIngresoDesde">
+                    </asp:CustomValidator>
                 </div>
                 <div>
-                    <asp:ImageButton ID="ImageButtonLimpiarCampos" runat="server" ImageUrl="Imagenes Botones\clearFilter.png" CssClass="botonLimiarCampos" OnClick="limpiarFiltros"/>
+                    <asp:ImageButton ID="ImageButtonLimpiarCampos" runat="server" ImageUrl="Imagenes Botones\clearFilter.png" 
+                                     CssClass="botonLimiarCampos" OnClick="limpiarFiltros"/>
 
-                    <asp:Button ID="ButtonNuevoContacto" runat="server" Text="Nuevo Contacto" CssClass="botonNuevoContacto" />
+                    <asp:Button ID="ButtonNuevoContacto" runat="server" Text="Nuevo Contacto" CssClass="botonNuevoContacto" onClick="nuevoContacto"/>
 
                     <asp:Button ID="ButtonBuscar" runat="server" Text="Buscar" CssClass="botonConsulta" OnClick="buscarPorFiltro"/>
                 </div>
                 <div>
-                    <asp:GridView ID="GridViewResultadosConsulta" runat="server" Width ="100%" AutoGenerateColumns ="false" RowStyle-HorizontalAlign ="Center" GridLines ="Horizontal" AllowPaging="true" PageSize="5" OnPageIndexChanging="cambiarIndicePagina">
+                    <asp:GridView ID="GridViewResultadosConsulta" runat="server" Width ="100%" OnRowCommand="botonesGridViewResultadosConsulta" AutoGenerateColumns ="false" RowStyle-HorizontalAlign ="Center" GridLines ="Horizontal" AllowPaging="true" PageSize="5" OnPageIndexChanging="cambiarIndicePagina">
                         <Columns>
-                            <asp:BoundField DataField="apellidoYnombre" HeaderText="Apellido y Nombre" HeaderStyle-CssClass ="HeaderResultadoConsulta" />
+                            <asp:BoundField DataField="apellidoYnombre" HeaderText="Apellido y Nombre" HeaderStyle-CssClass ="HeaderResultadoConsulta"/>
                             <asp:BoundField DataField="genero" HeaderText="Genero" HeaderStyle-CssClass ="HeaderResultadoConsulta"/>
                             <asp:BoundField DataField="pais" HeaderText="Pais" HeaderStyle-CssClass ="HeaderResultadoConsulta"/>
                             <asp:BoundField DataField="localidad" HeaderText="Localidad" HeaderStyle-CssClass ="HeaderResultadoConsulta"/>
@@ -84,14 +87,19 @@
                             <asp:BoundField DataField="cuentaSkype" HeaderText="Cuenta Skype" HeaderStyle-CssClass ="HeaderResultadoConsulta"/>
                             <asp:TemplateField>
                                 <ItemTemplate>
-                                    <asp:ImageButton ID="ImageButtonBorrarContacto" runat="server" ImageUrl="Imagenes Botones\delete.png" />
-                                    <asp:ImageButton ID="ImageButtonAbrirContacto" runat="server" ImageUrl="Imagenes Botones\zoom.png" />
-                                    <asp:ImageButton ID="ImageButtonEditarContacto" runat="server" ImageUrl="Imagenes Botones\edit.png" />
+                                    <asp:ImageButton ID="ImageButtonBorrarContacto" runat="server" ImageUrl="Imagenes Botones/delete.png" CommandArgument='<%# Eval("id") %>' CommandName="eliminarContacto" OnClientClick="return confirm('Estas Seguro que desea eliminar este contacto?')" />
+                                    <asp:ImageButton ID="ImageButtonAbrirContacto" runat="server" ImageUrl="Imagenes Botones/zoom.png" />
+                                    <asp:ImageButton ID="ImageButtonEditarContacto" runat="server" ImageUrl="Imagenes Botones/edit.png" />
+                                    <asp:ImageButton ID="ImageButtonActivarDesactivarContacto" runat="server" ImageUrl="Imagenes Botones/play_pause.png" CommandArgument='<%# Eval("id") %>' CommandName="activarDesactivarContacto"/>
                                 </ItemTemplate>
                             </asp:TemplateField>
                         </Columns>
                         <PagerStyle HorizontalAlign="Center" CssClass="botonesPagerGridView" />
-                        <PagerSettings Mode="NextPrevious" PageButtonCount="1" NextPageText="Siguiente" PreviousPageText="Anterior"/>
+                        <PagerSettings Mode="NextPreviousFirstLast" 
+                                       PageButtonCount="1" NextPageImageUrl="Imagenes Botones/arrow-right.svg" 
+                                       PreviousPageImageUrl="Imagenes Botones/arrow-left.svg" Position="Bottom" 
+                                       FirstPageImageUrl="Imagenes Botones/chevron-bar-left.svg" 
+                                       LastPageImageUrl="Imagenes Botones/chevron-bar-right.svg"/>
                         <RowStyle CssClass="HeaderResultadoConsulta"/>
                     </asp:GridView>
                 </div>

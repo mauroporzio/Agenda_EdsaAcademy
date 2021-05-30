@@ -105,6 +105,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="ConsultaRedireccion.aspx" />
     <Content Include="Otros aspx\About.aspx" />
     <Content Include="Otros aspx\Contact.aspx" />
     <Content Include="Content\bootstrap-theme.css" />
@@ -163,6 +164,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="ConsultaRedireccion.aspx.cs">
+      <DependentUpon>ConsultaRedireccion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ConsultaRedireccion.aspx.designer.cs">
+      <DependentUpon>ConsultaRedireccion.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Otros aspx\About.aspx.cs">
       <DependentUpon>About.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

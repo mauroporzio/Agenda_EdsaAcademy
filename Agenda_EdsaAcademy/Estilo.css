@@ -67,6 +67,11 @@
     padding-top: 5px;
 }
 
-botonesPagerGridView {
-    
+.validationSummaryCampos ul {
+    display: none;
+    visibility: hidden;
+}
+
+.validationSummaryCampos{
+    color: red;
 }

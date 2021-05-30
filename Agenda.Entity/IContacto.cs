@@ -2,7 +2,6 @@
 {
     interface IContacto
     {
-        void activarContacto();
-        void DesactivarContacto();
+        void activarDesactivarContacto(); // cambia el estado activo del contacto que la llame.
     }
 }
