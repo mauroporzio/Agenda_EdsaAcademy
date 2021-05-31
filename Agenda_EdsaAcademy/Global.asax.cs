@@ -34,7 +34,7 @@ namespace Agenda_EdsaAcademy
 
             Application["AgendaContactos"] = agendaContactos;
 
-            List<String> paisesDropDownTODOS = new List<string>() {"TODOS","Argentina", "Francia", "Brasil", "Uruguay"};
+            List<String> paisesDropDownTODOS = new List<string>() {"TODOS","Argentina", "Francia", "Brasil", "Uruguay", "Chile"};
 
             Application["listaPaisesTODOS"] = paisesDropDownTODOS;
 
@@ -42,7 +42,7 @@ namespace Agenda_EdsaAcademy
 
             Application["listaAreasTODOS"] = areaDropDownTODOS;
 
-            List<String> paisesDropDown = new List<string>() { "Argentina", "Francia", "Brasil", "Uruguay" };
+            List<String> paisesDropDown = new List<string>() { "Argentina", "Francia", "Brasil", "Uruguay", "Chile" };
 
             Application["listaPaises"] = paisesDropDown;
 

@@ -1,5 +1,7 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Consulta.aspx.cs" Inherits="Agenda_EdsaAcademy.WebForm1" %>
 
+
+
 <link href="Estilo.css" rel="stylesheet" type="text/css" />
 
 <!DOCTYPE html>
@@ -93,25 +95,23 @@
 
                                     <script>
 
-                                        function validateCambioActivo()
-                                        {
-                                            if (<%# Eval("activo").Equals("Si") %>) {
-                                                
-                                                if (confirm('cambiar a inactivado?')) {
-                                                    return true;
-                                                }
-                                                else {
-                                                    return false;
-                                                }
+                                        function validateCambioActivo() {
+
+                                            if (confirm('cambiar a inactivado?')) {
+                                                return true;
                                             }
-                                            else
-                                            {
-                                                if (confirm('cambiar a activado?')) {
-                                                    return true;
-                                                }
-                                                else {
-                                                    return false;
-                                                }
+                                            else {
+                                                return false;
+                                            }
+                                        }
+
+                                        function validateCambioInactivo() {
+
+                                            if (confirm('cambiar a activado?')) {
+                                                return true;
+                                            }
+                                            else {
+                                                return false;
                                             }
                                         }
 

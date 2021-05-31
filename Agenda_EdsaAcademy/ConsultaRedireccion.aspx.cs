@@ -36,19 +36,19 @@ namespace Agenda_EdsaAcademy
 
             DropDownListGenero.DataSource = (List<String>)Application["listaGenero"];
             DropDownListGenero.DataBind();
-
-            DropDownListContactoInterno.SelectedValue = "Si";
-
-            textBoxOrganizacion.Text = "";
-            textBoxOrganizacion.Enabled = false;
-            textBoxOrganizacion.BackColor = System.Drawing.Color.LightGray;
-            RequiredFieldValidatorOrganizacion.Enabled = false;
         }
         public void cargarControlesPorRedireccion()
         {
             if (Application["controlesACargar"].Equals("Nuevo Contacto"))
             {
                 Labeltitulo.Text = "Nuevo Contacto";
+
+                DropDownListContactoInterno.SelectedValue = "Si";
+
+                textBoxOrganizacion.Text = "";
+                textBoxOrganizacion.Enabled = false;
+                textBoxOrganizacion.BackColor = System.Drawing.Color.LightGray;
+                RequiredFieldValidatorOrganizacion.Enabled = false;
 
                 Button2.OnClientClick = "return validateNuevoContacto()";
 
@@ -112,6 +112,43 @@ namespace Agenda_EdsaAcademy
             else
             {
                 Labeltitulo.Text = "Editar Contacto";
+
+                Contacto contactoEditar = (Contacto)Application["contactoEditar"];
+
+                textBoxApellidoNombre.Text = contactoEditar.apellidoYnombre;
+                textBoxDireccion.Text = contactoEditar.direccion;
+                textBoxLocalidad.Text = contactoEditar.localidad;
+
+                textBoxEmail.Text = contactoEditar.eMail;
+                textBoxSkype.Text = contactoEditar.cuentaSkype;
+                textBoxTelefonoCelular.Text = contactoEditar.telefonoCelular;
+                textBoxOrganizacion.Text = contactoEditar.organizacion;
+                textBoxTelefonoFijoInterno.Text = contactoEditar.telefonoFijoInterno;
+
+                DropDownListGenero.SelectedValue = contactoEditar.genero;
+                DropDownListPais.SelectedValue = contactoEditar.pais;
+                DropDownListActivo.SelectedValue = contactoEditar.activo;
+
+                DropDownListContactoInterno.SelectedValue = contactoEditar.contactoInterno;
+                
+
+                if (contactoEditar.contactoInterno.Equals("Si"))
+                {
+                    textBoxOrganizacion.Text = "";
+                    textBoxOrganizacion.Enabled = false;
+                    textBoxOrganizacion.BackColor = System.Drawing.Color.LightGray;
+                    RequiredFieldValidatorOrganizacion.Enabled = false;
+
+                    DropDownListArea.SelectedValue = contactoEditar.area;
+                }
+                else
+                {
+                    DropDownListArea.DataSource = new List<String>();
+                    DropDownListArea.DataBind();
+
+                    DropDownListArea.Enabled = false;
+                    DropDownListArea.BackColor = System.Drawing.Color.LightGray;
+                }
 
                 Button2.OnClientClick = "return validateEditarContacto()";
                 

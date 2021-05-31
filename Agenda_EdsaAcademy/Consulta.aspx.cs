@@ -41,11 +41,11 @@ namespace Agenda_EdsaAcademy
                             break;
 
                         case (int)OPCIONES_FILTRO.FECHA_DE_INGRESO_DESDE:
-                            textFechaDeIngresoDesde.Text = filtroContacto.valorFiltroDate.ToString();
+                            textFechaDeIngresoDesde.Text = filtroContacto.valorFiltroDate.ToShortDateString();
                             break;
 
                         case (int)OPCIONES_FILTRO.FECHA_DE_INGRESO_HASTA:
-                            textFechaDeIngresoHasta.Text = filtroContacto.valorFiltroDate.ToString();
+                            textFechaDeIngresoHasta.Text = filtroContacto.valorFiltroDate.ToShortDateString();
                             break;
 
                         case (int)OPCIONES_FILTRO.CONTACTO_INTERNO:
@@ -79,7 +79,8 @@ namespace Agenda_EdsaAcademy
             }
             else
             {
-                GridViewResultadosConsulta.DataSource = Application["listaContactosResultadoConsulta"];
+                AgendaContactos agendaContacto = (AgendaContactos)Application["AgendaContactos"];
+                GridViewResultadosConsulta.DataSource = agendaContacto.getlistaContactosPorFiltro(new List<FiltroContacto>());
                 GridViewResultadosConsulta.DataBind();
             }
         }
@@ -257,10 +258,11 @@ namespace Agenda_EdsaAcademy
 
                 Contacto contactoCambioEstado = agendaContactos.getContactoById(new Contacto() { id = Int32.Parse(e.CommandArgument.ToString()) });
 
-                contactoCambioEstado.activarDesactivarContacto();
-
                 if (contactoCambioEstado.activo.Equals("Si"))
                 {
+                    boton.OnClientClick = "return validateCambioActivo()";
+                    contactoCambioEstado.activarDesactivarContacto();
+
                     //boton.ImageUrl = "/Imagenes Botones/play_pause.png";
 
                     /*
@@ -270,11 +272,14 @@ namespace Agenda_EdsaAcademy
                 }
                 else
                 {
+                    boton.OnClientClick = "return validateCambioInctivo()";
+                    contactoCambioEstado.activarDesactivarContacto();
+
                     //boton.ImageUrl = "/Imagenes Botones/anular.png";
 
                     /*
                     boton.Attributes.Remove("ImageUrl");
-                    boton.Attributes.Add("ImageUrl", "Imagenes Botones/play_pause.png");
+                    boton.Attributes.Add("ImageUrl", "Imagenes Botones/anular.png");
                     */
 
                 }
