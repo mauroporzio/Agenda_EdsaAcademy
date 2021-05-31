@@ -1,5 +1,7 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ConsultaRedireccion.aspx.cs" Inherits="Agenda_EdsaAcademy.ConsultaRedireccion" %>
 
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
+
 <link href="Estilo.css" rel="stylesheet" type="text/css" />
 
 <!DOCTYPE html>
@@ -12,7 +14,7 @@
     <form id="form1" runat="server">
         <div>
              <div class="TituloEspaciado">
-                <asp:Label ID ="Labeltitulo" text= "Nuevo contacto" runat ="server" CssClass ="Titulo"></asp:Label>
+                <asp:Label ID ="Labeltitulo" runat ="server" CssClass ="Titulo"></asp:Label>
              </div>
             <div class="CamposConsulta">
                 <table width="100%" id ="TablaRedireccion" runat ="server" class="TablaConsulta">
@@ -104,12 +106,19 @@
 
                             
                             <asp:Button ID="Button2" runat="server" text="Guardar" CssClass="botonConsulta" OnClientClick="return validate()" OnClick="guardarContacto"/>
+
                             <script>
                                 function validate()
                                 {
                                     if (Page_ClientValidate())
                                     {
-                                        return confirm('Desea dar de alta el nuevo contacto?');
+                                        if (confirm('Desea dar de alta el nuevo contacto?')) {
+                                            return alert("Contacto Guardado!"); true;
+                                        }
+                                        else
+                                        {
+                                            return false;
+                                        }
                                     }
                                 }
                             </script>

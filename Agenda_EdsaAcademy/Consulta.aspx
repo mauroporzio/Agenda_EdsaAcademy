@@ -1,5 +1,7 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Consulta.aspx.cs" Inherits="Agenda_EdsaAcademy.WebForm1" %>
 
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
+
 <link href="Estilo.css" rel="stylesheet" type="text/css" />
 
 <!DOCTYPE html>
@@ -87,9 +89,36 @@
                             <asp:TemplateField>
                                 <ItemTemplate>
                                     <asp:ImageButton ID="ImageButtonBorrarContacto" runat="server" ImageUrl="Imagenes Botones/delete.png" CommandArgument='<%# Eval("id") %>' CommandName="eliminarContacto" OnClientClick="return confirm('Estas Seguro que desea eliminar este contacto?')" />
-                                    <asp:ImageButton ID="ImageButtonAbrirContacto" runat="server" ImageUrl="Imagenes Botones/zoom.png" />
-                                    <asp:ImageButton ID="ImageButtonEditarContacto" runat="server" ImageUrl="Imagenes Botones/edit.png" />
+                                    <asp:ImageButton ID="ImageButtonAbrirContacto" runat="server" ImageUrl="Imagenes Botones/zoom.png" CommandArgument='<%# Eval("id") %>' CommandName="abrirContacto"/>
+                                    <asp:ImageButton ID="ImageButtonEditarContacto" runat="server" ImageUrl="Imagenes Botones/edit.png" CommandArgument='<%# Eval("id") %>' CommandName="editarContacto"/>
                                     <asp:ImageButton ID="ImageButtonActivarDesactivarContacto" runat="server" ImageUrl="Imagenes Botones/play_pause.png" CommandArgument='<%# Eval("id") %>' CommandName="activarDesactivarContacto"/>
+
+                                    <script>
+
+                                        function validateCambioActivo()
+                                        {
+                                            if (<%# Eval("activo").Equals("Si") %>) {
+                                                
+                                                if (confirm('cambiar a inactivado?')) {
+                                                    return true;
+                                                }
+                                                else {
+                                                    return false;
+                                                }
+                                            }
+                                            else
+                                            {
+                                                if (confirm('cambiar a activado?')) {
+                                                    return true;
+                                                }
+                                                else {
+                                                    return false;
+                                                }
+                                            }
+                                        }
+
+                                    </script>
+
                                 </ItemTemplate>
                             </asp:TemplateField>
                         </Columns>

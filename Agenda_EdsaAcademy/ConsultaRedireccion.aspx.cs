@@ -15,29 +15,101 @@ namespace Agenda_EdsaAcademy
         {
             if (!IsPostBack)
             {
-                List<String> listaPaises = (List<string>)Application["listaPaises"];
-                DropDownListPais.DataSource = listaPaises;
-                DropDownListPais.DataBind();
+                cargarDropDownLists();
 
-                DropDownListActivo.DataSource = new List<String> { "Si", "No" };
-                DropDownListActivo.DataBind();
+                cargarControlesPorRedireccion();
+            }
+        }
+        public void cargarDropDownLists()
+        {
+            DropDownListPais.DataSource = (List<string>)Application["listaPaises"];
+            DropDownListPais.DataBind();
 
-                List<String> listaAreas = (List<string>)Application["listaAreas"];
-                DropDownListArea.DataSource = listaAreas;
-                DropDownListArea.DataBind();
+            DropDownListActivo.DataSource = (List<String>)Application["listaSiNo"];
+            DropDownListActivo.DataBind();
 
-                DropDownListContactoInterno.DataSource = new List<String> { "Si", "No" };
-                DropDownListContactoInterno.DataBind();
+            DropDownListArea.DataSource = (List<string>)Application["listaAreas"]; ;
+            DropDownListArea.DataBind();
+
+            DropDownListContactoInterno.DataSource = (List<String>)Application["listaSiNo"];
+            DropDownListContactoInterno.DataBind();
+
+            DropDownListGenero.DataSource = (List<String>)Application["listaGenero"];
+            DropDownListGenero.DataBind();
+        }
+        public void cargarControlesPorRedireccion()
+        {
+            if (Application["queCargo"].Equals("Nuevo Contacto"))
+            {
+                Labeltitulo.Text = "Nuevo Contacto";
 
                 DropDownListContactoInterno.SelectedValue = "Si";
+
                 textBoxOrganizacion.Text = "";
                 textBoxOrganizacion.Enabled = false;
                 textBoxOrganizacion.BackColor = System.Drawing.Color.LightGray;
                 RequiredFieldValidatorOrganizacion.Enabled = false;
 
+            }
+            else if (Application["queCargo"].Equals("Abrir Contacto"))
+            {
+                Labeltitulo.Text = "Consulta Contacto";
 
-                DropDownListGenero.DataSource = new List<String> { "Masculino", "Femenino" };
-                DropDownListGenero.DataBind();
+                Button2.Visible = false;
+                Button2.Enabled = false;
+
+                Button1.Text = "Salir";
+
+                Contacto contactoAbierto = (Contacto)Application["contactoAbrir"];
+
+                textBoxApellidoNombre.Text = contactoAbierto.apellidoYnombre;
+                textBoxDireccion.Text = contactoAbierto.direccion;
+                textBoxLocalidad.Text = contactoAbierto.localidad;
+                textBoxOrganizacion.Text = contactoAbierto.organizacion;
+                textBoxEmail.Text = contactoAbierto.eMail;
+                textBoxSkype.Text = contactoAbierto.cuentaSkype;
+                textBoxTelefonoCelular.Text = contactoAbierto.telefonoCelular;
+                textBoxTelefonoFijoInterno.Text = contactoAbierto.telefonoFijoInterno;
+
+                DropDownListGenero.SelectedValue = contactoAbierto.genero;
+                DropDownListPais.SelectedValue = contactoAbierto.pais;
+                DropDownListActivo.SelectedValue = contactoAbierto.activo;
+                DropDownListArea.SelectedValue = contactoAbierto.area;
+                DropDownListContactoInterno.SelectedValue = contactoAbierto.contactoInterno;
+
+                textBoxApellidoNombre.BackColor = System.Drawing.Color.LightGray;
+                textBoxDireccion.BackColor = System.Drawing.Color.LightGray;
+                textBoxLocalidad.BackColor = System.Drawing.Color.LightGray;
+                textBoxOrganizacion.BackColor = System.Drawing.Color.LightGray;
+                textBoxEmail.BackColor = System.Drawing.Color.LightGray;
+                textBoxSkype.BackColor = System.Drawing.Color.LightGray;
+                textBoxTelefonoCelular.BackColor = System.Drawing.Color.LightGray;
+                textBoxTelefonoFijoInterno.BackColor = System.Drawing.Color.LightGray;
+
+                DropDownListGenero.BackColor = System.Drawing.Color.LightGray;
+                DropDownListPais.BackColor = System.Drawing.Color.LightGray;
+                DropDownListActivo.BackColor = System.Drawing.Color.LightGray;
+                DropDownListArea.BackColor = System.Drawing.Color.LightGray;
+                DropDownListContactoInterno.BackColor = System.Drawing.Color.LightGray;
+
+                textBoxApellidoNombre.Enabled = false;
+                textBoxDireccion.Enabled = false;
+                textBoxLocalidad.Enabled = false;
+                textBoxOrganizacion.Enabled = false;
+                textBoxEmail.Enabled = false;
+                textBoxSkype.Enabled = false;
+                textBoxTelefonoCelular.Enabled = false;
+                textBoxTelefonoFijoInterno.Enabled = false;
+
+                DropDownListGenero.Enabled = false;
+                DropDownListPais.Enabled = false;
+                DropDownListActivo.Enabled = false;
+                DropDownListArea.Enabled = false;
+                DropDownListContactoInterno.Enabled = false;
+            }
+            else
+            {
+
             }
         }
         public void validacionComunicacion(object source, ServerValidateEventArgs e)
@@ -102,6 +174,8 @@ namespace Agenda_EdsaAcademy
                 telefonoFijoInterno = textBoxTelefonoFijoInterno.Text,
                 fechaIngreso = DateTime.Today
             });
+
+
 
             Response.Redirect("Consulta.aspx");
         }
