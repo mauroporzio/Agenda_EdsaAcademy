@@ -103,8 +103,6 @@ namespace Agenda_EdsaAcademy
                 fechaIngreso = DateTime.Today
             });
 
-
-
             Response.Redirect("Consulta.aspx");
         }
     }

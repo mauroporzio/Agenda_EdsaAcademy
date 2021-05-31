@@ -19,6 +19,8 @@ namespace Agenda_EdsaAcademy
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
+            // mock data.
+
             List<Contacto> listaContactos = new List<Contacto>();
 
             listaContactos.Add(new Contacto { apellidoYnombre = "Mauro Porzio", id = 1, localidad = "Mar del Plata", fechaIngreso = DateTime.ParseExact("07/05/2002", "dd/MM/yyyy", null), activo = "Si", area = "Operaciones", contactoInterno = "Si", organizacion = "EDSA" });

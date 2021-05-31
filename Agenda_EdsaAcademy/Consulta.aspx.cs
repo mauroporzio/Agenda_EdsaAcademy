@@ -31,6 +31,9 @@ namespace Agenda_EdsaAcademy
                 DropDownArea.Enabled = false;
                 DropDownArea.BackColor = System.Drawing.Color.LightGray;
 
+                TextBoxOrganizacion.Enabled = false;
+                TextBoxOrganizacion.BackColor = System.Drawing.Color.LightGray;
+
                 DropDownContactoInterno.DataSource = new List<String> { "TODOS", "Si", "No" };
                 DropDownContactoInterno.DataBind();
             }
@@ -89,10 +92,21 @@ namespace Agenda_EdsaAcademy
                 DropDownArea.Enabled = true;
                 DropDownArea.BackColor = System.Drawing.Color.Empty;
             }
-            else
+            else if (DropDownContactoInterno.SelectedValue.Equals("No"))
             {
                 TextBoxOrganizacion.Text = "";
                 TextBoxOrganizacion.Enabled = true;
+                TextBoxOrganizacion.BackColor = System.Drawing.Color.Empty;
+                TextBoxOrganizacion.BorderColor = System.Drawing.Color.Empty;
+
+                DropDownArea.SelectedValue = "TODOS";
+                DropDownArea.Enabled = false;
+                DropDownArea.BackColor = System.Drawing.Color.LightGray;
+            }
+            else
+            {
+                TextBoxOrganizacion.Text = "";
+                TextBoxOrganizacion.Enabled = false;
                 TextBoxOrganizacion.BackColor = System.Drawing.Color.Empty;
                 TextBoxOrganizacion.BorderColor = System.Drawing.Color.Empty;
 
