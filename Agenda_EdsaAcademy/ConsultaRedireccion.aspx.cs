@@ -36,22 +36,24 @@ namespace Agenda_EdsaAcademy
 
             DropDownListGenero.DataSource = (List<String>)Application["listaGenero"];
             DropDownListGenero.DataBind();
+
+            DropDownListContactoInterno.SelectedValue = "Si";
+
+            textBoxOrganizacion.Text = "";
+            textBoxOrganizacion.Enabled = false;
+            textBoxOrganizacion.BackColor = System.Drawing.Color.LightGray;
+            RequiredFieldValidatorOrganizacion.Enabled = false;
         }
         public void cargarControlesPorRedireccion()
         {
-            if (Application["queCargo"].Equals("Nuevo Contacto"))
+            if (Application["controlesACargar"].Equals("Nuevo Contacto"))
             {
                 Labeltitulo.Text = "Nuevo Contacto";
 
-                DropDownListContactoInterno.SelectedValue = "Si";
-
-                textBoxOrganizacion.Text = "";
-                textBoxOrganizacion.Enabled = false;
-                textBoxOrganizacion.BackColor = System.Drawing.Color.LightGray;
-                RequiredFieldValidatorOrganizacion.Enabled = false;
+                Button2.OnClientClick = "return validateNuevoContacto()";
 
             }
-            else if (Application["queCargo"].Equals("Abrir Contacto"))
+            else if (Application["controlesACargar"].Equals("Abrir Contacto"))
             {
                 Labeltitulo.Text = "Consulta Contacto";
 
@@ -109,7 +111,10 @@ namespace Agenda_EdsaAcademy
             }
             else
             {
+                Labeltitulo.Text = "Editar Contacto";
 
+                Button2.OnClientClick = "return validateEditarContacto()";
+                
             }
         }
         public void validacionComunicacion(object source, ServerValidateEventArgs e)
@@ -156,9 +161,8 @@ namespace Agenda_EdsaAcademy
         {
             AgendaContactos agendaContactos = (AgendaContactos)Application["AgendaContactos"];
 
-            agendaContactos.insertarContacto(new Contacto()
+            Contacto contacto = new Contacto()
             {
-                id = agendaContactos.listaContactos.Count,
                 apellidoYnombre = textBoxApellidoNombre.Text,
                 activo = DropDownListActivo.SelectedValue,
                 area = DropDownListArea.SelectedValue,
@@ -171,12 +175,25 @@ namespace Agenda_EdsaAcademy
                 organizacion = textBoxOrganizacion.Text,
                 pais = DropDownListPais.SelectedValue,
                 telefonoCelular = textBoxTelefonoCelular.Text,
-                telefonoFijoInterno = textBoxTelefonoFijoInterno.Text,
-                fechaIngreso = DateTime.Today
-            });
+                telefonoFijoInterno = textBoxTelefonoFijoInterno.Text
+            };
 
+            if (Application["controlesACargar"].Equals("Nuevo Contacto"))
+            {
+                contacto.id = agendaContactos.listaContactos.Count + 1;
+                contacto.fechaIngreso = DateTime.Today;
 
+                agendaContactos.insertarContacto(contacto);
+            }
+            else
+            {
+                Contacto contactoEditar = (Contacto)Application["contactoEditar"];
 
+                contacto.id = contactoEditar.id;
+                contacto.fechaIngreso = contactoEditar.fechaIngreso;
+
+                agendaContactos.modificarContacto(contacto);
+            }
             Response.Redirect("Consulta.aspx");
         }
     }

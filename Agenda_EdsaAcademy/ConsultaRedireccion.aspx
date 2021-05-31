@@ -1,7 +1,5 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ConsultaRedireccion.aspx.cs" Inherits="Agenda_EdsaAcademy.ConsultaRedireccion" %>
 
-<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
-
 <link href="Estilo.css" rel="stylesheet" type="text/css" />
 
 <!DOCTYPE html>
@@ -21,7 +19,7 @@
                     <tr>
                         <td>
                             <asp:Label ID="lableApellidoNombre" runat ="server" Text ="Apellido y Nombre *" Width="14%" CssClass ="TextoConsulta"></asp:Label>
-                            <asp:TextBox ID="textBoxApellidoNombre" runat="server"></asp:TextBox>                            
+                            <asp:TextBox ID="textBoxApellidoNombre" runat="server"></asp:TextBox>
 
                             <asp:Label ID="LabelGenero" runat ="server" Text ="Género *" Width="14%" CssClass ="TextoConsultaOtraColumna"></asp:Label>
                             <asp:DropDownList ID="DropDownListGenero" runat="server" Width="10%"></asp:DropDownList>
@@ -105,14 +103,14 @@
                             <asp:Button ID="Button1" runat="server" Text="Cancelar" CssClass="botonNuevoContacto" OnClick="cancelarCreacion" CausesValidation="False"/>
 
                             
-                            <asp:Button ID="Button2" runat="server" text="Guardar" CssClass="botonConsulta" OnClientClick="return validate()" OnClick="guardarContacto"/>
+                            <asp:Button ID="Button2" runat="server" text="Guardar" CssClass="botonConsulta" OnClick="guardarContacto"/>
 
                             <script>
-                                function validate()
+                                function validateNuevoContacto()
                                 {
                                     if (Page_ClientValidate())
                                     {
-                                        if (confirm('Desea dar de alta el nuevo contacto?')) {
+                                        if (confirm('¿Desea dar de alta el nuevo contacto?')) {
                                             return alert("Contacto Guardado!"); true;
                                         }
                                         else
@@ -121,6 +119,20 @@
                                         }
                                     }
                                 }
+
+                                function validateEditarContacto()
+                                {
+                                    if (Page_ClientValidate())
+                                    {
+                                        if (confirm('¿Desea confirmarlos cambios realizados al contacto ?')) {
+                                            return alert("Cambios Guardados!"); true;
+                                        }
+                                        else {
+                                            return false;
+                                        }
+                                    }
+                                }
+
                             </script>
                         </td>
                     </tr>

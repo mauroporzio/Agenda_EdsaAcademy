@@ -70,14 +70,9 @@ namespace Agenda.BLL
                 return this.listaContactos.OrderBy(p => p.apellidoYnombre).ToList();
             }
         } // SEGUN LA LISTA DE FILTROS QUE LLEGUE POR PARAMETRO, SE FILTRA POR UNO, LUEGO SE GUARDA LA LISTA RESULTANTE, Y SE CONTINUA FILTRANDO POR TODO EL ARRAY DE FILTROS. (SE UTILIZA UN ENUM PARA EL CASE SWITCH).
-        public Contacto insertarContacto(Contacto contactoInsertar)
+        public void insertarContacto(Contacto contactoInsertar)
         {
-            int maxIdAcutal = this.listaContactos.OrderByDescending(p => p.id).First().id;
-            contactoInsertar.id = maxIdAcutal + 1;
-
             this.listaContactos.Add(contactoInsertar);
-
-            return contactoInsertar;
         }
         public void modificarContacto(Contacto contactoModificar) //LLEGA EL CONTACTO YA MODIFICADO PERO MANTIENE EL ID, ENTONCES BORRA EL CONTACTO VIEJO Y ALMACENA EL MODIFICADO.
         {

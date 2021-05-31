@@ -281,7 +281,7 @@ namespace Agenda_EdsaAcademy
             }
             else if (e.CommandName.Equals("abrirContacto"))
             {
-                Application["queCargo"] = "Abrir Contacto";
+                Application["controlesACargar"] = "Abrir Contacto";
 
                 Application["contactoAbrir"] = agendaContactos.getContactoById(new Contacto() { id = Int32.Parse(e.CommandArgument.ToString()) });
 
@@ -290,7 +290,7 @@ namespace Agenda_EdsaAcademy
 
             else if (e.CommandName.Equals("editarContacto"))
             {
-                Application["queCargo"] = "Editar Contacto";
+                Application["controlesACargar"] = "Editar Contacto";
 
                 Application["contactoEditar"] = agendaContactos.getContactoById(new Contacto() { id = Int32.Parse(e.CommandArgument.ToString()) });
 
@@ -303,7 +303,7 @@ namespace Agenda_EdsaAcademy
         }
         public void nuevoContacto(object sender, EventArgs e)
         {
-            Application["queCargo"] = "Nuevo Contacto";
+            Application["controlesACargar"] = "Nuevo Contacto";
 
             Response.Redirect("ConsultaRedireccion.aspx");
         }

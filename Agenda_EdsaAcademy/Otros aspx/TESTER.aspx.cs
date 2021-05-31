@@ -85,7 +85,7 @@ namespace Agenda_EdsaAcademy
             Response.Write("<BR/>");
             Response.Write("Test insertar un contacto y mostrar toda la lista");
             Response.Write("<BR/>");
-            Contacto nuevoContacto = AgendaBuisness.insertarContacto(new Contacto() { apellidoYnombre = "Sebastian Ramirez", localidad = "Mar del Plata", fechaIngreso = DateTime.ParseExact("12/09/2008", "dd/MM/yyyy", null), activo = "Si", area = "Programacion", contactoInterno = "Si", organizacion = "EDSA" });
+            AgendaBuisness.insertarContacto(new Contacto() { apellidoYnombre = "Sebastian Ramirez", localidad = "Mar del Plata", fechaIngreso = DateTime.ParseExact("12/09/2008", "dd/MM/yyyy", null), activo = "Si", area = "Programacion", contactoInterno = "Si", organizacion = "EDSA" });
             print(AgendaBuisness.getlistaContactosPorFiltro(new List<FiltroContacto>()));
             Response.Write("-------------------------------------------------------------------------------------");
             Response.Write("<BR/>");
