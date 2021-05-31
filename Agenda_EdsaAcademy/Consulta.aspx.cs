@@ -132,7 +132,8 @@ namespace Agenda_EdsaAcademy
             DropDownArea.Enabled = true;
             DropDownArea.BackColor = System.Drawing.Color.Empty;
 
-            GridViewResultadosConsulta.DataSource = null;
+            AgendaContactos agendaContacto = (AgendaContactos)Application["AgendaContactos"];
+            GridViewResultadosConsulta.DataSource = agendaContacto.getlistaContactosPorFiltro(new List<FiltroContacto>());
             GridViewResultadosConsulta.DataBind();
 
             DropDownArea.SelectedValue = "TODOS";

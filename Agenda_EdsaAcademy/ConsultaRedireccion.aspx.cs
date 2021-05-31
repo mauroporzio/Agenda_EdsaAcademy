@@ -145,9 +145,10 @@ namespace Agenda_EdsaAcademy
                 {
                     DropDownListArea.DataSource = new List<String>();
                     DropDownListArea.DataBind();
-
                     DropDownListArea.Enabled = false;
                     DropDownListArea.BackColor = System.Drawing.Color.LightGray;
+
+                    textBoxOrganizacion.Text = contactoEditar.organizacion;
                 }
 
                 Button2.OnClientClick = "return validateEditarContacto()";
