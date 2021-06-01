@@ -84,7 +84,7 @@
                             <asp:BoundField DataField="contactoInterno" HeaderText="Contacto interno" HeaderStyle-CssClass ="HeaderResultadoConsulta"/>
                             <asp:BoundField DataField="organizacion" HeaderText="Organización" HeaderStyle-CssClass ="HeaderResultadoConsulta"/>
                             <asp:BoundField DataField="area" HeaderText="Area" HeaderStyle-CssClass ="HeaderResultadoConsulta"/>
-                            <asp:BoundField DataField="fechaIngreso" HeaderText="Fecha de ingreso" HeaderStyle-CssClass ="HeaderResultadoConsulta"/>
+                            <asp:BoundField DataField="fechaIngreso" HeaderText="Fecha de ingreso" HeaderStyle-CssClass ="HeaderResultadoConsulta" DataFormatString= "{0:dd/MM/yyyy}"/>
                             <asp:BoundField DataField="activo" HeaderText="Activo" HeaderStyle-CssClass ="HeaderResultadoConsulta"/>
                             <asp:BoundField DataField="direccion" HeaderText="Dirección" HeaderStyle-CssClass ="HeaderResultadoConsulta"/>
                             <asp:BoundField DataField="telefonoFijoInterno" HeaderText="Tel. Fijo interno" HeaderStyle-CssClass ="HeaderResultadoConsulta"/>

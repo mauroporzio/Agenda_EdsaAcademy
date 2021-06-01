@@ -151,8 +151,8 @@ namespace Agenda_EdsaAcademy
         {
             if (textFechaDeIngresoHasta.Text.Length > 0)
             {
-                DateTime fechaHasta = DateTime.ParseExact(textFechaDeIngresoHasta.Text, new string[] { "dd/MM/yyyy", "d/M/yyyy", "yyyy" }, null, DateTimeStyles.AssumeLocal);
-                fecha.IsValid = DateTime.ParseExact(fecha.Value, new string[] { "dd/MM/yyyy", "d/M/yyyy", "yyyy" }, null, DateTimeStyles.AssumeLocal) <= fechaHasta;
+                DateTime fechaHasta = DateTime.ParseExact(textFechaDeIngresoHasta.Text, "dd/MM/yyyy", null, DateTimeStyles.AssumeLocal);
+                fecha.IsValid = DateTime.ParseExact(fecha.Value, "dd/MM/yyyy", null, DateTimeStyles.AssumeLocal) <= fechaHasta;
 
             }
         }
