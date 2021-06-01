@@ -26,6 +26,9 @@ namespace Agenda_EdsaAcademy
         {
             List<FiltroContacto> listaFiltrosReCarga = (List<FiltroContacto>)Application["listaFiltrosUsados"];
 
+            textFechaDeIngresoDesde.Attributes.Add("readonly", "readonly");
+            textFechaDeIngresoHasta.Attributes.Add("readonly", "readonly");
+
             if (listaFiltrosReCarga != null)
             {
                 foreach (FiltroContacto filtroContacto in listaFiltrosReCarga)

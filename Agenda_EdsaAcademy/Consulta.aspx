@@ -1,5 +1,7 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Consulta.aspx.cs" Inherits="Agenda_EdsaAcademy.WebForm1" %>
 
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
+
 
 
 <link href="Estilo.css" rel="stylesheet" type="text/css" />
@@ -17,6 +19,7 @@
                 <asp:Label ID ="titulo" runat ="server" Text="Consulta de Agenda" CssClass ="Titulo"></asp:Label>
             </div>
             <div class ="CamposConsulta">
+                 <asp:ScriptManager ID="ToolkitScriptManager1" runat="server"></asp:ScriptManager>
                  <table width="100%" id ="TablaConsulta" runat ="server" class="TablaConsulta">
                     <tr>
                         <td>
@@ -34,9 +37,11 @@
                         <td>
                             <asp:Label ID="LabelFechaDeIngresoDesde" runat ="server" Text ="Fecha de ingreso desde" Width="14%" CssClass ="TextoConsulta"></asp:Label>
                             <asp:TextBox ID="textFechaDeIngresoDesde" runat="server"></asp:TextBox>
+                            <ajaxToolkit:CalendarExtender ID="CalendarExtenderDesde" runat="server" TargetControlID="textFechaDeIngresoDesde" Format="dd/MM/yyyy"/>
 
                             <asp:Label ID="LabelFechaDeIngresoHasta" runat ="server" Text ="Fecha de ingreso hasta" Width="14%" CssClass ="TextoConsultaOtraColumna"></asp:Label>
                             <asp:TextBox ID="textFechaDeIngresoHasta" runat="server" Width="10%"></asp:TextBox>
+                            <ajaxToolkit:CalendarExtender ID="CalendarExtenderHasta" runat="server" TargetControlID="textFechaDeIngresoHasta" Format="dd/MM/yyyy"/>
 
                             <asp:Label ID="LabelContactoInterno" runat ="server" Text ="Contacto interno" Width="10%" CssClass ="TextoConsultaOtraColumna"></asp:Label>
                             <asp:DropDownList ID="DropDownContactoInterno" runat="server" AutoPostBack="true" Width="10%" OnSelectedIndexChanged="esContactoInterno"></asp:DropDownList>

@@ -33,6 +33,15 @@ namespace Agenda_EdsaAcademy
         protected global::System.Web.UI.WebControls.Label titulo;
 
         /// <summary>
+        /// ToolkitScriptManager1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.ScriptManager ToolkitScriptManager1;
+
+        /// <summary>
         /// TablaConsulta control.
         /// </summary>
         /// <remarks>
@@ -114,6 +123,15 @@ namespace Agenda_EdsaAcademy
         protected global::System.Web.UI.WebControls.TextBox textFechaDeIngresoDesde;
 
         /// <summary>
+        /// CalendarExtenderDesde control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.CalendarExtender CalendarExtenderDesde;
+
+        /// <summary>
         /// LabelFechaDeIngresoHasta control.
         /// </summary>
         /// <remarks>
@@ -130,6 +148,15 @@ namespace Agenda_EdsaAcademy
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox textFechaDeIngresoHasta;
+
+        /// <summary>
+        /// CalendarExtenderHasta control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.CalendarExtender CalendarExtenderHasta;
 
         /// <summary>
         /// LabelContactoInterno control.
