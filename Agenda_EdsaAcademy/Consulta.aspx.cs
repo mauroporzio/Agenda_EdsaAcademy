@@ -153,7 +153,6 @@ namespace Agenda_EdsaAcademy
             {
                 DateTime fechaHasta = DateTime.ParseExact(textFechaDeIngresoHasta.Text, "dd/MM/yyyy", null, DateTimeStyles.AssumeLocal);
                 fecha.IsValid = DateTime.ParseExact(fecha.Value, "dd/MM/yyyy", null, DateTimeStyles.AssumeLocal) <= fechaHasta;
-
             }
         }
         public void esContactoInterno(object source, EventArgs e)

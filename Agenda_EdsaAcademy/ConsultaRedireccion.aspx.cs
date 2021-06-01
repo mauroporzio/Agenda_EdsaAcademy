@@ -130,7 +130,7 @@ namespace Agenda_EdsaAcademy
                 DropDownListActivo.SelectedValue = contactoEditar.activo;
 
                 DropDownListContactoInterno.SelectedValue = contactoEditar.contactoInterno;
-                
+
 
                 if (contactoEditar.contactoInterno.Equals("Si"))
                 {
@@ -152,17 +152,19 @@ namespace Agenda_EdsaAcademy
                 }
 
                 Button2.OnClientClick = "return validateEditarContacto()";
-                
+
             }
         }
+        /*
         public void validacionComunicacion(object source, ServerValidateEventArgs e)
         {
-            Boolean hayTelFijoInterno = LabelTelefonoFijoInterno.Text.Length > 0;
-            Boolean hayTelCelular = LabelTelefonoCelular.Text.Length > 0;
-            Boolean haySkype = LabelSkype.Text.Length > 0;
+            bool hayTelFijoInterno = LabelTelefonoFijoInterno.Text.Equals("");
+            bool hayTelCelular = LabelTelefonoCelular.Text.Length.Equals("");
+            bool haySkype = LabelSkype.Text.Length.Equals("");
 
-            e.IsValid = hayTelCelular || hayTelFijoInterno || haySkype;
+            e.IsValid = hayTelCelular || hayTelFijoInterno || haySkype; 
         }
+        */
         public void esContactoInterno(object source, EventArgs e)
         {
             if (DropDownListContactoInterno.SelectedValue.Equals("Si"))
@@ -215,6 +217,8 @@ namespace Agenda_EdsaAcademy
                 telefonoCelular = textBoxTelefonoCelular.Text,
                 telefonoFijoInterno = textBoxTelefonoFijoInterno.Text
             };
+
+
 
             if (Application["controlesACargar"].Equals("Nuevo Contacto"))
             {

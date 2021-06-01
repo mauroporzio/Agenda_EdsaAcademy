@@ -42,7 +42,7 @@
                     </tr>
                     <tr>
                         <td>
-                            <asp:Label ID="LabelArea" runat="server" Text="Area" Width="14%" CssClass="TextoConsulta"></asp:Label>
+                            <asp:Label ID="LabelArea" runat="server" Text="Área" Width="14%" CssClass="TextoConsulta"></asp:Label>
                             <asp:DropDownList ID="DropDownListArea" runat="server" Width="9.3%"></asp:DropDownList>
 
                             <asp:Label ID="LabelActivo" runat="server" Text="Activo *" Width="14%" CssClass="TextoConsultaOtraColumna"></asp:Label>
@@ -54,10 +54,10 @@
                     </tr>
                     <tr>
                         <td>
-                            <asp:Label ID="LabelTelefonoFijoInterno" runat="server" Text="Telefono fijo - Interno" Width="14%" CssClass="TextoConsulta"></asp:Label>
+                            <asp:Label ID="LabelTelefonoFijoInterno" runat="server" Text="Teléfono fijo - Interno" Width="14%" CssClass="TextoConsulta"></asp:Label>
                             <asp:TextBox ID="textBoxTelefonoFijoInterno" runat="server" Width="9.3%"></asp:TextBox>
 
-                            <asp:Label ID="LabelTelefonoCelular" runat="server" Text="Telefono Celular" Width="14%" CssClass="TextoConsultaOtraColumna"></asp:Label>
+                            <asp:Label ID="LabelTelefonoCelular" runat="server" Text="Teléfono Celular" Width="14%" CssClass="TextoConsultaOtraColumna"></asp:Label>
                             <asp:TextBox ID="textBoxTelefonoCelular" runat="server" Width="10%"></asp:TextBox>
 
                             <asp:Label ID="LabelEmail" runat="server" Text="E-Mail *" Width="14%" CssClass="TextoConsultaOtraColumna"></asp:Label>
@@ -91,11 +91,26 @@
                                 ErrorMessage="" ControlToValidate="textBoxEmail">
                             </asp:RequiredFieldValidator>
 
+                            <asp:CustomValidator ID="ValidatorCamposComunicacion" runat="server"
+                                ErrorMessage="" ValidateEmptyText="true" ClientValidationFunction="validarComunicacion">
+                            </asp:CustomValidator>
 
+                            <script>
+                                function validarComunicacion(source, args) {
 
-                            <asp:CustomValidator ID="ValidatorSkype" runat="server" OnServerValidate="validacionComunicacion" ValidationGroup="GrupocamposRequeridos"></asp:CustomValidator>
-                            <asp:CustomValidator ID="ValidatorTelFijo" runat="server" OnServerValidate="validacionComunicacion" ValidationGroup="GrupocamposRequeridos"></asp:CustomValidator>
-                            <asp:CustomValidator ID="ValidatorTelCel" runat="server" OnServerValidate="validacionComunicacion" ValidationGroup="GrupocamposRequeridos"></asp:CustomValidator>
+                                    args.IsValid = false;
+
+                                    if (document.getElementById('<% =textBoxSkype.ClientID %>').value.length > 0) {
+                                        args.IsValid = true;
+                                    }
+                                    if (document.getElementById('<% =textBoxTelefonoCelular.ClientID %>').value.length > 0) {
+                                        args.IsValid = true;
+                                    }
+                                    if (document.getElementById('<% =textBoxTelefonoFijoInterno.ClientID %>').value.length > 0) {
+                                        args.IsValid = true;
+                                    }
+                                }
+                            </script>
                         </td>
                     </tr>
                     <tr>

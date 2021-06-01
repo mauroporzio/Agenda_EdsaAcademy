@@ -321,31 +321,13 @@ namespace Agenda_EdsaAcademy
         protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidatorEmail;
 
         /// <summary>
-        /// ValidatorSkype control.
+        /// ValidatorCamposComunicacion control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CustomValidator ValidatorSkype;
-
-        /// <summary>
-        /// ValidatorTelFijo control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.CustomValidator ValidatorTelFijo;
-
-        /// <summary>
-        /// ValidatorTelCel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.CustomValidator ValidatorTelCel;
+        protected global::System.Web.UI.WebControls.CustomValidator ValidatorCamposComunicacion;
 
         /// <summary>
         /// Button1 control.
