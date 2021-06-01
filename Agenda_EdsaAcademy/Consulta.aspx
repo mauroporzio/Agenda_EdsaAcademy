@@ -88,16 +88,27 @@
                             <asp:BoundField DataField="cuentaSkype" HeaderText="Cuenta Skype" HeaderStyle-CssClass ="HeaderResultadoConsulta"/>
                             <asp:TemplateField>
                                 <ItemTemplate>
-                                    <asp:ImageButton ID="ImageButtonBorrarContacto" runat="server" ImageUrl="Imagenes Botones/delete.png" CommandArgument='<%# Eval("id") %>' CommandName="eliminarContacto" OnClientClick="return confirm('Estas Seguro que desea eliminar este contacto?')" />
-                                    <asp:ImageButton ID="ImageButtonAbrirContacto" runat="server" ImageUrl="Imagenes Botones/zoom.png" CommandArgument='<%# Eval("id") %>' CommandName="abrirContacto"/>
-                                    <asp:ImageButton ID="ImageButtonEditarContacto" runat="server" ImageUrl="Imagenes Botones/edit.png" CommandArgument='<%# Eval("id") %>' CommandName="editarContacto"/>
-                                    <asp:ImageButton ID="ImageButtonActivarDesactivarContacto" runat="server" ImageUrl="Imagenes Botones/play_pause.png" CommandArgument='<%# Eval("id") %>' CommandName="activarDesactivarContacto"/>
+                                    <asp:ImageButton ID="ImageButtonBorrarContacto" runat="server" 
+                                                     ImageUrl="Imagenes Botones/delete.png" CommandArgument='<%# Eval("id") %>' 
+                                                     CommandName="eliminarContacto" 
+                                                     OnClientClick="return confirm('Estas Seguro que desea eliminar este contacto?')" />
 
+                                    <asp:ImageButton ID="ImageButtonAbrirContacto" runat="server" 
+                                                     ImageUrl="Imagenes Botones/zoom.png" CommandArgument='<%# Eval("id") %>' 
+                                                     CommandName="abrirContacto"/>
+
+                                    <asp:ImageButton ID="ImageButtonEditarContacto" runat="server" ImageUrl="Imagenes Botones/edit.png" 
+                                                     CommandArgument='<%# Eval("id") %>' CommandName="editarContacto"/>
+
+                                    <asp:ImageButton ID="ImageButtonActivarDesactivarContacto" runat="server" 
+                                                     ImageUrl='<%# Eval("activo").Equals("Si") ? "Imagenes Botones/anular.png" : "Imagenes Botones/play_pause.png" %>' 
+                                                     CommandArgument='<%# Eval("id") %>' CommandName="activarDesactivarContacto" 
+                                                     OnClientClick= '<%# Eval("activo").Equals("Si") ? "confirmCambioActivo()" : "confirmCambioInactivo()"%>'/>
                                     <script>
 
-                                        function validateCambioActivo() {
+                                        function confirmCambioActivo() {
 
-                                            if (confirm('cambiar a inactivado?')) {
+                                            if (confirm('¿Desea inactivar el contacto ?')) {
                                                 return true;
                                             }
                                             else {
@@ -105,9 +116,9 @@
                                             }
                                         }
 
-                                        function validateCambioInactivo() {
+                                        function confirmCambioInactivo() {
 
-                                            if (confirm('cambiar a activado?')) {
+                                            if (confirm('¿Desea activar el contacto ?')) {
                                                 return true;
                                             }
                                             else {

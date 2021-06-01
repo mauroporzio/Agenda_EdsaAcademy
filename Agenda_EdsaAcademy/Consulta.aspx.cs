@@ -255,35 +255,9 @@ namespace Agenda_EdsaAcademy
             }
             else if (e.CommandName.Equals("activarDesactivarContacto"))
             {
-                ImageButton boton = (ImageButton)e.CommandSource;
-
                 Contacto contactoCambioEstado = agendaContactos.getContactoById(new Contacto() { id = Int32.Parse(e.CommandArgument.ToString()) });
 
-                if (contactoCambioEstado.activo.Equals("Si"))
-                {
-                    boton.OnClientClick = "return validateCambioActivo()";
-                    contactoCambioEstado.activarDesactivarContacto();
-
-                    //boton.ImageUrl = "/Imagenes Botones/play_pause.png";
-
-                    /*
-                    boton.Attributes.Remove("ImageUrl");
-                    boton.Attributes.Add("ImageUrl", "Imagenes Botones/anular.png");
-                    */
-                }
-                else
-                {
-                    boton.OnClientClick = "return validateCambioInctivo()";
-                    contactoCambioEstado.activarDesactivarContacto();
-
-                    //boton.ImageUrl = "/Imagenes Botones/anular.png";
-
-                    /*
-                    boton.Attributes.Remove("ImageUrl");
-                    boton.Attributes.Add("ImageUrl", "Imagenes Botones/anular.png");
-                    */
-
-                }
+                contactoCambioEstado.activarDesactivarContacto();
             }
             else if (e.CommandName.Equals("abrirContacto"))
             {
