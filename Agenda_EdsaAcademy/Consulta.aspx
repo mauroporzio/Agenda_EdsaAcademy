@@ -91,21 +91,24 @@
                                     <asp:ImageButton ID="ImageButtonBorrarContacto" runat="server" 
                                                      ImageUrl="Imagenes Botones/delete.png" CommandArgument='<%# Eval("id") %>' 
                                                      CommandName="eliminarContacto" 
-                                                     OnClientClick="return confirm('Estas Seguro que desea eliminar este contacto?')" />
+                                                     OnClientClick="return confirm('Estas Seguro que desea eliminar este contacto?')" 
+                                                     ToolTip="Borrar contacto"/>
 
                                     <asp:ImageButton ID="ImageButtonAbrirContacto" runat="server" 
                                                      ImageUrl="Imagenes Botones/zoom.png" CommandArgument='<%# Eval("id") %>' 
-                                                     CommandName="abrirContacto"/>
+                                                     CommandName="abrirContacto"
+                                                     ToolTip="Abrir contacto"/>
 
                                     <asp:ImageButton ID="ImageButtonEditarContacto" runat="server" ImageUrl="Imagenes Botones/edit.png" 
-                                                     CommandArgument='<%# Eval("id") %>' CommandName="editarContacto"/>
+                                                     CommandArgument='<%# Eval("id") %>' CommandName="editarContacto"
+                                                     ToolTip="Editar contacto"/>
 
                                     <asp:ImageButton ID="ImageButtonActivarDesactivarContacto" runat="server" 
                                                      ImageUrl='<%# Eval("activo").Equals("Si") ? "Imagenes Botones/anular.png" : "Imagenes Botones/play_pause.png" %>' 
                                                      CommandArgument='<%# Eval("id") %>' CommandName="activarDesactivarContacto" 
-                                                     OnClientClick= '<%# Eval("activo").Equals("Si") ? "confirmCambioActivo()" : "confirmCambioInactivo()"%>'/>
+                                                     OnClientClick='<%# Eval("activo").Equals("Si") ? "confirmCambioActivo()" : "confirmCambioInactivo()"%>'
+                                                     ToolTip='<%# Eval("activo").Equals("Si") ? "Inactivar contacto" : "Activar contacto" %>'/>
                                     <script>
-
                                         function confirmCambioActivo() {
 
                                             if (confirm('¿Desea inactivar el contacto ?')) {
@@ -115,7 +118,6 @@
                                                 return false;
                                             }
                                         }
-
                                         function confirmCambioInactivo() {
 
                                             if (confirm('¿Desea activar el contacto ?')) {
@@ -125,7 +127,6 @@
                                                 return false;
                                             }
                                         }
-
                                     </script>
 
                                 </ItemTemplate>
