@@ -149,10 +149,14 @@ namespace Agenda_EdsaAcademy
         }
         public void validarFechas(object source, ServerValidateEventArgs fecha)
         {
-            if (textFechaDeIngresoHasta.Text.Length > 0)
+            if (textFechaDeIngresoHasta.Text.Length > 0 && textFechaDeIngresoDesde.Text.Length > 0)
             {
                 DateTime fechaHasta = DateTime.ParseExact(textFechaDeIngresoHasta.Text, "dd/MM/yyyy", null, DateTimeStyles.AssumeLocal);
-                fecha.IsValid = DateTime.ParseExact(fecha.Value, "dd/MM/yyyy", null, DateTimeStyles.AssumeLocal) <= fechaHasta;
+                fecha.IsValid = DateTime.Parse(textFechaDeIngresoDesde.Text) <= fechaHasta;
+            }
+            else
+            {
+                fecha.IsValid = true;
             }
         }
         public void esContactoInterno(object source, EventArgs e)

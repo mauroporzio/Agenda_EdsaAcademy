@@ -63,7 +63,7 @@
                 <div>
                     <asp:CustomValidator ID="ValidatorFechas" runat="server" OnServerValidate="validarFechas"
                         ErrorMessage="Fecha de ingreso desde debe ser anterior o igual que fecha de ingreso hasta"
-                        CssClass="validationSummaryCampos" ControlToValidate="textFechaDeIngresoDesde">
+                        CssClass="validationSummaryCampos">
                     </asp:CustomValidator>
                 </div>
                 <div>
