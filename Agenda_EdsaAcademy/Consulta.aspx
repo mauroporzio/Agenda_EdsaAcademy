@@ -41,7 +41,7 @@
 
                             <asp:Label ID="LabelFechaDeIngresoHasta" runat="server" Text="Fecha de ingreso hasta" Width="14%" CssClass="TextoConsultaOtraColumna"></asp:Label>
                             <asp:TextBox ID="textFechaDeIngresoHasta" runat="server" Width="10%"></asp:TextBox>
-                            <ajaxToolkit:CalendarExtender ID="CalendarExtenderHasta" runat="server" TargetControlID="textFechaDeIngresoHasta" Format="dd/MM/yyyy" />
+                            <ajaxToolkit:CalendarExtender ID="CalendarExtenderHasta" runat="server" TargetControlID="textFechaDeIngresoHasta" Format="dd/MM/yyyy"/>
 
                             <asp:Label ID="LabelContactoInterno" runat="server" Text="Contacto interno" Width="10%" CssClass="TextoConsultaOtraColumna"></asp:Label>
                             <asp:DropDownList ID="DropDownContactoInterno" runat="server" AutoPostBack="true" Width="10%" OnSelectedIndexChanged="esContactoInterno"></asp:DropDownList>
@@ -110,27 +110,15 @@
 
                                     <asp:ImageButton ID="ImageButtonActivarDesactivarContacto" runat="server"
                                         ImageUrl='<%# Eval("activo").Equals("Si") ? "Imagenes Botones/anular.png" : "Imagenes Botones/play_pause.png" %>'
+                                        OnClientClick='<%# Eval("activo").Equals("Si") ? "return confirmCambioActivo()" : "return confirmCambioInactivo()"%>'
                                         CommandArgument='<%# Eval("id") %>' CommandName="activarDesactivarContacto"
-                                        OnClientClick='<%# Eval("activo").Equals("Si") ? "confirmCambioActivo()" : "confirmCambioInactivo()"%>'
                                         ToolTip='<%# Eval("activo").Equals("Si") ? "Inactivar contacto" : "Activar contacto" %>' />
                                     <script>
                                         function confirmCambioActivo() {
-
-                                            if (confirm('¿Desea inactivar el contacto ?')) {
-                                                return true;
-                                            }
-                                            else {
-                                                return false;
-                                            }
+                                            return confirm('¿Desea inactivar el contacto?')
                                         }
                                         function confirmCambioInactivo() {
-
-                                            if (confirm('¿Desea activar el contacto ?')) {
-                                                return true;
-                                            }
-                                            else {
-                                                return false;
-                                            }
+                                            return confirm('¿Desea activar el contacto?')
                                         }
                                     </script>
 

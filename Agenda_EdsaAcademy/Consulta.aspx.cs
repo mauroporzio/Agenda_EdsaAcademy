@@ -257,9 +257,9 @@ namespace Agenda_EdsaAcademy
             }
             else if (e.CommandName.Equals("activarDesactivarContacto"))
             {
-                Contacto contactoCambioEstado = agendaContactos.getContactoById(new Contacto() { id = Int32.Parse(e.CommandArgument.ToString()) });
+                    Contacto contactoCambioEstado = agendaContactos.getContactoById(new Contacto() { id = Int32.Parse(e.CommandArgument.ToString()) });
 
-                contactoCambioEstado.activarDesactivarContacto();
+                    contactoCambioEstado.activarDesactivarContacto();
             }
             else if (e.CommandName.Equals("abrirContacto"))
             {
