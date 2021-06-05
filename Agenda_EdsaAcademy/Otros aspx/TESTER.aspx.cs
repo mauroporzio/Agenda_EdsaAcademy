@@ -43,7 +43,7 @@ namespace Agenda_EdsaAcademy
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            
+            /*
             IAgendaContactos AgendaBuisness = new AgendaContactos((List<Contacto>)Application["listaContactos"]);
 
             Response.Write("-------------------------------------------------------------------------------------");
@@ -113,6 +113,8 @@ namespace Agenda_EdsaAcademy
             print(AgendaBuisness.getlistaContactosPorFiltro(new List<FiltroContacto>()));
             Response.Write("-------------------------------------------------------------------------------------");
             Response.Write("<BR/>");
+
+            */
         }
 
     }

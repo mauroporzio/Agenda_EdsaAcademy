@@ -8,6 +8,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.IO;
 using System.Globalization;
+using System.Diagnostics;
 
 namespace Agenda_EdsaAcademy
 {
@@ -74,17 +75,20 @@ namespace Agenda_EdsaAcademy
                     }
                 }
 
-                AgendaContactos agendaContactos = (AgendaContactos)Application["AgendaContactos"];
-
-                GridViewResultadosConsulta.DataSource = agendaContactos.getlistaContactosPorFiltro(listaFiltrosReCarga);
-                GridViewResultadosConsulta.DataBind();
+                using (AgendaContactos agendaContacto = new AgendaContactos())
+                {
+                    GridViewResultadosConsulta.DataSource = agendaContacto.getlistaContactosPorFiltro(listaFiltrosReCarga);
+                    GridViewResultadosConsulta.DataBind();
+                }
 
             }
             else
             {
-                AgendaContactos agendaContacto = (AgendaContactos)Application["AgendaContactos"];
-                GridViewResultadosConsulta.DataSource = agendaContacto.getlistaContactosPorFiltro(new List<FiltroContacto>());
-                GridViewResultadosConsulta.DataBind();
+                using (AgendaContactos agendaContacto = new AgendaContactos())
+                {
+                    GridViewResultadosConsulta.DataSource = agendaContacto.getlistaContactosPorFiltro(new List<FiltroContacto>());
+                    GridViewResultadosConsulta.DataBind();
+                }
             }
         }
         public void cargarDropDownLists()
@@ -111,9 +115,12 @@ namespace Agenda_EdsaAcademy
         }
         public void cambiarIndicePagina(object sender, GridViewPageEventArgs e)
         {
-            GridViewResultadosConsulta.DataSource = Application["listaContactosResultadoConsulta"];
-            GridViewResultadosConsulta.PageIndex = e.NewPageIndex;
-            GridViewResultadosConsulta.DataBind();
+            using(IAgendaContactos agendaContactos = new AgendaContactos())
+            {
+                GridViewResultadosConsulta.DataSource = agendaContactos.getlistaContactosPorFiltro((List<FiltroContacto>)Application["listaFiltrosUsados"]);
+                GridViewResultadosConsulta.PageIndex = e.NewPageIndex;
+                GridViewResultadosConsulta.DataBind();
+            }
         }
         public void limpiarFiltros(object sender, ImageClickEventArgs e)
         {
@@ -135,9 +142,12 @@ namespace Agenda_EdsaAcademy
             DropDownArea.Enabled = true;
             DropDownArea.BackColor = System.Drawing.Color.Empty;
 
-            AgendaContactos agendaContacto = (AgendaContactos)Application["AgendaContactos"];
-            GridViewResultadosConsulta.DataSource = agendaContacto.getlistaContactosPorFiltro(new List<FiltroContacto>());
-            GridViewResultadosConsulta.DataBind();
+
+            using (AgendaContactos agendaContacto = new AgendaContactos())
+            {
+                GridViewResultadosConsulta.DataSource = agendaContacto.getlistaContactosPorFiltro(new List<FiltroContacto>());
+                GridViewResultadosConsulta.DataBind();
+            }
 
             DropDownArea.SelectedValue = "TODOS";
             DropDownArea.Enabled = false;
@@ -226,20 +236,20 @@ namespace Agenda_EdsaAcademy
 
             if (textFechaDeIngresoDesde.Text.Length > 0)
             {
-                listaFiltrosUsados.Add(new FiltroContacto { idFiltro = (int)OPCIONES_FILTRO.FECHA_DE_INGRESO_DESDE, valorFiltroDate = DateTime.ParseExact(textFechaDeIngresoDesde.Text, new string[] { "dd/MM/yyyy", "d/M/yyyy", "yyyy" }, null, DateTimeStyles.AssumeLocal) });
+                listaFiltrosUsados.Add(new FiltroContacto { idFiltro = (int)OPCIONES_FILTRO.FECHA_DE_INGRESO_DESDE, valorFiltroDate = DateTime.ParseExact(textFechaDeIngresoDesde.Text, new string[] { "dd/MM/yyyy" }, null, DateTimeStyles.AssumeLocal) });
             }
             else
             {
-                listaFiltrosUsados.Add(new FiltroContacto { idFiltro = (int)OPCIONES_FILTRO.FECHA_DE_INGRESO_DESDE, valorFiltro = null });
+                listaFiltrosUsados.Add(new FiltroContacto { idFiltro = (int)OPCIONES_FILTRO.FECHA_DE_INGRESO_DESDE, valorFiltroDate = DateTime.ParseExact("01/01/1754", new string[] { "dd/MM/yyyy" }, null, DateTimeStyles.AssumeLocal) });
             }
 
             if (textFechaDeIngresoHasta.Text.Length > 0)
             {
-                listaFiltrosUsados.Add(new FiltroContacto { idFiltro = (int)OPCIONES_FILTRO.FECHA_DE_INGRESO_HASTA, valorFiltroDate = DateTime.ParseExact(textFechaDeIngresoHasta.Text, new string[] { "dd/MM/yyyy", "d/M/yyyy", "yyyy" }, null, DateTimeStyles.AssumeLocal) });
+                listaFiltrosUsados.Add(new FiltroContacto { idFiltro = (int)OPCIONES_FILTRO.FECHA_DE_INGRESO_HASTA, valorFiltroDate = DateTime.ParseExact(textFechaDeIngresoHasta.Text, new string[] { "dd/MM/yyyy" }, null, DateTimeStyles.AssumeLocal) });
             }
             else
             {
-                listaFiltrosUsados.Add(new FiltroContacto { idFiltro = (int)OPCIONES_FILTRO.FECHA_DE_INGRESO_HASTA, valorFiltro = null });
+                listaFiltrosUsados.Add(new FiltroContacto { idFiltro = (int)OPCIONES_FILTRO.FECHA_DE_INGRESO_HASTA, valorFiltroDate = DateTime.ParseExact("01/01/9998", new string[] { "dd/MM/yyyy" }, null, DateTimeStyles.AssumeLocal) });
             }
 
             if (!DropDownContactoInterno.SelectedValue.Equals("TODOS"))
@@ -278,48 +288,55 @@ namespace Agenda_EdsaAcademy
                 listaFiltrosUsados.Add(new FiltroContacto { idFiltro = (int)OPCIONES_FILTRO.ACTIVO, valorFiltro = null });
             }
 
-            AgendaContactos agendaContactos = (AgendaContactos)Application["AgendaContactos"];
-
-            Application["listaFiltrosUsados"] = listaFiltrosUsados;
-
-            Application["listaContactosResultadoConsulta"] = agendaContactos.getlistaContactosPorFiltro(listaFiltrosUsados);
-
-            GridViewResultadosConsulta.DataSource = Application["listaContactosResultadoConsulta"];
-            GridViewResultadosConsulta.DataBind();
+            using (AgendaContactos agendaContactos = new AgendaContactos())
+            {
+                Application["listaFiltrosUsados"] = listaFiltrosUsados;
+                GridViewResultadosConsulta.DataSource = agendaContactos.getlistaContactosPorFiltro(listaFiltrosUsados);
+                GridViewResultadosConsulta.DataBind();
+            }
         }
         public void botonesGridViewResultadosConsulta(object sender, GridViewCommandEventArgs e)
         {
-            AgendaContactos agendaContactos = (AgendaContactos)Application["AgendaContactos"]; // recibo la lista de contactos que voy a utilizar.
+            
 
             if (e.CommandName.Equals("eliminarContacto"))
             {
-                agendaContactos.eliminarContacto(new Contacto() { id = Int32.Parse(e.CommandArgument.ToString()) });
+                using(AgendaContactos agendaContactos = new AgendaContactos())
+                {
+                    agendaContactos.eliminarContacto(new Contacto() { id = Int32.Parse(e.CommandArgument.ToString()) });
+                }    
             }
             else if (e.CommandName.Equals("activarDesactivarContacto"))
             {
+                using (AgendaContactos agendaContactos = new AgendaContactos())
+                {
                     Contacto contactoCambioEstado = agendaContactos.getContactoById(new Contacto() { id = Int32.Parse(e.CommandArgument.ToString()) });
 
                     contactoCambioEstado.activarDesactivarContacto();
+                }
             }
             else if (e.CommandName.Equals("abrirContacto"))
             {
-                Application["controlesACargar"] = "Abrir Contacto";
+                using (AgendaContactos agendaContactos = new AgendaContactos())
+                {
+                    Application["controlesACargar"] = "Abrir Contacto";
 
-                Application["contactoAbrir"] = agendaContactos.getContactoById(new Contacto() { id = Int32.Parse(e.CommandArgument.ToString()) });
+                    Application["contactoAbrir"] = agendaContactos.getContactoById(new Contacto() { id = Int32.Parse(e.CommandArgument.ToString()) });
 
-                Response.Redirect("ConsultaRedireccion.aspx");
+                    Response.Redirect("ConsultaRedireccion.aspx");
+                }
             }
-
             else if (e.CommandName.Equals("editarContacto"))
             {
-                Application["controlesACargar"] = "Editar Contacto";
+                using (AgendaContactos agendaContactos = new AgendaContactos())
+                {
+                    Application["controlesACargar"] = "Editar Contacto";
 
-                Application["contactoEditar"] = agendaContactos.getContactoById(new Contacto() { id = Int32.Parse(e.CommandArgument.ToString()) });
+                    Application["contactoEditar"] = agendaContactos.getContactoById(new Contacto() { id = Int32.Parse(e.CommandArgument.ToString()) });
 
-                Response.Redirect("ConsultaRedireccion.aspx");
+                    Response.Redirect("ConsultaRedireccion.aspx");
+                }
             }
-
-            Application["AgendaContactos"] = agendaContactos; // guardo los cambios.
 
             buscarPorFiltro(sender, e);
         }

@@ -7,32 +7,44 @@ using Agenda.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Diagnostics;
 
 namespace Agenda.DAL
 {
-    class AgendaContactosDAL : IDisposable
+    public class AgendaContactosDAL : IDisposable
     {
         public SqlConnection connection;
+        string connString = ConfigurationManager.ConnectionStrings["connectionDB"].ConnectionString;
         public AgendaContactosDAL()
         {
-            connection = new SqlConnection
-            {
-                ConnectionString = ConfigurationManager.AppSettings["connectionDB"]
-            };
+            connection = new SqlConnection(connString);
         }
         public SqlConnection AbrirConexion()
         {
             try
             {
                 connection.Open();
-                Console.WriteLine("Se creo la conexión exitosamente");
+                Debug.WriteLine("Se creo la conexión exitosamente");
                 return connection;
             }
             catch (Exception e)
             {
+                Debug.WriteLine($"Message: { e.Message }");
                 //agregar LOGGER
                 return null;
             }
+        }
+        public int EjecutarExecuteNonQuery(SqlConnection connection, string nonNonQwerySentence)
+        {
+            SqlCommand cmd = new SqlCommand
+            {
+                Connection = connection,
+                CommandType = CommandType.Text,
+                CommandText = nonNonQwerySentence
+            };
+            int registrosAfectados = cmd.ExecuteNonQuery();
+
+            return registrosAfectados;
         }
         public int EjecutarExecuteNonQueryConTransaccion(SqlTransaction transaction, SqlConnection connection, string nonNonQwerySentence)
         {
@@ -47,7 +59,6 @@ namespace Agenda.DAL
 
             return registrosAfectados;
         }
-
         public DataSet EjecutarQueryConsultarContactoAdataSet(SqlConnection connection, List<FiltroContacto> listaFiltroContactos)
         {
             using (SqlDataAdapter dataAdapter = new SqlDataAdapter())
@@ -119,7 +130,32 @@ namespace Agenda.DAL
 
             return sqlCommand;
         }
+        public DataSet EjecutarQueryDevolverContactPorId(SqlConnection connection, int idBuscar)
+        {
+            using (SqlDataAdapter dataAdapter = new SqlDataAdapter())
+            {
+                dataAdapter.SelectCommand = crearCommandDevolverContactPorId(connection, idBuscar);
 
+                DataSet dataSetResultado = new DataSet();
+
+                dataAdapter.Fill(dataSetResultado);
+
+                return dataSetResultado;
+            }
+        }
+        private SqlCommand crearCommandDevolverContactPorId(SqlConnection connection, int idBuscar)
+        {
+            SqlCommand sqlCommand = new SqlCommand
+            {
+                CommandText = "ConsultarContacto",
+                CommandType = CommandType.StoredProcedure,
+                Connection = connection
+            };
+
+            sqlCommand.Parameters.Add(new SqlParameter() {ParameterName = "@Id", Value = idBuscar, SqlDbType = SqlDbType.Int });
+
+            return sqlCommand;
+        }
         public void Dispose()
         {
             if (connection.State == ConnectionState.Open)

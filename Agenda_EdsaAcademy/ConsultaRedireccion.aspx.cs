@@ -155,16 +155,6 @@ namespace Agenda_EdsaAcademy
 
             }
         }
-        /*
-        public void validacionComunicacion(object source, ServerValidateEventArgs e)
-        {
-            bool hayTelFijoInterno = LabelTelefonoFijoInterno.Text.Equals("");
-            bool hayTelCelular = LabelTelefonoCelular.Text.Length.Equals("");
-            bool haySkype = LabelSkype.Text.Length.Equals("");
-
-            e.IsValid = hayTelCelular || hayTelFijoInterno || haySkype; 
-        }
-        */
         public void esContactoInterno(object source, EventArgs e)
         {
             if (DropDownListContactoInterno.SelectedValue.Equals("Si"))
@@ -199,8 +189,6 @@ namespace Agenda_EdsaAcademy
         }
         public void guardarContacto(object sender, EventArgs e)
         {
-            AgendaContactos agendaContactos = (AgendaContactos)Application["AgendaContactos"];
-
             Contacto contacto = new Contacto()
             {
                 apellidoYnombre = textBoxApellidoNombre.Text,
@@ -222,10 +210,10 @@ namespace Agenda_EdsaAcademy
 
             if (Application["controlesACargar"].Equals("Nuevo Contacto"))
             {
-                contacto.id = agendaContactos.listaContactos.Count + 1;
-                contacto.fechaIngreso = DateTime.Today;
-
-                agendaContactos.insertarContacto(contacto);
+                using (IAgendaContactos agendaContacto = new AgendaContactos())
+                {
+                    agendaContacto.insertarContacto(contacto);
+                } 
             }
             else
             {
@@ -234,7 +222,10 @@ namespace Agenda_EdsaAcademy
                 contacto.id = contactoEditar.id;
                 contacto.fechaIngreso = contactoEditar.fechaIngreso;
 
-                agendaContactos.modificarContacto(contacto);
+                using (IAgendaContactos agendaContacto = new AgendaContactos())
+                {
+                    agendaContacto.modificarContacto(contacto);
+                }
             }
             Response.Redirect("Consulta.aspx");
         }

@@ -1,0 +1,6 @@
+D:\New folder (6)\MAURO\GitHub\Agenda_EdsaAcademy\Util\bin\Debug\Util.dll
+D:\New folder (6)\MAURO\GitHub\Agenda_EdsaAcademy\Util\bin\Debug\Util.pdb
+D:\New folder (6)\MAURO\GitHub\Agenda_EdsaAcademy\Util\obj\Debug\Util.csprojAssemblyReference.cache
+D:\New folder (6)\MAURO\GitHub\Agenda_EdsaAcademy\Util\obj\Debug\Util.csproj.CoreCompileInputs.cache
+D:\New folder (6)\MAURO\GitHub\Agenda_EdsaAcademy\Util\obj\Debug\Util.dll
+D:\New folder (6)\MAURO\GitHub\Agenda_EdsaAcademy\Util\obj\Debug\Util.pdb

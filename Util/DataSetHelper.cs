@@ -2,7 +2,7 @@
 
 namespace Util
 {
-    class DataSetHelper
+    public static class DataSetHelper
     {
         public static bool HasRecords(DataSet ds)
         {

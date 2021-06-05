@@ -1,98 +1,172 @@
-﻿using Agenda.Entity;
+﻿using Agenda.DAL;
+using Agenda.Entity;
+using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
+using System.Diagnostics;
 using System.Linq;
+using System.Text;
+using Util;
 
 namespace Agenda.BLL
 {
     public class AgendaContactos : IAgendaContactos
     {
-        public List<Contacto> listaContactos;
-        public AgendaContactos(List<Contacto> listaContactos)
-        {
-            this.listaContactos = listaContactos;
-        }
         public Contacto getContactoById(Contacto contactoBuscar)
         {
-            return this.listaContactos.Single(p => p.id.Equals(contactoBuscar.id));
-        }
-        public List<Contacto> getlistaContactosPorFiltro(List<FiltroContacto> listaFiltros)
-        {
-            if (listaFiltros.Count != 0)
+            try
             {
-                List<Contacto> listaFiltrar = copiarLista(this.listaContactos).OrderBy(p => p.apellidoYnombre).ToList(); // SE COPIA LA LISTA PARA QUE LOS CAMBIOS FUTUROS NO AFECTEN A LA LISTA ORIGINAL.
-
-                foreach (FiltroContacto filtroContacto in listaFiltros)
+                using (AgendaContactosDAL dal = new AgendaContactosDAL())
                 {
-                    switch (filtroContacto.idFiltro)
-                    {
-                        case (int)OPCIONES_FILTRO.APELLIDO_Y_NOMBRE:
-                            listaFiltrar =  listaFiltrar.FindAll(p => p.apellidoYnombre.Contains(filtroContacto.valorFiltro));
-                            break;
-
-                        case (int)OPCIONES_FILTRO.LOCALIDAD:
-                            listaFiltrar = listaFiltrar.FindAll(p => p.localidad.Contains(filtroContacto.valorFiltro));
-                            break;
-
-                        case (int)OPCIONES_FILTRO.FECHA_DE_INGRESO_DESDE:
-                            listaFiltrar = listaFiltrar.FindAll(p => p.fechaIngreso >= filtroContacto.valorFiltroDate);
-                            break;
-
-                        case (int)OPCIONES_FILTRO.FECHA_DE_INGRESO_HASTA:
-                            listaFiltrar = listaFiltrar.FindAll(p => p.fechaIngreso <= filtroContacto.valorFiltroDate);
-                            break;
-
-                        case (int)OPCIONES_FILTRO.CONTACTO_INTERNO:
-                            listaFiltrar = listaFiltrar.FindAll(p => p.contactoInterno.Contains(filtroContacto.valorFiltro));
-                            break;
-
-                        case (int)OPCIONES_FILTRO.ORGANIZACION:
-                            listaFiltrar = listaFiltrar.FindAll(p => p.organizacion.Contains(filtroContacto.valorFiltro));
-                            break;
-
-                        case (int)OPCIONES_FILTRO.AREA:
-                            listaFiltrar = listaFiltrar.FindAll(p => p.area.Contains(filtroContacto.valorFiltro));
-                            break;
-
-                        case (int)OPCIONES_FILTRO.ACTIVO:
-                            listaFiltrar = listaFiltrar.FindAll(p => p.activo.Contains(filtroContacto.valorFiltro));
-                            break;
-                        case (int)OPCIONES_FILTRO.PAIS:
-                            listaFiltrar = listaFiltrar.FindAll(p => p.pais.Contains(filtroContacto.valorFiltro));
-                            break;
-                        default:
-                            break;
-                    }
+                    var connection = dal.AbrirConexion();
+                    DataSet ds = dal.EjecutarQueryDevolverContactPorId(connection, contactoBuscar.id);
+                    return DataSetAListaContacto(ds).First();
                 }
-                return listaFiltrar;
             }
-            else
+            catch (Exception e)
             {
-                return this.listaContactos.OrderBy(p => p.apellidoYnombre).ToList();
+                Debug.WriteLine($"Message: { e.Message }");
+                //AGREGAR LOGGER.
+                return null;
             }
-        } // SEGUN LA LISTA DE FILTROS QUE LLEGUE POR PARAMETRO, SE FILTRA POR UNO, LUEGO SE GUARDA LA LISTA RESULTANTE, Y SE CONTINUA FILTRANDO POR TODO EL ARRAY DE FILTROS. (SE UTILIZA UN ENUM PARA EL CASE SWITCH).
+        }
+        public List<Contacto> getlistaContactosPorFiltro(List<FiltroContacto> listaFiltros) // SI LE PASAS LISTA VACIA RETORNA TODOS LOS CONTACTOS.
+        {
+            try
+            { 
+                using (AgendaContactosDAL dal = new AgendaContactosDAL())
+                {
+                    var connection = dal.AbrirConexion();
+                    DataSet ds = dal.EjecutarQueryConsultarContactoAdataSet(connection, listaFiltros);
+                    return DataSetAListaContacto(ds);
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine($"Message: { e.Message }");
+                //AGREGAR LOGGER.
+                return null;
+            }
+        }
         public void insertarContacto(Contacto contactoInsertar)
         {
-            this.listaContactos.Add(contactoInsertar);
+            using (AgendaContactosDAL dal = new AgendaContactosDAL())
+            {
+                var connection = dal.AbrirConexion();
+                SqlTransaction transaccion = connection.BeginTransaction();
+
+                try
+                {
+                    StringBuilder nonNonQwerySentence = new StringBuilder();
+
+                    nonNonQwerySentence.Append("EXEC InsertarContacto");
+                    nonNonQwerySentence.Append("'" + contactoInsertar.apellidoYnombre + "'" + ",");
+                    nonNonQwerySentence.Append("'" + contactoInsertar.genero + "'" + ",");
+                    nonNonQwerySentence.Append("'" + contactoInsertar.pais + "'" + ",");
+                    nonNonQwerySentence.Append("'" + contactoInsertar.localidad + "'" + ",");
+                    nonNonQwerySentence.Append("'" + contactoInsertar.contactoInterno + "'" + ",");
+                    nonNonQwerySentence.Append("'" + contactoInsertar.organizacion + "'" + ",");
+                    nonNonQwerySentence.Append("'" + contactoInsertar.area + "'" + ",");
+                    nonNonQwerySentence.Append("'" + contactoInsertar.activo + "'" + ",");
+                    nonNonQwerySentence.Append("'" + contactoInsertar.direccion + "'" + ",");
+                    nonNonQwerySentence.Append("'" + contactoInsertar.telefonoFijoInterno + "'" + ",");
+                    nonNonQwerySentence.Append("'" + contactoInsertar.telefonoCelular + "'" + ",");
+                    nonNonQwerySentence.Append("'" + contactoInsertar.eMail + "'" + ",");
+                    nonNonQwerySentence.Append("'" + contactoInsertar.cuentaSkype + "'" + ",");
+                    nonNonQwerySentence.Append("'" + "insertarContacto()" + "'" + ",");
+
+                    dal.EjecutarExecuteNonQueryConTransaccion(transaccion, connection, nonNonQwerySentence.ToString());
+
+                    transaccion.Commit();
+                }
+                catch (Exception e)
+                {
+                    transaccion.Rollback();
+                    Debug.WriteLine($"Message: { e.Message }");
+                    //AGREGAR LOGGER.
+                }
+                finally
+                {
+                    transaccion.Dispose();
+                }
+            }
         }
-        public void modificarContacto(Contacto contactoModificar) //LLEGA EL CONTACTO YA MODIFICADO PERO MANTIENE EL ID, ENTONCES BORRA EL CONTACTO VIEJO Y ALMACENA EL MODIFICADO.
+        public void modificarContacto(Contacto contactoModificar) //LLEGA EL CONTACTO YA MODIFICADO PERO MANTIENE EL ID
         {
-            this.eliminarContacto(contactoModificar);
-            this.insertarContacto(contactoModificar);
+            eliminarContacto(contactoModificar);
+            insertarContacto(contactoModificar);
         }
         public void eliminarContacto(Contacto contactoEliminar)
         {
-            this.listaContactos.Remove(this.listaContactos.Single(p => p.id.Equals(contactoEliminar.id)));
-        }
-        private List<Contacto> copiarLista(List<Contacto> listaCopiar)
-        {
-            List<Contacto> listaCopiada = new List<Contacto>();
-
-            foreach(Contacto contactoCopiar in listaCopiar)
+            using (AgendaContactosDAL dal = new AgendaContactosDAL())
             {
-                listaCopiada.Add(contactoCopiar);
-            }
+                var connection = dal.AbrirConexion();
+                SqlTransaction transaccion = connection.BeginTransaction();
 
-            return listaCopiada;
-        }// FUNCION UTILIZADA PARA HACER LA COPIA DE LA LISTA Y QUE LOS CAMBIOS FUTUROS NO AFECTEN A LA LISTA ORIGINAL.
+                try
+                {
+                    string nonNonQwerySentence = "EXEC BorrarContacto " + contactoEliminar.id;
+
+                    dal.EjecutarExecuteNonQueryConTransaccion(transaccion, connection, nonNonQwerySentence);
+
+                    transaccion.Commit();
+                }
+                catch (Exception e)
+                {
+                    transaccion.Rollback();
+                    Debug.WriteLine($"Message: { e.Message }");
+                    //AGREGAR LOGGER.
+                }
+                finally
+                {
+                    transaccion.Dispose();
+                }
+            }
+        }
+        
+        private List<Contacto> DataSetAListaContacto(DataSet dataSet) // retorna una lista de contactos provenientes del data set pasado por param.
+        {
+            List<Contacto> listaContacto = new List<Contacto>();
+
+            if (DataSetHelper.HasRecords(dataSet))
+            {
+                foreach (DataRow row in dataSet.Tables[0].Rows)
+                {
+                    listaContacto.Add(DataRowAContacto(row));
+                }
+                return listaContacto;
+            }
+            else
+            {
+                return null;
+            }
+        }
+        private Contacto DataRowAContacto (DataRow row) // mapea la fila dada en un contacto y lo retorna.
+        {
+            return new Contacto()
+            {
+                id = Convert.ToInt32(row["idAgendaContacto"]),
+                apellidoYnombre = Convert.ToString(row["ApellidoYNombre"]),
+                genero = Convert.ToString(row["Genero"]),
+                pais = Convert.ToString(row["Pais"]),
+                localidad = Convert.IsDBNull(row["Localidad"]) ? null : Convert.ToString(row["Localidad"]),
+                contactoInterno = Convert.ToString(row["ContactoInterno"]),
+                organizacion = Convert.IsDBNull(row["Organizacion"]) ? null : Convert.ToString(row["Organizacion"]),
+                area = Convert.IsDBNull(row["Area"]) ? null : Convert.ToString(row["Area"]),
+                activo = Convert.ToString(row["Activo"]),
+                direccion = Convert.IsDBNull(row["Direccion"]) ? null : Convert.ToString(row["Direccion"]),
+                telefonoFijoInterno = Convert.IsDBNull(row["TelefonoFijoInterno"]) ? null : Convert.ToString(row["TelefonoFijoInterno"]),
+                telefonoCelular = Convert.IsDBNull(row["TelefonoCelular"]) ? null : Convert.ToString(row["TelefonoCelular"]),
+                eMail = Convert.ToString(row["Email"]),
+                cuentaSkype = Convert.IsDBNull(row["CuentaSkype"]) ? null : Convert.ToString(row["CuentaSkype"]),
+                fechaIngreso = Convert.ToDateTime(row["FechaAltaReg"])
+            };
+        }
+
+        public void Dispose()
+        {
+            
+        }
     }
 }

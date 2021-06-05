@@ -21,6 +21,7 @@ namespace Agenda_EdsaAcademy
 
             // mock data.
 
+            /*
             List<Contacto> listaContactos = new List<Contacto>();
 
             listaContactos.Add(new Contacto { apellidoYnombre = "Mauro Porzio", id = 1, localidad = "Mar del Plata", fechaIngreso = DateTime.ParseExact("07/05/2002", "dd/MM/yyyy", null), activo = "Si", area = "Operaciones", contactoInterno = "Si", direccion = "calle 123", eMail = "email1@direc.com", cuentaSkype = "cuentaSkype1", genero = "Masculino", pais = "Argentina", telefonoCelular = "223345456" });
@@ -34,11 +35,13 @@ namespace Agenda_EdsaAcademy
 
             Application["AgendaContactos"] = agendaContactos;
 
+            */
+
             List<String> paisesDropDownTODOS = new List<string>() { "TODOS", "Argentina", "Francia", "Brasil", "Uruguay", "Chile" };
 
             Application["listaPaisesTODOS"] = paisesDropDownTODOS;
 
-            List<String> areaDropDownTODOS = new List<string>() { "TODOS", "Marketing", "Finanzas", "RRHH", "Operaicones" };
+            List<String> areaDropDownTODOS = new List<string>() { "TODOS", "Marketing", "Finanzas", "RRHH", "Operaciones" };
 
             Application["listaAreasTODOS"] = areaDropDownTODOS;
 
@@ -46,7 +49,7 @@ namespace Agenda_EdsaAcademy
 
             Application["listaPaises"] = paisesDropDown;
 
-            List<String> areaDropDown = new List<string>() { "Marketing", "Finanzas", "RRHH", "Operaicones" };
+            List<String> areaDropDown = new List<string>() { "Marketing", "Finanzas", "RRHH", "Operaciones" };
 
             Application["listaAreas"] = areaDropDown;
 
