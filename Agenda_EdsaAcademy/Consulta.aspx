@@ -75,7 +75,10 @@
                     <asp:Button ID="ButtonBuscar" runat="server" Text="Buscar" CssClass="botonConsulta" OnClick="buscarPorFiltro" />
                 </div>
                 <div>
-                    <asp:GridView ID="GridViewResultadosConsulta" runat="server" Width="100%" OnRowCommand="botonesGridViewResultadosConsulta" AutoGenerateColumns="false" RowStyle-HorizontalAlign="Center" GridLines="Horizontal" AllowPaging="true" PageSize="5" OnPageIndexChanging="cambiarIndicePagina">
+                    <asp:GridView ID="GridViewResultadosConsulta" runat="server" Width="100%" 
+                                  OnRowCommand="botonesGridViewResultadosConsulta" AutoGenerateColumns="false" 
+                                  RowStyle-HorizontalAlign="Center" GridLines="Horizontal" AllowPaging="true" 
+                                  PageSize="5" OnPageIndexChanging="cambiarIndicePagina">
                         <Columns>
                             <asp:BoundField DataField="apellidoYnombre" HeaderText="Apellido y Nombre" HeaderStyle-CssClass="HeaderResultadoConsulta" />
                             <asp:BoundField DataField="genero" HeaderText="Género" HeaderStyle-CssClass="HeaderResultadoConsulta" />

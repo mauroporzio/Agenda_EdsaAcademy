@@ -201,45 +201,81 @@ namespace Agenda_EdsaAcademy
             {
                 listaFiltrosUsados.Add(new FiltroContacto { idFiltro = (int)OPCIONES_FILTRO.APELLIDO_Y_NOMBRE, valorFiltro = textBoxApellidoNombre.Text });
             }
+            else
+            {
+                listaFiltrosUsados.Add(new FiltroContacto { idFiltro = (int)OPCIONES_FILTRO.APELLIDO_Y_NOMBRE, valorFiltro = null });
+            }
 
             if (!DropDownListPais.SelectedValue.Equals("TODOS"))
             {
                 listaFiltrosUsados.Add(new FiltroContacto { idFiltro = (int)OPCIONES_FILTRO.PAIS, valorFiltro = DropDownListPais.SelectedValue });
+            }
+            else
+            {
+                listaFiltrosUsados.Add(new FiltroContacto { idFiltro = (int)OPCIONES_FILTRO.PAIS, valorFiltro = null });
             }
 
             if (textBoxLocalidad.Text.Length > 0)
             {
                 listaFiltrosUsados.Add(new FiltroContacto { idFiltro = (int)OPCIONES_FILTRO.LOCALIDAD, valorFiltro = textBoxLocalidad.Text });
             }
+            else
+            {
+                listaFiltrosUsados.Add(new FiltroContacto { idFiltro = (int)OPCIONES_FILTRO.LOCALIDAD, valorFiltro = null });
+            }
 
             if (textFechaDeIngresoDesde.Text.Length > 0)
             {
                 listaFiltrosUsados.Add(new FiltroContacto { idFiltro = (int)OPCIONES_FILTRO.FECHA_DE_INGRESO_DESDE, valorFiltroDate = DateTime.ParseExact(textFechaDeIngresoDesde.Text, new string[] { "dd/MM/yyyy", "d/M/yyyy", "yyyy" }, null, DateTimeStyles.AssumeLocal) });
+            }
+            else
+            {
+                listaFiltrosUsados.Add(new FiltroContacto { idFiltro = (int)OPCIONES_FILTRO.FECHA_DE_INGRESO_DESDE, valorFiltro = null });
             }
 
             if (textFechaDeIngresoHasta.Text.Length > 0)
             {
                 listaFiltrosUsados.Add(new FiltroContacto { idFiltro = (int)OPCIONES_FILTRO.FECHA_DE_INGRESO_HASTA, valorFiltroDate = DateTime.ParseExact(textFechaDeIngresoHasta.Text, new string[] { "dd/MM/yyyy", "d/M/yyyy", "yyyy" }, null, DateTimeStyles.AssumeLocal) });
             }
+            else
+            {
+                listaFiltrosUsados.Add(new FiltroContacto { idFiltro = (int)OPCIONES_FILTRO.FECHA_DE_INGRESO_HASTA, valorFiltro = null });
+            }
 
             if (!DropDownContactoInterno.SelectedValue.Equals("TODOS"))
             {
                 listaFiltrosUsados.Add(new FiltroContacto { idFiltro = (int)OPCIONES_FILTRO.CONTACTO_INTERNO, valorFiltro = DropDownContactoInterno.SelectedValue });
+            }
+            else
+            {
+                listaFiltrosUsados.Add(new FiltroContacto { idFiltro = (int)OPCIONES_FILTRO.CONTACTO_INTERNO, valorFiltro = null });
             }
 
             if (TextBoxOrganizacion.Text.Length > 0)
             {
                 listaFiltrosUsados.Add(new FiltroContacto { idFiltro = (int)OPCIONES_FILTRO.ORGANIZACION, valorFiltro = TextBoxOrganizacion.Text });
             }
+            else
+            {
+                listaFiltrosUsados.Add(new FiltroContacto { idFiltro = (int)OPCIONES_FILTRO.ORGANIZACION, valorFiltro = null });
+            }
 
             if (!DropDownArea.SelectedValue.Equals("TODOS"))
             {
                 listaFiltrosUsados.Add(new FiltroContacto { idFiltro = (int)OPCIONES_FILTRO.AREA, valorFiltro = DropDownArea.SelectedValue });
             }
+            else
+            {
+                listaFiltrosUsados.Add(new FiltroContacto { idFiltro = (int)OPCIONES_FILTRO.AREA, valorFiltro = null });
+            }
 
             if (!DropDownActivo.SelectedValue.Equals("TODOS"))
             {
                 listaFiltrosUsados.Add(new FiltroContacto { idFiltro = (int)OPCIONES_FILTRO.ACTIVO, valorFiltro = DropDownActivo.SelectedValue });
+            }
+            else
+            {
+                listaFiltrosUsados.Add(new FiltroContacto { idFiltro = (int)OPCIONES_FILTRO.ACTIVO, valorFiltro = null });
             }
 
             AgendaContactos agendaContactos = (AgendaContactos)Application["AgendaContactos"];

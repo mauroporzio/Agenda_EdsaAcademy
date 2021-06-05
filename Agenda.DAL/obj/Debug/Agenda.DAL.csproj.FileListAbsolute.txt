@@ -1,0 +1,2 @@
+D:\New folder (6)\MAURO\GitHub\Agenda_EdsaAcademy\Agenda.DAL\obj\Debug\Agenda.DAL.csprojAssemblyReference.cache
+D:\New folder (6)\MAURO\GitHub\Agenda_EdsaAcademy\Agenda.DAL\obj\Debug\Agenda.DAL.csproj.CoreCompileInputs.cache
