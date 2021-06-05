@@ -147,7 +147,7 @@ namespace Agenda.DAL
         {
             SqlCommand sqlCommand = new SqlCommand
             {
-                CommandText = "ConsultarContacto",
+                CommandText = "DevolverContactoPorId",
                 CommandType = CommandType.StoredProcedure,
                 Connection = connection
             };

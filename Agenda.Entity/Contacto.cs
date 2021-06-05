@@ -3,7 +3,7 @@
 namespace Agenda.Entity
 {
     [Serializable]
-    public class Contacto : IContacto
+    public class Contacto
     {
         public int id { get; set; } // ID de contacto
         public string apellidoYnombre { get; set; }
@@ -20,17 +20,5 @@ namespace Agenda.Entity
         public string eMail { get; set; }
         public string cuentaSkype { get; set; }
         public string genero { get; set; }
-
-        public void activarDesactivarContacto()
-        {
-            if (this.activo.Equals("No"))
-            {
-                this.activo = "Si";
-            }
-            else
-            {
-                this.activo = "No";
-            }
-        }
     }
 }

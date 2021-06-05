@@ -60,7 +60,9 @@ namespace Agenda.BLL
                 {
                     StringBuilder nonNonQwerySentence = new StringBuilder();
 
-                    nonNonQwerySentence.Append("EXEC InsertarContacto");
+                    nonNonQwerySentence.Append("DECLARE @Id INT ");
+                    nonNonQwerySentence.Append("EXEC InsertarContacto ");
+                    nonNonQwerySentence.Append( "@Id OUTPUT" + ",");
                     nonNonQwerySentence.Append("'" + contactoInsertar.apellidoYnombre + "'" + ",");
                     nonNonQwerySentence.Append("'" + contactoInsertar.genero + "'" + ",");
                     nonNonQwerySentence.Append("'" + contactoInsertar.pais + "'" + ",");
@@ -74,7 +76,7 @@ namespace Agenda.BLL
                     nonNonQwerySentence.Append("'" + contactoInsertar.telefonoCelular + "'" + ",");
                     nonNonQwerySentence.Append("'" + contactoInsertar.eMail + "'" + ",");
                     nonNonQwerySentence.Append("'" + contactoInsertar.cuentaSkype + "'" + ",");
-                    nonNonQwerySentence.Append("'" + "insertarContacto()" + "'" + ",");
+                    nonNonQwerySentence.Append("'" + "insertarContacto()" + "'");
 
                     dal.EjecutarExecuteNonQueryConTransaccion(transaccion, connection, nonNonQwerySentence.ToString());
 
@@ -94,8 +96,47 @@ namespace Agenda.BLL
         }
         public void modificarContacto(Contacto contactoModificar) //LLEGA EL CONTACTO YA MODIFICADO PERO MANTIENE EL ID
         {
-            eliminarContacto(contactoModificar);
-            insertarContacto(contactoModificar);
+            using (AgendaContactosDAL dal = new AgendaContactosDAL())
+            {
+                var connection = dal.AbrirConexion();
+                SqlTransaction transaccion = connection.BeginTransaction();
+
+                try
+                {
+                    StringBuilder nonNonQwerySentence = new StringBuilder();
+
+                    nonNonQwerySentence.Append("EXEC EditarContacto ");
+                    nonNonQwerySentence.Append(contactoModificar.id + ",");
+                    nonNonQwerySentence.Append("'" + contactoModificar.apellidoYnombre + "'" + ",");
+                    nonNonQwerySentence.Append("'" + contactoModificar.genero + "'" + ",");
+                    nonNonQwerySentence.Append("'" + contactoModificar.pais + "'" + ",");
+                    nonNonQwerySentence.Append("'" + contactoModificar.localidad + "'" + ",");
+                    nonNonQwerySentence.Append("'" + contactoModificar.contactoInterno + "'" + ",");
+                    nonNonQwerySentence.Append("'" + contactoModificar.organizacion + "'" + ",");
+                    nonNonQwerySentence.Append("'" + contactoModificar.area + "'" + ",");
+                    nonNonQwerySentence.Append("'" + contactoModificar.activo + "'" + ",");
+                    nonNonQwerySentence.Append("'" + contactoModificar.direccion + "'" + ",");
+                    nonNonQwerySentence.Append("'" + contactoModificar.telefonoFijoInterno + "'" + ",");
+                    nonNonQwerySentence.Append("'" + contactoModificar.telefonoCelular + "'" + ",");
+                    nonNonQwerySentence.Append("'" + contactoModificar.eMail + "'" + ",");
+                    nonNonQwerySentence.Append("'" + contactoModificar.cuentaSkype + "'" + ",");
+                    nonNonQwerySentence.Append("'" + "modificarContacto()" + "'");
+
+                    dal.EjecutarExecuteNonQueryConTransaccion(transaccion, connection, nonNonQwerySentence.ToString());
+
+                    transaccion.Commit();
+                }
+                catch (Exception e)
+                {
+                    transaccion.Rollback();
+                    Debug.WriteLine($"Message: { e.Message }");
+                    //AGREGAR LOGGER.
+                }
+                finally
+                {
+                    transaccion.Dispose();
+                }
+            }
         }
         public void eliminarContacto(Contacto contactoEliminar)
         {
@@ -146,7 +187,7 @@ namespace Agenda.BLL
         {
             return new Contacto()
             {
-                id = Convert.ToInt32(row["idAgendaContacto"]),
+                id = Convert.ToInt32(row["Id"]),
                 apellidoYnombre = Convert.ToString(row["ApellidoYNombre"]),
                 genero = Convert.ToString(row["Genero"]),
                 pais = Convert.ToString(row["Pais"]),

@@ -45,11 +45,25 @@ namespace Agenda_EdsaAcademy
                             break;
 
                         case (int)OPCIONES_FILTRO.FECHA_DE_INGRESO_DESDE:
-                            textFechaDeIngresoDesde.Text = filtroContacto.valorFiltroDate.ToShortDateString();
+                            if (filtroContacto.valorFiltroDate.ToShortDateString().Equals("01/01/1754"))
+                            {
+                                textFechaDeIngresoDesde.Text = "";
+                            }
+                            else
+                            {
+                                textFechaDeIngresoDesde.Text = filtroContacto.valorFiltroDate.ToShortDateString();
+                            }
                             break;
 
                         case (int)OPCIONES_FILTRO.FECHA_DE_INGRESO_HASTA:
-                            textFechaDeIngresoHasta.Text = filtroContacto.valorFiltroDate.ToShortDateString();
+                            if (filtroContacto.valorFiltroDate.ToShortDateString().Equals("01/01/9998"))
+                            {
+                                textFechaDeIngresoDesde.Text = "";
+                            }
+                            else
+                            {
+                                textFechaDeIngresoHasta.Text = filtroContacto.valorFiltroDate.ToShortDateString();
+                            }
                             break;
 
                         case (int)OPCIONES_FILTRO.CONTACTO_INTERNO:
@@ -312,7 +326,16 @@ namespace Agenda_EdsaAcademy
                 {
                     Contacto contactoCambioEstado = agendaContactos.getContactoById(new Contacto() { id = Int32.Parse(e.CommandArgument.ToString()) });
 
-                    contactoCambioEstado.activarDesactivarContacto();
+                    if (contactoCambioEstado.activo.Equals("Si"))
+                    {
+                        contactoCambioEstado.activo = "No";
+                        agendaContactos.modificarContacto(contactoCambioEstado);
+                    }
+                    else
+                    {
+                        contactoCambioEstado.activo = "Si";
+                        agendaContactos.modificarContacto(contactoCambioEstado);
+                    }
                 }
             }
             else if (e.CommandName.Equals("abrirContacto"))
@@ -322,6 +345,8 @@ namespace Agenda_EdsaAcademy
                     Application["controlesACargar"] = "Abrir Contacto";
 
                     Application["contactoAbrir"] = agendaContactos.getContactoById(new Contacto() { id = Int32.Parse(e.CommandArgument.ToString()) });
+
+
 
                     Response.Redirect("ConsultaRedireccion.aspx");
                 }
