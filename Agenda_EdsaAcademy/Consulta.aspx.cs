@@ -1,14 +1,11 @@
 ﻿using Agenda.Entity;
 using Agenda.BLL;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
+using System.Collections.Generic;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.IO;
 using System.Globalization;
-using System.Diagnostics;
 
 namespace Agenda_EdsaAcademy
 {
@@ -45,7 +42,7 @@ namespace Agenda_EdsaAcademy
                             break;
 
                         case (int)OPCIONES_FILTRO.FECHA_DE_INGRESO_DESDE:
-                            if (filtroContacto.valorFiltroDate.ToShortDateString().Equals("01/01/1754"))
+                            if (filtroContacto.valorFiltroDate.Equals(DateTime.ParseExact("01/01/1754", "dd/MM/yyyy", null, DateTimeStyles.AssumeLocal)))
                             {
                                 textFechaDeIngresoDesde.Text = "";
                             }
@@ -56,7 +53,7 @@ namespace Agenda_EdsaAcademy
                             break;
 
                         case (int)OPCIONES_FILTRO.FECHA_DE_INGRESO_HASTA:
-                            if (filtroContacto.valorFiltroDate.ToShortDateString().Equals("01/01/9998"))
+                            if (filtroContacto.valorFiltroDate.Equals(DateTime.ParseExact("01/01/9998", "dd/MM/yyyy", null, DateTimeStyles.AssumeLocal)))
                             {
                                 textFechaDeIngresoDesde.Text = "";
                             }
@@ -91,7 +88,14 @@ namespace Agenda_EdsaAcademy
 
                 using (AgendaContactos agendaContacto = new AgendaContactos())
                 {
-                    GridViewResultadosConsulta.DataSource = agendaContacto.getlistaContactosPorFiltro(listaFiltrosReCarga);
+                    List<Contacto> listaContactos = agendaContacto.getlistaContactosPorFiltro(listaFiltrosReCarga);
+
+                    if (listaContactos != null)
+                    {
+                        listaContactos.OrderBy(Contacto => Contacto.apellidoYnombre).ToList();
+                    }
+
+                    GridViewResultadosConsulta.DataSource = listaContactos;
                     GridViewResultadosConsulta.DataBind();
                 }
 
@@ -100,7 +104,8 @@ namespace Agenda_EdsaAcademy
             {
                 using (AgendaContactos agendaContacto = new AgendaContactos())
                 {
-                    GridViewResultadosConsulta.DataSource = agendaContacto.getlistaContactosPorFiltro(new List<FiltroContacto>());
+                    List<Contacto> listaContactos = agendaContacto.getlistaContactosPorFiltro(new List<FiltroContacto>()).OrderBy(Contacto => Contacto.apellidoYnombre).ToList();
+                    GridViewResultadosConsulta.DataSource = listaContactos;
                     GridViewResultadosConsulta.DataBind();
                 }
             }
@@ -131,7 +136,7 @@ namespace Agenda_EdsaAcademy
         {
             using(IAgendaContactos agendaContactos = new AgendaContactos())
             {
-                GridViewResultadosConsulta.DataSource = agendaContactos.getlistaContactosPorFiltro((List<FiltroContacto>)Application["listaFiltrosUsados"]);
+                GridViewResultadosConsulta.DataSource = agendaContactos.getlistaContactosPorFiltro((List<FiltroContacto>)Application["listaFiltrosUsados"]).OrderBy(Contacto => Contacto.apellidoYnombre).ToList();
                 GridViewResultadosConsulta.PageIndex = e.NewPageIndex;
                 GridViewResultadosConsulta.DataBind();
             }
@@ -159,7 +164,7 @@ namespace Agenda_EdsaAcademy
 
             using (AgendaContactos agendaContacto = new AgendaContactos())
             {
-                GridViewResultadosConsulta.DataSource = agendaContacto.getlistaContactosPorFiltro(new List<FiltroContacto>());
+                GridViewResultadosConsulta.DataSource = agendaContacto.getlistaContactosPorFiltro(new List<FiltroContacto>()).OrderBy(Contacto => Contacto.apellidoYnombre).ToList();
                 GridViewResultadosConsulta.DataBind();
             }
 
@@ -169,6 +174,8 @@ namespace Agenda_EdsaAcademy
 
             TextBoxOrganizacion.Enabled = false;
             TextBoxOrganizacion.BackColor = System.Drawing.Color.LightGray;
+
+            Application["listaFiltrosUsados"] = new List<FiltroContacto>(); 
 
         }
         public void validarFechas(object source, ServerValidateEventArgs fecha)
@@ -305,7 +312,15 @@ namespace Agenda_EdsaAcademy
             using (AgendaContactos agendaContactos = new AgendaContactos())
             {
                 Application["listaFiltrosUsados"] = listaFiltrosUsados;
-                GridViewResultadosConsulta.DataSource = agendaContactos.getlistaContactosPorFiltro(listaFiltrosUsados);
+
+                List<Contacto> listaContactos = agendaContactos.getlistaContactosPorFiltro(listaFiltrosUsados);
+
+                if (listaContactos != null)
+                {
+                    listaContactos.OrderBy(Contacto => Contacto.apellidoYnombre).ToList();
+                }
+
+                GridViewResultadosConsulta.DataSource = listaContactos;
                 GridViewResultadosConsulta.DataBind();
             }
         }
