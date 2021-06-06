@@ -52,6 +52,10 @@
       <Project>{B6871BEA-6C40-4182-A604-7107346BAB47}</Project>
       <Name>Agenda.Entity</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Util\Util.csproj">
+      <Project>{CA780765-51C1-45C1-9900-4A7D3475574A}</Project>
+      <Name>Util</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

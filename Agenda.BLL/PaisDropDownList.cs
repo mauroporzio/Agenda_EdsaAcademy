@@ -25,8 +25,10 @@ namespace Agenda.BLL
             }
             catch (Exception e)
             {
-                Debug.WriteLine($"Message: { e.Message }");
-                //AGREGAR LOGGER.
+                using (LogHelper logger = new LogHelper())
+                {
+                    logger.log(e.Message);
+                }
                 return null;
             }
         }

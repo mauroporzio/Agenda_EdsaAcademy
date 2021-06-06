@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Diagnostics;
+using Util;
 
 namespace Agenda.DAL
 {
@@ -29,8 +30,10 @@ namespace Agenda.DAL
             }
             catch (Exception e)
             {
-                Debug.WriteLine($"Message: { e.Message }");
-                //agregar LOGGER
+                using (LogHelper logger = new LogHelper())
+                {
+                    logger.log(e.Message);
+                }
                 return null;
             }
         }

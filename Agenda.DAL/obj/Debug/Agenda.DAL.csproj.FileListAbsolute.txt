@@ -7,3 +7,5 @@ D:\New folder (6)\MAURO\GitHub\Agenda_EdsaAcademy\Agenda.DAL\bin\Debug\Agenda.En
 D:\New folder (6)\MAURO\GitHub\Agenda_EdsaAcademy\Agenda.DAL\obj\Debug\Agenda.DAL.csproj.CopyComplete
 D:\New folder (6)\MAURO\GitHub\Agenda_EdsaAcademy\Agenda.DAL\obj\Debug\Agenda.DAL.dll
 D:\New folder (6)\MAURO\GitHub\Agenda_EdsaAcademy\Agenda.DAL\obj\Debug\Agenda.DAL.pdb
+D:\New folder (6)\MAURO\GitHub\Agenda_EdsaAcademy\Agenda.DAL\bin\Debug\Util.dll
+D:\New folder (6)\MAURO\GitHub\Agenda_EdsaAcademy\Agenda.DAL\bin\Debug\Util.pdb

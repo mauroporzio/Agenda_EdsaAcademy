@@ -317,7 +317,7 @@ namespace Agenda_EdsaAcademy
 
                 if (listaContactos != null)
                 {
-                    listaContactos.OrderBy(Contacto => Contacto.apellidoYnombre).ToList();
+                    listaContactos = listaContactos.OrderBy(Contacto => Contacto.apellidoYnombre).ToList();
                 }
 
                 GridViewResultadosConsulta.DataSource = listaContactos;
