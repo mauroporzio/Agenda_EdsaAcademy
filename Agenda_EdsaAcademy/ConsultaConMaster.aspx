@@ -1,22 +1,14 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Consulta.aspx.cs" Inherits="Agenda_EdsaAcademy.WebForm1" %>
-
-<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
-
-
-
-<link href="Estilo.css" rel="stylesheet" type="text/css" />
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="ConsultaConMaster.aspx.cs" Inherits="Agenda_EdsaAcademy.ConsultaConMaster" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+    <link href="Estilo.css" rel="stylesheet" type="text/css" />
 
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <title></title>
-</head>
 <body>
-    <form id="form1" runat="server">
         <div>
             <div class="TituloEspaciado">
-                <asp:Label ID="titulo" runat="server" Text="Consulta de Agenda" CssClass="Titulo"></asp:Label>
+                <asp:Label ID="titulo" style="font-size:16pt" runat="server" Text="Consulta de Agenda" CssClass="Titulo"></asp:Label>
             </div>
             <div class="CamposConsulta">
                 <asp:ScriptManager ID="ToolkitScriptManager1" runat="server"></asp:ScriptManager>
@@ -26,10 +18,10 @@
                             <asp:Label ID="lableApellidoNombre" runat="server" Text="Apellido y Nombre" Width="14%" CssClass="TextoConsulta"></asp:Label>
                             <asp:TextBox ID="textBoxApellidoNombre" runat="server"></asp:TextBox>
 
-                            <asp:Label ID="LablePais" runat="server" Text="País" Width="14%" CssClass="TextoConsultaOtraColumna"></asp:Label>
+                            <asp:Label ID="LablePais" runat="server" Text="País" Width="19%" CssClass="TextoConsultaOtraColumna"></asp:Label>
                             <asp:DropDownList ID="DropDownListPais" runat="server" Width="10%"></asp:DropDownList>
 
-                            <asp:Label ID="LabelLocalidad" runat="server" Text="Localidad" Width="10%" CssClass="TextoConsultaOtraColumna"></asp:Label>
+                            <asp:Label ID="LabelLocalidad" runat="server" Text="Localidad" Width="15%" CssClass="TextoConsultaOtraColumna"></asp:Label>
                             <asp:TextBox ID="textBoxLocalidad" runat="server" Width="10%"></asp:TextBox>
                         </td>
                     </tr>
@@ -39,11 +31,11 @@
                             <asp:TextBox ID="textFechaDeIngresoDesde" runat="server"></asp:TextBox>
                             <ajaxToolkit:CalendarExtender ID="CalendarExtenderDesde" runat="server" TargetControlID="textFechaDeIngresoDesde" Format="dd/MM/yyyy" />
 
-                            <asp:Label ID="LabelFechaDeIngresoHasta" runat="server" Text="Fecha de ingreso hasta" Width="14%" CssClass="TextoConsultaOtraColumna"></asp:Label>
+                            <asp:Label ID="LabelFechaDeIngresoHasta" runat="server" Text="Fecha de ingreso hasta" Width="19%" CssClass="TextoConsultaOtraColumna"></asp:Label>
                             <asp:TextBox ID="textFechaDeIngresoHasta" runat="server" Width="10%"></asp:TextBox>
                             <ajaxToolkit:CalendarExtender ID="CalendarExtenderHasta" runat="server" TargetControlID="textFechaDeIngresoHasta" Format="dd/MM/yyyy"/>
 
-                            <asp:Label ID="LabelContactoInterno" runat="server" Text="Contacto interno" Width="10%" CssClass="TextoConsultaOtraColumna"></asp:Label>
+                            <asp:Label ID="LabelContactoInterno" runat="server" Text="Contacto interno" Width="15%" CssClass="TextoConsultaOtraColumna"></asp:Label>
                             <asp:DropDownList ID="DropDownContactoInterno" runat="server" AutoPostBack="true" Width="10%" OnSelectedIndexChanged="esContactoInterno"></asp:DropDownList>
                         </td>
                     </tr>
@@ -52,10 +44,10 @@
                             <asp:Label ID="LabelOrganizacion" runat="server" Text="Organización" Width="14%" CssClass="TextoConsulta"></asp:Label>
                             <asp:TextBox ID="TextBoxOrganizacion" runat="server"></asp:TextBox>
 
-                            <asp:Label ID="LabelArea" runat="server" Text="Área" Width="14%" CssClass="TextoConsultaOtraColumna"></asp:Label>
+                            <asp:Label ID="LabelArea" runat="server" Text="Área" Width="19%" CssClass="TextoConsultaOtraColumna"></asp:Label>
                             <asp:DropDownList ID="DropDownArea" runat="server" Width="10%"></asp:DropDownList>
 
-                            <asp:Label ID="LabelActivo" runat="server" Text="Activo" Width="10%" CssClass="TextoConsultaOtraColumna"></asp:Label>
+                            <asp:Label ID="LabelActivo" runat="server" Text="Activo" Width="15%" CssClass="TextoConsultaOtraColumna"></asp:Label>
                             <asp:DropDownList ID="DropDownActivo" runat="server" Width="10%"></asp:DropDownList>
                         </td>
                     </tr>
@@ -78,7 +70,7 @@
                     <asp:GridView ID="GridViewResultadosConsulta" runat="server" Width="100%" 
                                   OnRowCommand="botonesGridViewResultadosConsulta" AutoGenerateColumns="false" 
                                   RowStyle-HorizontalAlign="Center" GridLines="Horizontal" AllowPaging="true" 
-                                  PageSize="5" OnPageIndexChanging="cambiarIndicePagina">
+                                  PageSize="5" OnPageIndexChanging="cambiarIndicePagina" RowStyle-CssClass="HeaderResultadoConsulta">
                         <Columns>
                             <asp:BoundField DataField="apellidoYnombre" HeaderText="Apellido y Nombre" HeaderStyle-CssClass="HeaderResultadoConsulta" />
                             <asp:BoundField DataField="genero" HeaderText="Género" HeaderStyle-CssClass="HeaderResultadoConsulta" />
@@ -124,7 +116,12 @@
                                             return confirm('¿Desea activar el contacto?')
                                         }
                                     </script>
-
+                                    <style type="text/css">
+                                        th
+                                        {
+                                            text-align:center;
+                                        }
+                                    </style>
                                 </ItemTemplate>
                             </asp:TemplateField>
                         </Columns>
@@ -134,11 +131,11 @@
                             PreviousPageImageUrl="Imagenes Botones/arrow-left.svg" Position="Bottom"
                             FirstPageImageUrl="Imagenes Botones/chevron-bar-left.svg"
                             LastPageImageUrl="Imagenes Botones/chevron-bar-right.svg" />
-                        <RowStyle CssClass="HeaderResultadoConsulta" />
+                        <RowStyle CssClass="HeaderResultadoConsulta"/>
                     </asp:GridView>
                 </div>
             </div>
         </div>
-    </form>
 </body>
 </html>
+</asp:Content>

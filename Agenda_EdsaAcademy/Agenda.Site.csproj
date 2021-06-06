@@ -109,7 +109,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="ConsultaRedireccion.aspx" />
+    <Content Include="ConsultaConMaster.aspx" />
+    <Content Include="ConsultaRedireccionConMaster.aspx" />
     <Content Include="Otros aspx\About.aspx" />
     <Content Include="Otros aspx\Contact.aspx" />
     <Content Include="Content\bootstrap-theme.css" />
@@ -129,7 +130,6 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
-    <Content Include="Consulta.aspx" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -168,12 +168,19 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
-    <Compile Include="ConsultaRedireccion.aspx.cs">
-      <DependentUpon>ConsultaRedireccion.aspx</DependentUpon>
+    <Compile Include="ConsultaConMaster.aspx.cs">
+      <DependentUpon>ConsultaConMaster.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="ConsultaRedireccion.aspx.designer.cs">
-      <DependentUpon>ConsultaRedireccion.aspx</DependentUpon>
+    <Compile Include="ConsultaConMaster.aspx.designer.cs">
+      <DependentUpon>ConsultaConMaster.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ConsultaRedireccionConMaster.aspx.cs">
+      <DependentUpon>ConsultaRedireccionConMaster.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ConsultaRedireccionConMaster.aspx.designer.cs">
+      <DependentUpon>ConsultaRedireccionConMaster.aspx</DependentUpon>
     </Compile>
     <Compile Include="Otros aspx\About.aspx.cs">
       <DependentUpon>About.aspx</DependentUpon>
@@ -221,13 +228,6 @@
     </Compile>
     <Compile Include="ViewSwitcher.ascx.designer.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
-    </Compile>
-    <Compile Include="Consulta.aspx.cs">
-      <DependentUpon>Consulta.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Consulta.aspx.designer.cs">
-      <DependentUpon>Consulta.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

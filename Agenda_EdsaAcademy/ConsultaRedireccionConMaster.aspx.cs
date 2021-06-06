@@ -9,7 +9,7 @@ using System.Web.UI.WebControls;
 
 namespace Agenda_EdsaAcademy
 {
-    public partial class ConsultaRedireccion : System.Web.UI.Page
+    public partial class ConsultaRedireccionConMaster : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -185,7 +185,7 @@ namespace Agenda_EdsaAcademy
         }
         public void cancelarCreacion(object sender, EventArgs e)
         {
-            Response.Redirect("Consulta.aspx");
+            Response.Redirect("ConsultaConMaster.aspx");
         }
         public void guardarContacto(object sender, EventArgs e)
         {
@@ -213,7 +213,7 @@ namespace Agenda_EdsaAcademy
                 using (IAgendaContactos agendaContacto = new AgendaContactos())
                 {
                     agendaContacto.insertarContacto(contacto);
-                } 
+                }
             }
             else
             {
@@ -227,7 +227,7 @@ namespace Agenda_EdsaAcademy
                     agendaContacto.modificarContacto(contacto);
                 }
             }
-            Response.Redirect("Consulta.aspx");
+            Response.Redirect("ConsultaConMaster.aspx");
         }
     }
 }

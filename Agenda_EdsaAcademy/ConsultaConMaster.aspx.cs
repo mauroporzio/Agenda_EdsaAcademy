@@ -9,7 +9,7 @@ using System.Globalization;
 
 namespace Agenda_EdsaAcademy
 {
-    public partial class WebForm1 : System.Web.UI.Page
+    public partial class ConsultaConMaster : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -134,7 +134,7 @@ namespace Agenda_EdsaAcademy
         }
         public void cambiarIndicePagina(object sender, GridViewPageEventArgs e)
         {
-            using(IAgendaContactos agendaContactos = new AgendaContactos())
+            using (IAgendaContactos agendaContactos = new AgendaContactos())
             {
                 GridViewResultadosConsulta.DataSource = agendaContactos.getlistaContactosPorFiltro((List<FiltroContacto>)Application["listaFiltrosUsados"]).OrderBy(Contacto => Contacto.apellidoYnombre).ToList();
                 GridViewResultadosConsulta.PageIndex = e.NewPageIndex;
@@ -175,7 +175,7 @@ namespace Agenda_EdsaAcademy
             TextBoxOrganizacion.Enabled = false;
             TextBoxOrganizacion.BackColor = System.Drawing.Color.LightGray;
 
-            Application["listaFiltrosUsados"] = new List<FiltroContacto>(); 
+            Application["listaFiltrosUsados"] = new List<FiltroContacto>();
 
         }
         public void validarFechas(object source, ServerValidateEventArgs fecha)
@@ -326,14 +326,14 @@ namespace Agenda_EdsaAcademy
         }
         public void botonesGridViewResultadosConsulta(object sender, GridViewCommandEventArgs e)
         {
-            
+
 
             if (e.CommandName.Equals("eliminarContacto"))
             {
-                using(AgendaContactos agendaContactos = new AgendaContactos())
+                using (AgendaContactos agendaContactos = new AgendaContactos())
                 {
                     agendaContactos.eliminarContacto(new Contacto() { id = Int32.Parse(e.CommandArgument.ToString()) });
-                }    
+                }
             }
             else if (e.CommandName.Equals("activarDesactivarContacto"))
             {
@@ -363,7 +363,7 @@ namespace Agenda_EdsaAcademy
 
 
 
-                    Response.Redirect("ConsultaRedireccion.aspx");
+                    Response.Redirect("ConsultaRedireccionConMaster.aspx");
                 }
             }
             else if (e.CommandName.Equals("editarContacto"))
@@ -374,7 +374,7 @@ namespace Agenda_EdsaAcademy
 
                     Application["contactoEditar"] = agendaContactos.getContactoById(new Contacto() { id = Int32.Parse(e.CommandArgument.ToString()) });
 
-                    Response.Redirect("ConsultaRedireccion.aspx");
+                    Response.Redirect("ConsultaRedireccionConMaster.aspx");
                 }
             }
 
@@ -384,8 +384,7 @@ namespace Agenda_EdsaAcademy
         {
             Application["controlesACargar"] = "Nuevo Contacto";
 
-            Response.Redirect("ConsultaRedireccion.aspx");
+            Response.Redirect("ConsultaRedireccionConMaster.aspx");
         }
     }
-
 }

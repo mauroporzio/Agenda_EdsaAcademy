@@ -1,18 +1,14 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ConsultaRedireccion.aspx.cs" Inherits="Agenda_EdsaAcademy.ConsultaRedireccion" %>
-
-<link href="Estilo.css" rel="stylesheet" type="text/css" />
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="ConsultaRedireccionConMaster.aspx.cs" Inherits="Agenda_EdsaAcademy.ConsultaRedireccionConMaster" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+    <link href="Estilo.css" rel="stylesheet" type="text/css" />
 
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <title></title>
-</head>
 <body>
-    <form id="form1" runat="server">
         <div>
             <div class="TituloEspaciado">
-                <asp:Label ID="Labeltitulo" runat="server" CssClass="Titulo"></asp:Label>
+                <asp:Label ID="Labeltitulo"  style="font-size:16pt" runat="server" CssClass="Titulo"></asp:Label>
             </div>
             <div class="CamposConsulta">
                 <table width="100%" id="TablaRedireccion" runat="server" class="TablaConsulta">
@@ -21,7 +17,7 @@
                             <asp:Label ID="lableApellidoNombre" runat="server" Text="Apellido y Nombre *" Width="14%" CssClass="TextoConsulta"></asp:Label>
                             <asp:TextBox ID="textBoxApellidoNombre" runat="server"></asp:TextBox>
 
-                            <asp:Label ID="LabelGenero" runat="server" Text="Género *" Width="14%" CssClass="TextoConsultaOtraColumna"></asp:Label>
+                            <asp:Label ID="LabelGenero" runat="server" Text="Género *" Width="16%" CssClass="TextoConsultaOtraColumna"></asp:Label>
                             <asp:DropDownList ID="DropDownListGenero" runat="server" Width="10%"></asp:DropDownList>
 
                             <asp:Label ID="LablePais" runat="server" Text="País *" Width="14%" CssClass="TextoConsultaOtraColumna"></asp:Label>
@@ -33,7 +29,7 @@
                             <asp:Label ID="LabelLocalidad" runat="server" Text="Localidad" Width="14%" CssClass="TextoConsulta"></asp:Label>
                             <asp:TextBox ID="textBoxLocalidad" runat="server"></asp:TextBox>
 
-                            <asp:Label ID="LabelContactoInterno" runat="server" Text="Contacto interno *" Width="14%" CssClass="TextoConsultaOtraColumna"></asp:Label>
+                            <asp:Label ID="LabelContactoInterno" runat="server" Text="Contacto interno *" Width="16%" CssClass="TextoConsultaOtraColumna"></asp:Label>
                             <asp:DropDownList ID="DropDownListContactoInterno" runat="server" Width="10%" OnSelectedIndexChanged="esContactoInterno" AutoPostBack="true"></asp:DropDownList>
 
                             <asp:Label ID="LabelOrganizacion" runat="server" Text="Organización *" Width="14%" CssClass="TextoConsultaOtraColumna"></asp:Label>
@@ -45,7 +41,7 @@
                             <asp:Label ID="LabelArea" runat="server" Text="Área" Width="14%" CssClass="TextoConsulta"></asp:Label>
                             <asp:DropDownList ID="DropDownListArea" runat="server" Width="9.3%"></asp:DropDownList>
 
-                            <asp:Label ID="LabelActivo" runat="server" Text="Activo *" Width="14%" CssClass="TextoConsultaOtraColumna"></asp:Label>
+                            <asp:Label ID="LabelActivo" runat="server" Text="Activo *" Width="16%" CssClass="TextoConsultaOtraColumna"></asp:Label>
                             <asp:DropDownList ID="DropDownListActivo" runat="server" Width="10%"></asp:DropDownList>
 
                             <asp:Label ID="LabelDireccion" runat="server" Text="Dirección" Width="14%" CssClass="TextoConsultaOtraColumna"></asp:Label>
@@ -57,7 +53,7 @@
                             <asp:Label ID="LabelTelefonoFijoInterno" runat="server" Text="Teléfono fijo - Interno" Width="14%" CssClass="TextoConsulta"></asp:Label>
                             <asp:TextBox ID="textBoxTelefonoFijoInterno" runat="server" Width="9.3%"></asp:TextBox>
 
-                            <asp:Label ID="LabelTelefonoCelular" runat="server" Text="Teléfono Celular" Width="14%" CssClass="TextoConsultaOtraColumna"></asp:Label>
+                            <asp:Label ID="LabelTelefonoCelular" runat="server" Text="Teléfono Celular" Width="16%" CssClass="TextoConsultaOtraColumna"></asp:Label>
                             <asp:TextBox ID="textBoxTelefonoCelular" runat="server" Width="10%"></asp:TextBox>
 
                             <asp:Label ID="LabelEmail" runat="server" Text="E-Mail *" Width="14%" CssClass="TextoConsultaOtraColumna"></asp:Label>
@@ -152,3 +148,5 @@
     </form>
 </body>
 </html>
+
+</asp:Content>
