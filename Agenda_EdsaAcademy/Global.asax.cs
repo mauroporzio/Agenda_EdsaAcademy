@@ -37,21 +37,23 @@ namespace Agenda_EdsaAcademy
 
             */
 
-            List<String> paisesDropDownTODOS = new List<string>() { "TODOS", "Argentina", "Francia", "Brasil", "Uruguay", "Chile" };
+            using (PaisDropDownList pais = new PaisDropDownList())
+            {
+                Application["listaPaises"] = pais.getListaPaises();
 
-            Application["listaPaisesTODOS"] = paisesDropDownTODOS;
+                List<String> listaPaisesTODOS = pais.getListaPaises();
+                listaPaisesTODOS.Insert(0, "TODOS");
+                Application["listaPaisesTODOS"] = listaPaisesTODOS;
+            }
 
-            List<String> areaDropDownTODOS = new List<string>() { "TODOS", "Marketing", "Finanzas", "RRHH", "Operaciones" };
+            using (AreaDropDownList area = new AreaDropDownList())
+            {
+                Application["listaAreas"] = area.getListaAreas();
 
-            Application["listaAreasTODOS"] = areaDropDownTODOS;
-
-            List<String> paisesDropDown = new List<string>() { "Argentina", "Francia", "Brasil", "Uruguay", "Chile" };
-
-            Application["listaPaises"] = paisesDropDown;
-
-            List<String> areaDropDown = new List<string>() { "Marketing", "Finanzas", "RRHH", "Operaciones" };
-
-            Application["listaAreas"] = areaDropDown;
+                List<String> listaAreasTODOS = area.getListaAreas();
+                listaAreasTODOS.Insert(0, "TODOS");
+                Application["listaAreasTODOS"] = listaAreasTODOS;
+            }
 
             List<String> DropDownSiNoTODOS = new List<String> { "TODOS", "Si", "No" };
 
