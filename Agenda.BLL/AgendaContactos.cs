@@ -160,7 +160,7 @@ namespace Agenda.BLL
                     nonNonQwerySentence.Append("'" + contactoModificar.genero + "'" + ", ");
                     nonNonQwerySentence.Append("'" + contactoModificar.pais + "'" + ", ");
                     nonNonQwerySentence.Append("'" + contactoModificar.localidad + "'" + ", ");
-                    nonNonQwerySentence.Append("@ContactoInterno"+ ", ");
+                    nonNonQwerySentence.Append("@ContactoInterno" + ", ");
                     nonNonQwerySentence.Append("'" + contactoModificar.organizacion + "'" + ", ");
                     nonNonQwerySentence.Append("'" + contactoModificar.area + "'" + ", ");
                     nonNonQwerySentence.Append("@Activo" + ", ");
@@ -177,14 +177,11 @@ namespace Agenda.BLL
                 }
                 catch (Exception e)
                 {
-                    /*
                     transaccion.Rollback();
                     using (LogHelper logger = new LogHelper())
                     {
                         logger.log(e.Message);
                     }
-                    */
-                    Debug.WriteLine(e.Message);
                 }
                 finally
                 {
