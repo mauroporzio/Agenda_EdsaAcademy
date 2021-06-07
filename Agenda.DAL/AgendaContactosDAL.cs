@@ -107,7 +107,19 @@ namespace Agenda.DAL
                         break;
 
                     case (int)OPCIONES_FILTRO.CONTACTO_INTERNO:
-                        listaDeFiltros.Add(new SqlParameter { ParameterName = "@ContactoInterno", Value = filtro.valorFiltro, SqlDbType = SqlDbType.VarChar });
+                        if (filtro.valorFiltro == null)
+                        {
+
+                            listaDeFiltros.Add(new SqlParameter { ParameterName = "@ContactoInterno", Value = null, SqlDbType = SqlDbType.Bit });
+                        }
+                        else if (filtro.valorFiltro.Equals("No"))
+                        {
+                            listaDeFiltros.Add(new SqlParameter { ParameterName = "@ContactoInterno", Value = 0, SqlDbType = SqlDbType.Bit });
+                        }
+                        else
+                        {
+                            listaDeFiltros.Add(new SqlParameter { ParameterName = "@ContactoInterno", Value = 1, SqlDbType = SqlDbType.Bit });
+                        }
                         break;
 
                     case (int)OPCIONES_FILTRO.ORGANIZACION:
@@ -119,7 +131,18 @@ namespace Agenda.DAL
                         break;
 
                     case (int)OPCIONES_FILTRO.ACTIVO:
-                        listaDeFiltros.Add(new SqlParameter { ParameterName = "@Activo", Value = filtro.valorFiltro, SqlDbType = SqlDbType.VarChar });
+                        if (filtro.valorFiltro == null)
+                        {
+                            listaDeFiltros.Add(new SqlParameter { ParameterName = "@Activo", Value = null, SqlDbType = SqlDbType.Bit });
+                        }
+                        else if (filtro.valorFiltro.Equals("No"))
+                        {
+                            listaDeFiltros.Add(new SqlParameter { ParameterName = "@Activo", Value = 0, SqlDbType = SqlDbType.Bit });
+                        }
+                        else
+                        {
+                            listaDeFiltros.Add(new SqlParameter { ParameterName = "@Activo", Value = 1, SqlDbType = SqlDbType.Bit });
+                        }
                         break;
                     case (int)OPCIONES_FILTRO.PAIS:
                         listaDeFiltros.Add(new SqlParameter { ParameterName = "@Pais", Value = filtro.valorFiltro, SqlDbType = SqlDbType.VarChar });

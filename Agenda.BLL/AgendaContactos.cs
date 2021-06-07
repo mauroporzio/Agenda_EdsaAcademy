@@ -65,21 +65,43 @@ namespace Agenda.BLL
                     StringBuilder nonNonQwerySentence = new StringBuilder();
 
                     nonNonQwerySentence.Append("DECLARE @Id INT ");
-                    nonNonQwerySentence.Append("EXEC InsertarContacto ");
-                    nonNonQwerySentence.Append( "@Id OUTPUT" + ",");
-                    nonNonQwerySentence.Append("'" + contactoInsertar.apellidoYnombre + "'" + ",");
-                    nonNonQwerySentence.Append("'" + contactoInsertar.genero + "'" + ",");
-                    nonNonQwerySentence.Append("'" + contactoInsertar.pais + "'" + ",");
-                    nonNonQwerySentence.Append("'" + contactoInsertar.localidad + "'" + ",");
-                    nonNonQwerySentence.Append("'" + contactoInsertar.contactoInterno + "'" + ",");
-                    nonNonQwerySentence.Append("'" + contactoInsertar.organizacion + "'" + ",");
-                    nonNonQwerySentence.Append("'" + contactoInsertar.area + "'" + ",");
-                    nonNonQwerySentence.Append("'" + contactoInsertar.activo + "'" + ",");
-                    nonNonQwerySentence.Append("'" + contactoInsertar.direccion + "'" + ",");
-                    nonNonQwerySentence.Append("'" + contactoInsertar.telefonoFijoInterno + "'" + ",");
-                    nonNonQwerySentence.Append("'" + contactoInsertar.telefonoCelular + "'" + ",");
-                    nonNonQwerySentence.Append("'" + contactoInsertar.eMail + "'" + ",");
-                    nonNonQwerySentence.Append("'" + contactoInsertar.cuentaSkype + "'" + ",");
+                    nonNonQwerySentence.Append("DECLARE @ContactoInterno BIT = ");
+
+                    if (contactoInsertar.contactoInterno.Equals("Si"))
+                    {
+                        nonNonQwerySentence.Append(1);
+                    }
+                    else
+                    {
+                        nonNonQwerySentence.Append(0);
+                    }
+
+                    nonNonQwerySentence.Append(" DECLARE @Area BIT = ");
+
+                    if (contactoInsertar.activo.Equals("Si"))
+                    {
+                        nonNonQwerySentence.Append(1);
+                    }
+                    else
+                    {
+                        nonNonQwerySentence.Append(0);
+                    }
+
+                    nonNonQwerySentence.Append(" EXEC InsertarContacto ");
+                    nonNonQwerySentence.Append( "@Id OUTPUT" + ", ");
+                    nonNonQwerySentence.Append("'" + contactoInsertar.apellidoYnombre + "'" + ", ");
+                    nonNonQwerySentence.Append("'" + contactoInsertar.genero + "'" + ", ");
+                    nonNonQwerySentence.Append("'" + contactoInsertar.pais + "'" + ", ");
+                    nonNonQwerySentence.Append("'" + contactoInsertar.localidad + "'" + ", ");
+                    nonNonQwerySentence.Append( "@ContactoInterno" + ", ");
+                    nonNonQwerySentence.Append("'" + contactoInsertar.organizacion + "'" + ", ");
+                    nonNonQwerySentence.Append("'" + contactoInsertar.area + "'" + ", ");
+                    nonNonQwerySentence.Append("@Area" + ", ");
+                    nonNonQwerySentence.Append("'" + contactoInsertar.direccion + "'" + ", ");
+                    nonNonQwerySentence.Append("'" + contactoInsertar.telefonoFijoInterno + "'" + ", ");
+                    nonNonQwerySentence.Append("'" + contactoInsertar.telefonoCelular + "'" + ", ");
+                    nonNonQwerySentence.Append("'" + contactoInsertar.eMail + "'" + ", ");
+                    nonNonQwerySentence.Append("'" + contactoInsertar.cuentaSkype + "'" + ", ");
                     nonNonQwerySentence.Append("'" + "insertarContacto()" + "'");
 
                     dal.EjecutarExecuteNonQueryConTransaccion(transaccion, connection, nonNonQwerySentence.ToString());
@@ -111,21 +133,42 @@ namespace Agenda.BLL
                 {
                     StringBuilder nonNonQwerySentence = new StringBuilder();
 
+                    nonNonQwerySentence.Append("DECLARE @ContactoInterno BIT = ");
+
+                    if (contactoModificar.contactoInterno.Equals("Si"))
+                    {
+                        nonNonQwerySentence.Append(1 + " ");
+                    }
+                    else
+                    {
+                        nonNonQwerySentence.Append(0 + " ");
+                    }
+
+                    nonNonQwerySentence.Append(" DECLARE @Activo BIT = ");
+
+                    if (contactoModificar.activo.Equals("Si"))
+                    {
+                        nonNonQwerySentence.Append(1 + " ");
+                    }
+                    else
+                    {
+                        nonNonQwerySentence.Append(0 + " ");
+                    }
                     nonNonQwerySentence.Append("EXEC EditarContacto ");
-                    nonNonQwerySentence.Append(contactoModificar.id + ",");
-                    nonNonQwerySentence.Append("'" + contactoModificar.apellidoYnombre + "'" + ",");
-                    nonNonQwerySentence.Append("'" + contactoModificar.genero + "'" + ",");
-                    nonNonQwerySentence.Append("'" + contactoModificar.pais + "'" + ",");
-                    nonNonQwerySentence.Append("'" + contactoModificar.localidad + "'" + ",");
-                    nonNonQwerySentence.Append("'" + contactoModificar.contactoInterno + "'" + ",");
-                    nonNonQwerySentence.Append("'" + contactoModificar.organizacion + "'" + ",");
-                    nonNonQwerySentence.Append("'" + contactoModificar.area + "'" + ",");
-                    nonNonQwerySentence.Append("'" + contactoModificar.activo + "'" + ",");
-                    nonNonQwerySentence.Append("'" + contactoModificar.direccion + "'" + ",");
-                    nonNonQwerySentence.Append("'" + contactoModificar.telefonoFijoInterno + "'" + ",");
-                    nonNonQwerySentence.Append("'" + contactoModificar.telefonoCelular + "'" + ",");
-                    nonNonQwerySentence.Append("'" + contactoModificar.eMail + "'" + ",");
-                    nonNonQwerySentence.Append("'" + contactoModificar.cuentaSkype + "'" + ",");
+                    nonNonQwerySentence.Append(contactoModificar.id + ", ");
+                    nonNonQwerySentence.Append("'" + contactoModificar.apellidoYnombre + "'" + ", ");
+                    nonNonQwerySentence.Append("'" + contactoModificar.genero + "'" + ", ");
+                    nonNonQwerySentence.Append("'" + contactoModificar.pais + "'" + ", ");
+                    nonNonQwerySentence.Append("'" + contactoModificar.localidad + "'" + ", ");
+                    nonNonQwerySentence.Append("@ContactoInterno"+ ", ");
+                    nonNonQwerySentence.Append("'" + contactoModificar.organizacion + "'" + ", ");
+                    nonNonQwerySentence.Append("'" + contactoModificar.area + "'" + ", ");
+                    nonNonQwerySentence.Append("@Activo" + ", ");
+                    nonNonQwerySentence.Append("'" + contactoModificar.direccion + "'" + ", ");
+                    nonNonQwerySentence.Append("'" + contactoModificar.telefonoFijoInterno + "'" + ", ");
+                    nonNonQwerySentence.Append("'" + contactoModificar.telefonoCelular + "'" + ", ");
+                    nonNonQwerySentence.Append("'" + contactoModificar.eMail + "'" + ", ");
+                    nonNonQwerySentence.Append("'" + contactoModificar.cuentaSkype + "'" + ", ");
                     nonNonQwerySentence.Append("'" + "modificarContacto()" + "'");
 
                     dal.EjecutarExecuteNonQueryConTransaccion(transaccion, connection, nonNonQwerySentence.ToString());
@@ -134,11 +177,14 @@ namespace Agenda.BLL
                 }
                 catch (Exception e)
                 {
+                    /*
                     transaccion.Rollback();
                     using (LogHelper logger = new LogHelper())
                     {
                         logger.log(e.Message);
                     }
+                    */
+                    Debug.WriteLine(e.Message);
                 }
                 finally
                 {
@@ -195,26 +241,44 @@ namespace Agenda.BLL
         }
         private Contacto DataRowAContacto (DataRow row) // mapea la fila dada en un contacto y lo retorna.
         {
-            return new Contacto()
+            Contacto retorno = new Contacto()
             {
                 id = Convert.ToInt32(row["Id"]),
                 apellidoYnombre = Convert.ToString(row["ApellidoYNombre"]),
                 genero = Convert.ToString(row["Genero"]),
                 pais = Convert.ToString(row["Pais"]),
                 localidad = Convert.IsDBNull(row["Localidad"]) ? null : Convert.ToString(row["Localidad"]),
-                contactoInterno = Convert.ToString(row["ContactoInterno"]),
                 organizacion = Convert.IsDBNull(row["Organizacion"]) ? null : Convert.ToString(row["Organizacion"]),
                 area = Convert.IsDBNull(row["Area"]) ? null : Convert.ToString(row["Area"]),
-                activo = Convert.ToString(row["Activo"]),
                 direccion = Convert.IsDBNull(row["Direccion"]) ? null : Convert.ToString(row["Direccion"]),
                 telefonoFijoInterno = Convert.IsDBNull(row["TelefonoFijoInterno"]) ? null : Convert.ToString(row["TelefonoFijoInterno"]),
                 telefonoCelular = Convert.IsDBNull(row["TelefonoCelular"]) ? null : Convert.ToString(row["TelefonoCelular"]),
                 eMail = Convert.ToString(row["Email"]),
                 cuentaSkype = Convert.IsDBNull(row["CuentaSkype"]) ? null : Convert.ToString(row["CuentaSkype"]),
-                fechaIngreso = Convert.ToDateTime(row["FechaAltaReg"])
-            };
-        }
+                fechaIngreso = Convert.ToDateTime(row["FechaAltaReg"]),
 
+            };
+
+            if (Convert.ToBoolean(row["Activo"]))
+            {
+                retorno.activo = "Si";
+            }
+            else
+            {
+                retorno.activo = "No";
+            }
+
+            if (Convert.ToBoolean(row["ContactoInterno"]))
+            {
+                retorno.contactoInterno = "Si";
+            }
+            else
+            {
+                retorno.contactoInterno = "No";
+            }
+
+            return retorno;
+        }
         public void Dispose()
         {
             

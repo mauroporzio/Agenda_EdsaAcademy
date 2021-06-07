@@ -76,8 +76,8 @@ namespace Agenda_EdsaAcademy
                 DropDownListGenero.SelectedValue = contactoAbierto.genero;
                 DropDownListPais.SelectedValue = contactoAbierto.pais;
                 DropDownListActivo.SelectedValue = contactoAbierto.activo;
-                DropDownListArea.SelectedValue = contactoAbierto.area;
                 DropDownListContactoInterno.SelectedValue = contactoAbierto.contactoInterno;
+                DropDownListArea.SelectedValue = contactoAbierto.area;
 
                 textBoxApellidoNombre.BackColor = System.Drawing.Color.LightGray;
                 textBoxDireccion.BackColor = System.Drawing.Color.LightGray;
@@ -127,9 +127,8 @@ namespace Agenda_EdsaAcademy
 
                 DropDownListGenero.SelectedValue = contactoEditar.genero;
                 DropDownListPais.SelectedValue = contactoEditar.pais;
-                DropDownListActivo.SelectedValue = contactoEditar.activo;
-
                 DropDownListContactoInterno.SelectedValue = contactoEditar.contactoInterno;
+                DropDownListArea.SelectedValue = contactoEditar.area;
 
 
                 if (contactoEditar.contactoInterno.Equals("Si"))
@@ -143,7 +142,8 @@ namespace Agenda_EdsaAcademy
                 }
                 else
                 {
-                    DropDownListArea.DataSource = new List<String>();
+                    DropDownListArea.DataSource = new List<String>() { "" };
+                    DropDownListArea.SelectedValue = "";
                     DropDownListArea.DataBind();
                     DropDownListArea.Enabled = false;
                     DropDownListArea.BackColor = System.Drawing.Color.LightGray;
@@ -192,21 +192,51 @@ namespace Agenda_EdsaAcademy
             Contacto contacto = new Contacto()
             {
                 apellidoYnombre = textBoxApellidoNombre.Text,
-                activo = DropDownListActivo.SelectedValue,
-                area = DropDownListArea.SelectedValue,
-                contactoInterno = DropDownListContactoInterno.SelectedValue,
                 cuentaSkype = textBoxSkype.Text,
-                direccion = textBoxDireccion.Text,
                 eMail = textBoxEmail.Text,
                 genero = DropDownListGenero.SelectedValue,
-                localidad = textBoxLocalidad.Text,
-                organizacion = textBoxOrganizacion.Text,
                 pais = DropDownListPais.SelectedValue,
                 telefonoCelular = textBoxTelefonoCelular.Text,
-                telefonoFijoInterno = textBoxTelefonoFijoInterno.Text
+                telefonoFijoInterno = textBoxTelefonoFijoInterno.Text,
+                contactoInterno = DropDownListContactoInterno.SelectedValue,
+                activo = DropDownListActivo.SelectedValue
             };
 
+            if (textBoxLocalidad.Text.Length > 0)
+            {
+                contacto.localidad = textBoxLocalidad.Text;
+            }
+            else
+            {
+                contacto.localidad = null;
+            }
 
+            if (textBoxDireccion.Text.Length > 0)
+            {
+                contacto.direccion = textBoxDireccion.Text;
+            }
+            else
+            {
+                contacto.direccion = null;
+            }
+
+            if (textBoxOrganizacion.Text.Length > 0)
+            {
+                contacto.organizacion = textBoxOrganizacion.Text;
+            }
+            else
+            {
+                contacto.organizacion = null;
+            }
+
+            if (DropDownListArea.SelectedValue.Length > 0)
+            {
+                contacto.area = DropDownListArea.SelectedValue;
+            }
+            else
+            {
+                contacto.area = null;
+            }
 
             if (Application["controlesACargar"].Equals("Nuevo Contacto"))
             {

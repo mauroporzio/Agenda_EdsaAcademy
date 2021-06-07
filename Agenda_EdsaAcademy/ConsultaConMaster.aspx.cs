@@ -92,7 +92,7 @@ namespace Agenda_EdsaAcademy
 
                     if (listaContactos != null)
                     {
-                        listaContactos.OrderBy(Contacto => Contacto.apellidoYnombre).ToList();// ORDENO LOS RESULTADOS ALFABETICAMENTE SI ES QUE LOS HAY.
+                        listaContactos = listaContactos.OrderBy(Contacto => Contacto.apellidoYnombre).ToList();// ORDENO LOS RESULTADOS ALFABETICAMENTE SI ES QUE LOS HAY.
                     }
 
                     GridViewResultadosConsulta.DataSource = listaContactos; // CARGO LOS RESULTADOS.
@@ -104,8 +104,8 @@ namespace Agenda_EdsaAcademy
             {
                 using (AgendaContactos agendaContacto = new AgendaContactos())
                 {
-                    List<Contacto> listaContactos = agendaContacto.getlistaContactosPorFiltro(new List<FiltroContacto>()).OrderBy(Contacto => Contacto.apellidoYnombre).ToList();
-                    GridViewResultadosConsulta.DataSource = listaContactos; // SI NO TENIA FILTROS CARGO TODA LA LISTA DE CONTACTOS EN ORDEN ALFABETICO.
+                    List<Contacto> listaContactos = agendaContacto.getlistaContactosPorFiltro(new List<FiltroContacto>());
+                    GridViewResultadosConsulta.DataSource = listaContactos.OrderBy(Contacto => Contacto.apellidoYnombre).ToList(); // SI NO TENIA FILTROS CARGO TODA LA LISTA DE CONTACTOS EN ORDEN ALFABETICO.
                     GridViewResultadosConsulta.DataBind();
                 }
             }
