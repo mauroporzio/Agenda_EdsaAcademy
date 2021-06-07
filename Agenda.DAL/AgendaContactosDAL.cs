@@ -15,10 +15,10 @@ namespace Agenda.DAL
     public class AgendaContactosDAL : IDisposable
     {
         public SqlConnection connection;
-        string connString = ConfigurationManager.ConnectionStrings["connectionDB"].ConnectionString;
+        string connString = ConfigurationManager.ConnectionStrings["connectionDB"].ConnectionString; //LEGA EL PATH DE CONEXION DEL WEB.CONFIG. SERA UTILIZADO SOLO PARA CONSULTAS, NO PARA OPERACIONES QUE CAMBIEN LA BASE DE DATOS.
         public AgendaContactosDAL()
         {
-            connection = new SqlConnection(connString);
+            connection = new SqlConnection(connString); // ASIGNO EL PATH.
         }
         public SqlConnection AbrirConexion()
         {
@@ -37,7 +37,7 @@ namespace Agenda.DAL
                 return null;
             }
         }
-        public int EjecutarExecuteNonQuery(SqlConnection connection, string nonNonQwerySentence)
+        public int EjecutarExecuteNonQuery(SqlConnection connection, string nonNonQwerySentence) // RECIBO UN NONQUERY PARA EJECUTAR.
         {
             SqlCommand cmd = new SqlCommand
             {
@@ -47,10 +47,10 @@ namespace Agenda.DAL
             };
             int registrosAfectados = cmd.ExecuteNonQuery();
 
-            return registrosAfectados;
+            return registrosAfectados; // RETORNO EL NUMERO DE REGISTROS AFECTADOS, PUEDE GUARDARSE EN UNA VARIABLE SI SE DESEA.
         }
-        public int EjecutarExecuteNonQueryConTransaccion(SqlTransaction transaction, SqlConnection connection, string nonNonQwerySentence)
-        {
+        public int EjecutarExecuteNonQueryConTransaccion(SqlTransaction transaction, SqlConnection connection, string nonNonQwerySentence) // RECIBO UN NONQUERY PERO ESTE SE PRESENTA EN UNA TRANSACCION. 
+        {                                                                                                                                  // SERA UTILIZADO PARA OPERACIONES CON LA BASE QUE REFLEJEN CAMBIOS EN ELLA.
             SqlCommand sqlCommnad = new SqlCommand
             {
                 Connection = transaction != null ? transaction.Connection : connection,
@@ -60,22 +60,22 @@ namespace Agenda.DAL
             };
             int registrosAfectados = sqlCommnad.ExecuteNonQuery();
 
-            return registrosAfectados;
+            return registrosAfectados; // RETORNO EL NUMERO DE REGISTROS AFECTADOS. NO ES NECESARIO GUARDARLO.
         }
-        public DataSet EjecutarQueryConsultarContactoAdataSet(SqlConnection connection, List<FiltroContacto> listaFiltroContactos)
+        public DataSet EjecutarQueryConsultarContactoAdataSet(SqlConnection connection, List<FiltroContacto> listaFiltroContactos) // RECIBO LA CONNECTION Y UNA LISTA DE FILTROS QUE SERAN IMPLEMENTADOS PARA EL FILTRADO EN LA BASE. 
         {
             using (SqlDataAdapter dataAdapter = new SqlDataAdapter())
             {
-                dataAdapter.SelectCommand = crearCommandConsultarContactos(connection, listaFiltroContactos);
+                dataAdapter.SelectCommand = crearCommandConsultarContactos(connection, listaFiltroContactos); // CREO EL SQLCOMMNAD EN OTRO METODO, QUE RECIBIENDO LA LISTA, RETORNA EL COMANDO ARMADO.
 
                 DataSet dataSetResultado = new DataSet();
 
-                dataAdapter.Fill(dataSetResultado);
+                dataAdapter.Fill(dataSetResultado); // LLENO EL DATA SET CON LOS RESULTADOS.
 
-                return dataSetResultado;
+                return dataSetResultado; // RETORNO EL DATA SET. PARA LUEGO SER VOLCADO A UNA LISTA DE CONTACTOS EN LA CAPA BLL.
             }
         }
-        private SqlCommand crearCommandConsultarContactos(SqlConnection connection, List<FiltroContacto> listaFiltroContactos)
+        private SqlCommand crearCommandConsultarContactos(SqlConnection connection, List<FiltroContacto> listaFiltroContactos) // CREA EL SQLCOMMAND Y LO RETORNA EN BASE A LA LISTA DE FILTROS RECIBIDA.
         {
             SqlCommand sqlCommand = new SqlCommand
             {
@@ -129,24 +129,24 @@ namespace Agenda.DAL
                 }
             }
 
-            sqlCommand.Parameters.AddRange(listaDeFiltros.ToArray());
+            sqlCommand.Parameters.AddRange(listaDeFiltros.ToArray()); // SE AGREGA EL ARRAY DE PARAMETROS AL SQL COMMAND.
 
-            return sqlCommand;
+            return sqlCommand; // SE RETORNA EL COMANDO SQL.
         }
-        public DataSet EjecutarQueryDevolverContactPorId(SqlConnection connection, int idBuscar)
+        public DataSet EjecutarQueryDevolverContactPorId(SqlConnection connection, int idBuscar) // RECIBO EL ID A BUSCAR PARA LUEGO GENERAR EL SQL COMMAND.
         {
             using (SqlDataAdapter dataAdapter = new SqlDataAdapter())
             {
-                dataAdapter.SelectCommand = crearCommandDevolverContactPorId(connection, idBuscar);
+                dataAdapter.SelectCommand = crearCommandDevolverContactPorId(connection, idBuscar); // LLAMO A LA FUNCION CON LA CONNECTION Y EL ID QUE LUEGO ME RETORNARA EL SQLCOMMAND ARAMDO.
 
                 DataSet dataSetResultado = new DataSet();
 
-                dataAdapter.Fill(dataSetResultado);
+                dataAdapter.Fill(dataSetResultado); // LLENO EL DATASET CON EL RESULTADO
 
-                return dataSetResultado;
+                return dataSetResultado; // LO RETORNO.
             }
         }
-        private SqlCommand crearCommandDevolverContactPorId(SqlConnection connection, int idBuscar)
+        private SqlCommand crearCommandDevolverContactPorId(SqlConnection connection, int idBuscar) // RECIBO EL ID Y LA CONNECTION PARA DEVOLVER EL SQL COMMAND ARMADO.
         {
             SqlCommand sqlCommand = new SqlCommand
             {
@@ -155,11 +155,11 @@ namespace Agenda.DAL
                 Connection = connection
             };
 
-            sqlCommand.Parameters.Add(new SqlParameter() {ParameterName = "@Id", Value = idBuscar, SqlDbType = SqlDbType.Int });
+            sqlCommand.Parameters.Add(new SqlParameter() {ParameterName = "@Id", Value = idBuscar, SqlDbType = SqlDbType.Int }); // AGREGO EL ID COMO PARAM.
 
-            return sqlCommand;
+            return sqlCommand;// RETORNO EL SQLCOMMAND.
         }
-        public void Dispose()
+        public void Dispose() // DISPOSE DE LA CONNECTION PARA UNA VEZ QUE SE UTILIZE SE LIBEREN LOS RECURSOS.
         {
             if (connection.State == ConnectionState.Open)
             {

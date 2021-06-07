@@ -20,7 +20,7 @@ namespace Agenda_EdsaAcademy
                 cargarControlesPorRedireccion();
             }
         }
-        public void cargarDropDownLists()
+        public void cargarDropDownLists() // SE CARGAN EN EL PAGE LOAD LAS DROP DOWN LISTS.
         {
             DropDownListPais.DataSource = (List<string>)Application["listaPaises"];
             DropDownListPais.DataBind();
@@ -37,7 +37,7 @@ namespace Agenda_EdsaAcademy
             DropDownListGenero.DataSource = (List<String>)Application["listaGenero"];
             DropDownListGenero.DataBind();
         }
-        public void cargarControlesPorRedireccion()
+        public void cargarControlesPorRedireccion() // SE CARGAN DE MANERA PARTICULAR A CADA CASO DE REDIRECCION, SE HABILITAN Y RESTRINGEN CAMPOS SEGUN SEA NECESARIO.
         {
             if (Application["controlesACargar"].Equals("Nuevo Contacto"))
             {
@@ -155,7 +155,7 @@ namespace Agenda_EdsaAcademy
 
             }
         }
-        public void esContactoInterno(object source, EventArgs e)
+        public void esContactoInterno(object source, EventArgs e) // METODO ENCARGADO DE MANEJAR SEGUN EN QUE ESTADO SE ENCUENTRE EL CAMPO DE CONTACTO INTERNO, SE HABILITAN O RESTRINGEN DIFERENTES CAMPOS.
         {
             if (DropDownListContactoInterno.SelectedValue.Equals("Si"))
             {
@@ -186,7 +186,7 @@ namespace Agenda_EdsaAcademy
         public void cancelarCreacion(object sender, EventArgs e)
         {
             Response.Redirect("ConsultaConMaster.aspx");
-        }
+        }// METODO ENCARGADO DE REDIRECCIONAR A LA PAGINA DE CONSULTA SI SE CANCELA LA OPERACION EN CURSO.
         public void guardarContacto(object sender, EventArgs e)
         {
             Contacto contacto = new Contacto()
@@ -228,6 +228,6 @@ namespace Agenda_EdsaAcademy
                 }
             }
             Response.Redirect("ConsultaConMaster.aspx");
-        }
+        }// METODO ENCARGADO DE REGISTRAR LOS CAMBIAS Y PASARLOS A LA BLL EN FORMA DE CONTACTO,YA SEA NUEVO O EDITADO.
     }
 }

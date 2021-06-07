@@ -20,18 +20,18 @@ namespace Agenda_EdsaAcademy
                 cargarDropDownLists();
             }
         }
-        public void cargarCamposFiltrosyResultados()
+        public void cargarCamposFiltrosyResultados() // CARGA LOS CAMPOS, FILTROS Y RESULTADOS SEGUN SI ES PA PRIMERA CARGA O NO.
         {
             List<FiltroContacto> listaFiltrosReCarga = (List<FiltroContacto>)Application["listaFiltrosUsados"];
 
-            textFechaDeIngresoDesde.Attributes.Add("readonly", "readonly");
+            textFechaDeIngresoDesde.Attributes.Add("readonly", "readonly"); // SE ASIGNA QUE LAS TEXTBOX DE FECHAS SOLO SEAN READONLY.
             textFechaDeIngresoHasta.Attributes.Add("readonly", "readonly");
 
-            if (listaFiltrosReCarga != null)
+            if (listaFiltrosReCarga != null)// SI LA LISTA DE FILTROS NO ESTA VACIA.
             {
                 foreach (FiltroContacto filtroContacto in listaFiltrosReCarga)
                 {
-                    switch (filtroContacto.idFiltro)
+                    switch (filtroContacto.idFiltro)// CARGO LOS FILTROS EN PANTALLA
                     {
                         case (int)OPCIONES_FILTRO.APELLIDO_Y_NOMBRE:
                             textBoxApellidoNombre.Text = filtroContacto.valorFiltro;
@@ -92,10 +92,10 @@ namespace Agenda_EdsaAcademy
 
                     if (listaContactos != null)
                     {
-                        listaContactos.OrderBy(Contacto => Contacto.apellidoYnombre).ToList();
+                        listaContactos.OrderBy(Contacto => Contacto.apellidoYnombre).ToList();// ORDENO LOS RESULTADOS ALFABETICAMENTE SI ES QUE LOS HAY.
                     }
 
-                    GridViewResultadosConsulta.DataSource = listaContactos;
+                    GridViewResultadosConsulta.DataSource = listaContactos; // CARGO LOS RESULTADOS.
                     GridViewResultadosConsulta.DataBind();
                 }
 
@@ -105,12 +105,12 @@ namespace Agenda_EdsaAcademy
                 using (AgendaContactos agendaContacto = new AgendaContactos())
                 {
                     List<Contacto> listaContactos = agendaContacto.getlistaContactosPorFiltro(new List<FiltroContacto>()).OrderBy(Contacto => Contacto.apellidoYnombre).ToList();
-                    GridViewResultadosConsulta.DataSource = listaContactos;
+                    GridViewResultadosConsulta.DataSource = listaContactos; // SI NO TENIA FILTROS CARGO TODA LA LISTA DE CONTACTOS EN ORDEN ALFABETICO.
                     GridViewResultadosConsulta.DataBind();
                 }
             }
         }
-        public void cargarDropDownLists()
+        public void cargarDropDownLists() // SE CARGAN LAS LISTAS DE DROP DOWN. Y SE "GRISEAN" LOS CAMPOS NECESARIOS PARA COMENZAR A UTILIZAR LA AGENDA.
         {
             List<String> listaPaises = (List<String>)Application["listaPaisesTODOS"];
             DropDownListPais.DataSource = listaPaises;
@@ -132,7 +132,7 @@ namespace Agenda_EdsaAcademy
             DropDownContactoInterno.DataSource = (List<String>)Application["listaSiNoTODOS"];
             DropDownContactoInterno.DataBind();
         }
-        public void cambiarIndicePagina(object sender, GridViewPageEventArgs e)
+        public void cambiarIndicePagina(object sender, GridViewPageEventArgs e) // METODO ENCARGADO DE EL MANEJO DE LAS PAGINAS DE LA GRID VIEW.
         {
             using (IAgendaContactos agendaContactos = new AgendaContactos())
             {
@@ -141,7 +141,7 @@ namespace Agenda_EdsaAcademy
                 GridViewResultadosConsulta.DataBind();
             }
         }
-        public void limpiarFiltros(object sender, ImageClickEventArgs e)
+        public void limpiarFiltros(object sender, ImageClickEventArgs e) // METODO ENCARGADO DE RESTABLECER LOS CAMPOS DE FILTRADO.
         {
             textBoxApellidoNombre.Text = "";
             textBoxLocalidad.Text = "";
@@ -178,7 +178,7 @@ namespace Agenda_EdsaAcademy
             Application["listaFiltrosUsados"] = new List<FiltroContacto>();
 
         }
-        public void validarFechas(object source, ServerValidateEventArgs fecha)
+        public void validarFechas(object source, ServerValidateEventArgs fecha) // METODO UTILIZADO PARA EL CUSTOM VALIDATOR DE LAS FECHAS.
         {
             if (textFechaDeIngresoHasta.Text.Length > 0 && textFechaDeIngresoDesde.Text.Length > 0)
             {
@@ -190,7 +190,7 @@ namespace Agenda_EdsaAcademy
                 fecha.IsValid = true;
             }
         }
-        public void esContactoInterno(object source, EventArgs e)
+        public void esContactoInterno(object source, EventArgs e) // METODO ENCARGADO DE HABILITAR LOS CAMPOS Y RESTRINGIR OTROS CUANDO EL CONTACTO ES O NO INTERNO.
         {
             if (DropDownContactoInterno.SelectedValue.Equals("Si"))
             {
@@ -224,7 +224,7 @@ namespace Agenda_EdsaAcademy
                 DropDownArea.BackColor = System.Drawing.Color.LightGray;
             }
         }
-        public void buscarPorFiltro(object sender, EventArgs e)
+        public void buscarPorFiltro(object sender, EventArgs e) // METODO ENCARGADO DE LEVANTAR LOS FILTROS INGRESADOS POR EL USUARIO Y COMUNICARLO A LA CABA BLL COMO LISTA. PARA LUEGO ASIGNARLA AL GRID.
         {
             List<FiltroContacto> listaFiltrosUsados = new List<FiltroContacto>();
 
@@ -379,8 +379,8 @@ namespace Agenda_EdsaAcademy
             }
 
             buscarPorFiltro(sender, e);
-        }
-        public void nuevoContacto(object sender, EventArgs e)
+        }// METODO ENCARGADO DE MANEJAR LAS REDIRECCIONES Y OPERACIONES DE LOS BOTONES POR CONTACTO DEL GRID VIEW CON SUS COMMAND NAME.
+        public void nuevoContacto(object sender, EventArgs e) // METODO UTILIZADO PARA LA REDIRECCION HACIA OTRA PAGINA ASPX PARA CARGAR UN NUEVO CONTACTO.
         {
             Application["controlesACargar"] = "Nuevo Contacto";
 

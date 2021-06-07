@@ -43,7 +43,6 @@
   <ItemGroup>
     <Compile Include="Contacto.cs" />
     <Compile Include="FiltroContacto.cs" />
-    <Compile Include="IFiltroContacto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -15,7 +15,7 @@ namespace Agenda.DAL
     {
         public SqlConnection connection;
 
-        string connString = ConfigurationManager.ConnectionStrings["connectionDB"].ConnectionString;
+        string connString = ConfigurationManager.ConnectionStrings["connectionDB"].ConnectionString; // PATH DEL CONNECTION PROVENIENTE DEL WEB.CONFIG
         public PaisDAL()
         {
             connection = new SqlConnection(connString);
@@ -37,7 +37,6 @@ namespace Agenda.DAL
                 return null;
             }
         }
-
         public DataSet EjecutarQueryPaisesADataSet(SqlConnection connection)
         {
             using (SqlDataAdapter dataAdapter = new SqlDataAdapter())
@@ -55,8 +54,8 @@ namespace Agenda.DAL
 
                 return dataSetResultado;
             }
-        }
-        public void Dispose()
+        }// SE RECIBE LA TABLE DE PAISES DESDE LA BASE Y SE RETORNA SU CONTENIDO COMO DATASET, PARA LUEGO SER PASADO A UNA LISTA EN EL BLL.
+        public void Dispose() //DISPOSE PARA LIBERAR RECURSOS CUANDO YA NO SE NECESITEN.
         {
             if (connection.State == ConnectionState.Open)
             {

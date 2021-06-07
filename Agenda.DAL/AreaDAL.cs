@@ -15,10 +15,10 @@ namespace Agenda.DAL
     {
         public SqlConnection connection;
 
-        string connString = ConfigurationManager.ConnectionStrings["connectionDB"].ConnectionString;
+        string connString = ConfigurationManager.ConnectionStrings["connectionDB"].ConnectionString; // SE RECIBE EL PATH DE LA CONNECTION.
         public  AreaDAL()
         {
-            connection = new SqlConnection(connString);
+            connection = new SqlConnection(connString); // SE ASIGNA EL PATH.
         }
         public SqlConnection AbrirConexion()
         {
@@ -37,7 +37,7 @@ namespace Agenda.DAL
                 return null;
             }
         }
-        public DataSet EjecutarQueryAreasADataSet(SqlConnection connection)
+        public DataSet EjecutarQueryAreasADataSet(SqlConnection connection) // SE RECIBE LA TABLA DE AREA PARA PASARLA A UN DATA SET, EL CUAL LUEGO SE CONVERTIRA EN UNA LISTA EN EL BLL.
         {
             using (SqlDataAdapter dataAdapter = new SqlDataAdapter())
             {
@@ -45,17 +45,17 @@ namespace Agenda.DAL
                 {
                     Connection = connection,
                     CommandType = CommandType.Text,
-                    CommandText = "SELECT * FROM Area"
+                    CommandText = "SELECT * FROM Area" // SE ASIGNA EL SQLCOMMAND
                 };
 
                 DataSet dataSetResultado = new DataSet();
 
-                dataAdapter.Fill(dataSetResultado);
+                dataAdapter.Fill(dataSetResultado);  // SE LLENA EL DATASET
 
-                return dataSetResultado;
+                return dataSetResultado;// SE RETORNA.
             }
         }
-        public void Dispose()
+        public void Dispose() // DISPOSE PARA LIBERAR LOS RECURSOS CUANDO YA NO SEAN REQUERIDOS.
         {
             if (connection.State == ConnectionState.Open)
             {
