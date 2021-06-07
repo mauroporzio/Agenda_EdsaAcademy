@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Diagnostics;
 
 namespace Agenda_EdsaAcademy
 {
@@ -173,14 +174,19 @@ namespace Agenda_EdsaAcademy
                 textBoxOrganizacion.BackColor = System.Drawing.Color.LightGray;
                 RequiredFieldValidatorOrganizacion.Enabled = false;
 
-                DropDownListArea.DataSource = (List<string>)Application["listaAreas"];
-                DropDownListArea.DataBind();
+                using (AreaDropDownList area = new AreaDropDownList())// SE RECIBE DE LA CAPA BLL LA LISTA DE AREAS PROVENIENTE DE LA BASE DE DATOS.
+                {
+                    Contacto contacto = (Contacto)Application["contactoEditar"];
+                    DropDownListArea.DataSource = area.getListaAreas();
+                    DropDownListArea.DataBind();
+                }
                 DropDownListArea.Enabled = true;
                 DropDownListArea.BackColor = System.Drawing.Color.Empty;
             }
             else
             {
-                textBoxOrganizacion.Text = "";
+                Contacto contacto = (Contacto)Application["contactoEditar"];
+                textBoxOrganizacion.Text = contacto.organizacion;
                 textBoxOrganizacion.Enabled = true;
                 textBoxOrganizacion.BackColor = System.Drawing.Color.Empty;
                 textBoxOrganizacion.BorderColor = System.Drawing.Color.Empty;

@@ -37,18 +37,6 @@ namespace Agenda.DAL
                 return null;
             }
         }
-        public int EjecutarExecuteNonQuery(SqlConnection connection, string nonNonQwerySentence) // RECIBO UN NONQUERY PARA EJECUTAR.
-        {
-            SqlCommand cmd = new SqlCommand
-            {
-                Connection = connection,
-                CommandType = CommandType.Text,
-                CommandText = nonNonQwerySentence
-            };
-            int registrosAfectados = cmd.ExecuteNonQuery();
-
-            return registrosAfectados; // RETORNO EL NUMERO DE REGISTROS AFECTADOS, PUEDE GUARDARSE EN UNA VARIABLE SI SE DESEA.
-        }
         public int EjecutarExecuteNonQueryConTransaccion(SqlTransaction transaction, SqlConnection connection, string nonNonQwerySentence) // RECIBO UN NONQUERY PERO ESTE SE PRESENTA EN UNA TRANSACCION. 
         {                                                                                                                                  // SERA UTILIZADO PARA OPERACIONES CON LA BASE QUE REFLEJEN CAMBIOS EN ELLA.
             SqlCommand sqlCommnad = new SqlCommand

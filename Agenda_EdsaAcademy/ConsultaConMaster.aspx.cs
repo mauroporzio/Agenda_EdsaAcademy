@@ -55,7 +55,7 @@ namespace Agenda_EdsaAcademy
                         case (int)OPCIONES_FILTRO.FECHA_DE_INGRESO_HASTA:
                             if (filtroContacto.valorFiltroDate.Equals(DateTime.ParseExact("01/01/9998", "dd/MM/yyyy", null, DateTimeStyles.AssumeLocal)))
                             {
-                                textFechaDeIngresoDesde.Text = "";
+                                textFechaDeIngresoHasta.Text = "";
                             }
                             else
                             {
@@ -64,7 +64,42 @@ namespace Agenda_EdsaAcademy
                             break;
 
                         case (int)OPCIONES_FILTRO.CONTACTO_INTERNO:
-                            DropDownContactoInterno.SelectedValue = filtroContacto.valorFiltro;
+
+                            if (filtroContacto.valorFiltro == null)
+                            {
+                                DropDownArea.SelectedValue = "TODOS";
+                                DropDownArea.Enabled = false;
+                                DropDownArea.BackColor = System.Drawing.Color.LightGray;
+
+                                TextBoxOrganizacion.Text = "";
+                                TextBoxOrganizacion.Enabled = false;
+                                TextBoxOrganizacion.BackColor = System.Drawing.Color.LightGray;
+
+                                DropDownContactoInterno.SelectedValue = "TODOS";
+                            }
+                            else if (filtroContacto.valorFiltro.Equals("No"))
+                            {
+                                DropDownContactoInterno.SelectedValue = filtroContacto.valorFiltro;
+                                TextBoxOrganizacion.Enabled = true;
+                                TextBoxOrganizacion.BackColor = System.Drawing.Color.Empty;
+                                TextBoxOrganizacion.BorderColor = System.Drawing.Color.Empty;
+
+                                DropDownArea.SelectedValue = "TODOS";
+                                DropDownArea.Enabled = false;
+                                DropDownArea.BackColor = System.Drawing.Color.LightGray;
+                            }
+                            else if (filtroContacto.valorFiltro.Equals("Si"))
+                            {
+
+                                DropDownContactoInterno.SelectedValue = filtroContacto.valorFiltro;
+                                TextBoxOrganizacion.Text = "";
+                                TextBoxOrganizacion.Enabled = false;
+                                TextBoxOrganizacion.BackColor = System.Drawing.Color.LightGray;
+
+                                DropDownArea.Enabled = true;
+                                DropDownArea.BackColor = System.Drawing.Color.Empty;
+
+                            }
                             break;
 
                         case (int)OPCIONES_FILTRO.ORGANIZACION:
@@ -108,6 +143,14 @@ namespace Agenda_EdsaAcademy
                     GridViewResultadosConsulta.DataSource = listaContactos.OrderBy(Contacto => Contacto.apellidoYnombre).ToList(); // SI NO TENIA FILTROS CARGO TODA LA LISTA DE CONTACTOS EN ORDEN ALFABETICO.
                     GridViewResultadosConsulta.DataBind();
                 }
+
+                DropDownArea.SelectedValue = "TODOS";
+                DropDownArea.Enabled = false;
+                DropDownArea.BackColor = System.Drawing.Color.LightGray;
+
+                TextBoxOrganizacion.Text = "";
+                TextBoxOrganizacion.Enabled = false;
+                TextBoxOrganizacion.BackColor = System.Drawing.Color.LightGray;
             }
         }
         public void cargarDropDownLists() // SE CARGAN LAS LISTAS DE DROP DOWN. Y SE "GRISEAN" LOS CAMPOS NECESARIOS PARA COMENZAR A UTILIZAR LA AGENDA.
@@ -131,13 +174,6 @@ namespace Agenda_EdsaAcademy
                 DropDownArea.DataSource = listaAreasTODOS;
                 DropDownArea.DataBind();
             }
-
-            DropDownArea.SelectedValue = "TODOS";
-            DropDownArea.Enabled = false;
-            DropDownArea.BackColor = System.Drawing.Color.LightGray;
-
-            TextBoxOrganizacion.Enabled = false;
-            TextBoxOrganizacion.BackColor = System.Drawing.Color.LightGray;
 
             DropDownContactoInterno.DataSource = (List<String>)Application["listaSiNoTODOS"];
             DropDownContactoInterno.DataBind();
