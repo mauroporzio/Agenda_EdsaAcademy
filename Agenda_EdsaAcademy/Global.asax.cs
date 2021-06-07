@@ -19,7 +19,7 @@ namespace Agenda_EdsaAcademy
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
-            // mock data. Que se utilizaba para la pagina aspx de testeo al comienzo del desarrollo.
+            // Mock data que se utilizaba para la pagina aspx de testeo al comienzo del desarrollo.
 
             /*
             List<Contacto> listaContactos = new List<Contacto>();
@@ -36,24 +36,6 @@ namespace Agenda_EdsaAcademy
             Application["AgendaContactos"] = agendaContactos;
 
             */
-
-            using (PaisDropDownList pais = new PaisDropDownList())// SE RECIBE DE LA CAPA BLL LA LISTA DE PAISES PROVENIENTE DE LA BASE DE DATOS.
-            {
-                Application["listaPaises"] = pais.getListaPaises();// LISTA CON SOLO LOS PAISES PARA LOS DROPDOWN DE NUEVO CONTACTO, ABRIR CONTACTO Y EDITAR CONTACTO.
-
-                List<String> listaPaisesTODOS = pais.getListaPaises();
-                listaPaisesTODOS.Insert(0, "TODOS");
-                Application["listaPaisesTODOS"] = listaPaisesTODOS; // LISTA DE PAISES CON EL AGREGADO DE 'TODOS' PARA LA PANTALLA DE CONSULTA
-            }
-
-            using (AreaDropDownList area = new AreaDropDownList())// SE RECIBE DE LA CAPA BLL LA LISTA DE AREAS PROVENIENTE DE LA BASE DE DATOS.
-            {
-                Application["listaAreas"] = area.getListaAreas();// LISTA CON SOLO LAS AREAS PARA LOS DROPDOWN DE NUEVO CONTACTO, ABRIR CONTACTO Y EDITAR CONTACTO.
-
-                List<String> listaAreasTODOS = area.getListaAreas();
-                listaAreasTODOS.Insert(0, "TODOS");
-                Application["listaAreasTODOS"] = listaAreasTODOS; // LISTA DE PAISES CON EL AGREGADO DE 'TODOS' PARA LA PANTALLA DE CONSULTA
-            }
 
             List<String> DropDownSiNoTODOS = new List<String> { "TODOS", "Si", "No" };
 

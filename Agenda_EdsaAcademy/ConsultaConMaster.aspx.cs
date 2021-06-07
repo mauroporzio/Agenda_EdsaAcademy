@@ -112,16 +112,26 @@ namespace Agenda_EdsaAcademy
         }
         public void cargarDropDownLists() // SE CARGAN LAS LISTAS DE DROP DOWN. Y SE "GRISEAN" LOS CAMPOS NECESARIOS PARA COMENZAR A UTILIZAR LA AGENDA.
         {
-            List<String> listaPaises = (List<String>)Application["listaPaisesTODOS"];
-            DropDownListPais.DataSource = listaPaises;
-            DropDownListPais.DataBind();
+            using (PaisDropDownList pais = new PaisDropDownList()) // SE RECIBE DE LA CAPA BLL LA LISTA DE PAISES PROVENIENTE DE LA BASE DE DATOS.
+            {
+                List<String> listaPaisesTODOS = pais.getListaPaises();
+                listaPaisesTODOS.Insert(0, "TODOS");
+                DropDownListPais.DataSource = listaPaisesTODOS;
+                DropDownListPais.DataBind();
+            }
 
             DropDownActivo.DataSource = (List<String>)Application["listaSiNoTODOS"];
             DropDownActivo.DataBind();
 
-            List<String> listaAreas = (List<string>)Application["listaAreasTODOS"];
-            DropDownArea.DataSource = listaAreas;
-            DropDownArea.DataBind();
+            using (AreaDropDownList area = new AreaDropDownList())// SE RECIBE DE LA CAPA BLL LA LISTA DE AREAS PROVENIENTE DE LA BASE DE DATOS.
+            {
+
+                List<String> listaAreasTODOS = area.getListaAreas();
+                listaAreasTODOS.Insert(0, "TODOS");
+                DropDownArea.DataSource = listaAreasTODOS;
+                DropDownArea.DataBind();
+            }
+
             DropDownArea.SelectedValue = "TODOS";
             DropDownArea.Enabled = false;
             DropDownArea.BackColor = System.Drawing.Color.LightGray;

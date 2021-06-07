@@ -22,14 +22,23 @@ namespace Agenda_EdsaAcademy
         }
         public void cargarDropDownLists() // SE CARGAN EN EL PAGE LOAD LAS DROP DOWN LISTS.
         {
-            DropDownListPais.DataSource = (List<string>)Application["listaPaises"];
-            DropDownListPais.DataBind();
+            using (PaisDropDownList pais = new PaisDropDownList()) // SE RECIBE DE LA CAPA BLL LA LISTA DE PAISES PROVENIENTE DE LA BASE DE DATOS.
+            {
+                DropDownListPais.DataSource = pais.getListaPaises();
+                DropDownListPais.DataBind();
+            }
+
+            DropDownListActivo.DataSource = (List<String>)Application["listaSiNoTODOS"];
+            DropDownListActivo.DataBind();
+
+            using (AreaDropDownList area = new AreaDropDownList())// SE RECIBE DE LA CAPA BLL LA LISTA DE AREAS PROVENIENTE DE LA BASE DE DATOS.
+            {
+                DropDownListArea.DataSource = area.getListaAreas();
+                DropDownListArea.DataBind();
+            }
 
             DropDownListActivo.DataSource = (List<String>)Application["listaSiNo"];
             DropDownListActivo.DataBind();
-
-            DropDownListArea.DataSource = (List<string>)Application["listaAreas"]; ;
-            DropDownListArea.DataBind();
 
             DropDownListContactoInterno.DataSource = (List<String>)Application["listaSiNo"];
             DropDownListContactoInterno.DataBind();
