@@ -200,7 +200,7 @@ namespace Agenda_EdsaAcademy
         }
         public void cancelarCreacion(object sender, EventArgs e)
         {
-            Response.Redirect("ConsultaConMaster.aspx");
+            Response.Redirect("ConsultaConMaster.aspx", false);
         }// METODO ENCARGADO DE REDIRECCIONAR A LA PAGINA DE CONSULTA SI SE CANCELA LA OPERACION EN CURSO.
         public void guardarContacto(object sender, EventArgs e)
         {
@@ -272,7 +272,7 @@ namespace Agenda_EdsaAcademy
                     agendaContacto.modificarContacto(contacto);
                 }
             }
-            Response.Redirect("ConsultaConMaster.aspx");
+            Response.Redirect("ConsultaConMaster.aspx", false);
         }// METODO ENCARGADO DE REGISTRAR LOS CAMBIAS Y PASARLOS A LA BLL EN FORMA DE CONTACTO,YA SEA NUEVO O EDITADO.
     }
 }

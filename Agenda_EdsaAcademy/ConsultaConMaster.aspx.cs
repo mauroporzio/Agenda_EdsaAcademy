@@ -409,7 +409,7 @@ namespace Agenda_EdsaAcademy
 
 
 
-                    Response.Redirect("ConsultaRedireccionConMaster.aspx");
+                    Response.Redirect("ConsultaRedireccionConMaster.aspx", false);
                 }
             }
             else if (e.CommandName.Equals("editarContacto"))
@@ -420,7 +420,7 @@ namespace Agenda_EdsaAcademy
 
                     Application["contactoEditar"] = agendaContactos.getContactoById(new Contacto() { id = Int32.Parse(e.CommandArgument.ToString()) });
 
-                    Response.Redirect("ConsultaRedireccionConMaster.aspx");
+                    Response.Redirect("ConsultaRedireccionConMaster.aspx", false);
                 }
             }
 
@@ -430,7 +430,7 @@ namespace Agenda_EdsaAcademy
         {
             Application["controlesACargar"] = "Nuevo Contacto";
 
-            Response.Redirect("ConsultaRedireccionConMaster.aspx");
+            Response.Redirect("ConsultaRedireccionConMaster.aspx", false);
         }
     }
 }
