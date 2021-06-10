@@ -32,11 +32,9 @@ namespace Agenda_EdsaAcademy
             DropDownListActivo.DataSource = (List<String>)Application["listaSiNoTODOS"];
             DropDownListActivo.DataBind();
 
-            using (AreaDropDownList area = new AreaDropDownList())// SE RECIBE DE LA CAPA BLL LA LISTA DE AREAS PROVENIENTE DE LA BASE DE DATOS.
-            {
-                DropDownListArea.DataSource = area.getListaAreas();
-                DropDownListArea.DataBind();
-            }
+            WSAreasAgendaHija WSAreas = new WSAreasAgendaHija();
+            DropDownListArea.DataSource = WSAreas.getAreas().ToList(); // SE PIDE AL WS QUE CARGUE LOS CAMPOS DE LA LISTA DE AREAS
+            DropDownListArea.DataBind();
 
             DropDownListActivo.DataSource = (List<String>)Application["listaSiNo"];
             DropDownListActivo.DataBind();
@@ -174,19 +172,32 @@ namespace Agenda_EdsaAcademy
                 textBoxOrganizacion.BackColor = System.Drawing.Color.LightGray;
                 RequiredFieldValidatorOrganizacion.Enabled = false;
 
-                using (AreaDropDownList area = new AreaDropDownList())// SE RECIBE DE LA CAPA BLL LA LISTA DE AREAS PROVENIENTE DE LA BASE DE DATOS.
-                {
-                    Contacto contacto = (Contacto)Application["contactoEditar"];
-                    DropDownListArea.DataSource = area.getListaAreas();
-                    DropDownListArea.DataBind();
-                }
+                WSAreasAgendaHija WSAreas = new WSAreasAgendaHija();
+                DropDownListArea.DataSource = WSAreas.getAreas().ToList(); // SE PIDE AL WS QUE CARGUE LOS CAMPOS DE LA LISTA DE AREAS
+                DropDownListArea.DataBind();
+
                 DropDownListArea.Enabled = true;
                 DropDownListArea.BackColor = System.Drawing.Color.Empty;
+
+                Contacto contacto = (Contacto)Application["contactoEditar"];
+
+                if (Application["controlesACargar"].Equals("Editar Contacto") && contacto.area != "")
+                {
+                    DropDownListArea.SelectedValue = contacto.area;
+                }
             }
             else
             {
-                Contacto contacto = (Contacto)Application["contactoEditar"];
-                textBoxOrganizacion.Text = contacto.organizacion;
+                if (Application["controlesACargar"].Equals("Editar Contacto"))
+                {
+                    Contacto contacto = (Contacto)Application["contactoEditar"];
+                    textBoxOrganizacion.Text = contacto.organizacion;
+                }
+                else
+                {
+                    textBoxOrganizacion.Text = "";
+                }
+
                 textBoxOrganizacion.Enabled = true;
                 textBoxOrganizacion.BackColor = System.Drawing.Color.Empty;
                 textBoxOrganizacion.BorderColor = System.Drawing.Color.Empty;

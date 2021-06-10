@@ -166,15 +166,12 @@ namespace Agenda_EdsaAcademy
             DropDownActivo.DataSource = (List<String>)Application["listaSiNoTODOS"];
             DropDownActivo.DataBind();
 
-            using (AreaDropDownList area = new AreaDropDownList())// SE RECIBE DE LA CAPA BLL LA LISTA DE AREAS PROVENIENTE DE LA BASE DE DATOS.
-            {
-
-                List<String> listaAreasTODOS = area.getListaAreas();
-                listaAreasTODOS.Insert(0, "TODOS");
-                DropDownArea.DataSource = listaAreasTODOS;
-                DropDownArea.DataBind();
-            }
-
+            WSAreasAgendaHija WSAreas = new WSAreasAgendaHija();
+            List<String> listaAreasTODOS = WSAreas.getAreas().ToList(); // SE PIDE AL WS QUE CARGUE LOS CAMPOS DE LA LISTA DE AREAS + OPCION "TODOS".
+            listaAreasTODOS.Insert(0, "TODOS");
+            DropDownArea.DataSource = listaAreasTODOS;
+            DropDownArea.DataBind();
+            
             DropDownContactoInterno.DataSource = (List<String>)Application["listaSiNoTODOS"];
             DropDownContactoInterno.DataBind();
         }
@@ -262,8 +259,7 @@ namespace Agenda_EdsaAcademy
             {
                 TextBoxOrganizacion.Text = "";
                 TextBoxOrganizacion.Enabled = false;
-                TextBoxOrganizacion.BackColor = System.Drawing.Color.Empty;
-                TextBoxOrganizacion.BorderColor = System.Drawing.Color.Empty;
+                TextBoxOrganizacion.BackColor = System.Drawing.Color.LightGray;
 
                 DropDownArea.SelectedValue = "TODOS";
                 DropDownArea.Enabled = false;

@@ -229,6 +229,8 @@
     <Compile Include="ViewSwitcher.ascx.designer.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
     </Compile>
+    <Compile Include="WSAreasAgenda.cs" />
+    <Compile Include="WSAreasAgendaHija.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

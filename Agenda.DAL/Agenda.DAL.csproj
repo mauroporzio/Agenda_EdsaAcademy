@@ -43,7 +43,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AgendaContactosDAL.cs" />
-    <Compile Include="AreaDAL.cs" />
     <Compile Include="PaisDAL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
