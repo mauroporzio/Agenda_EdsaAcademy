@@ -23,6 +23,8 @@ namespace Agenda_EdsaAcademy
         }
         public void cargarDropDownLists() // SE CARGAN EN EL PAGE LOAD LAS DROP DOWN LISTS.
         {
+            textBoxCuil.Attributes.Add("readonly", "readonly"); // SE ASIGNA QUE LA TEXTBOX CUIL SOLO SEAN READONLY.
+
             using (PaisDropDownList pais = new PaisDropDownList()) // SE RECIBE DE LA CAPA BLL LA LISTA DE PAISES PROVENIENTE DE LA BASE DE DATOS.
             {
                 DropDownListPais.DataSource = pais.getListaPaises();
@@ -80,6 +82,7 @@ namespace Agenda_EdsaAcademy
                 textBoxSkype.Text = contactoAbierto.cuentaSkype;
                 textBoxTelefonoCelular.Text = contactoAbierto.telefonoCelular;
                 textBoxTelefonoFijoInterno.Text = contactoAbierto.telefonoFijoInterno;
+                textBoxCuil.Text = contactoAbierto.cuil;
 
                 DropDownListGenero.SelectedValue = contactoAbierto.genero;
                 DropDownListPais.SelectedValue = contactoAbierto.pais;
@@ -95,7 +98,7 @@ namespace Agenda_EdsaAcademy
                 textBoxSkype.BackColor = System.Drawing.Color.LightGray;
                 textBoxTelefonoCelular.BackColor = System.Drawing.Color.LightGray;
                 textBoxTelefonoFijoInterno.BackColor = System.Drawing.Color.LightGray;
-
+                textBoxCuil.BackColor = System.Drawing.Color.LightGray;
                 DropDownListGenero.BackColor = System.Drawing.Color.LightGray;
                 DropDownListPais.BackColor = System.Drawing.Color.LightGray;
                 DropDownListActivo.BackColor = System.Drawing.Color.LightGray;
@@ -110,6 +113,7 @@ namespace Agenda_EdsaAcademy
                 textBoxSkype.Enabled = false;
                 textBoxTelefonoCelular.Enabled = false;
                 textBoxTelefonoFijoInterno.Enabled = false;
+                textBoxCuil.Enabled = false;
 
                 DropDownListGenero.Enabled = false;
                 DropDownListPais.Enabled = false;
@@ -126,18 +130,17 @@ namespace Agenda_EdsaAcademy
                 textBoxApellidoNombre.Text = contactoEditar.apellidoYnombre;
                 textBoxDireccion.Text = contactoEditar.direccion;
                 textBoxLocalidad.Text = contactoEditar.localidad;
-
                 textBoxEmail.Text = contactoEditar.eMail;
                 textBoxSkype.Text = contactoEditar.cuentaSkype;
                 textBoxTelefonoCelular.Text = contactoEditar.telefonoCelular;
                 textBoxOrganizacion.Text = contactoEditar.organizacion;
                 textBoxTelefonoFijoInterno.Text = contactoEditar.telefonoFijoInterno;
+                textBoxCuil.Text = contactoEditar.cuil;
 
                 DropDownListGenero.SelectedValue = contactoEditar.genero;
                 DropDownListPais.SelectedValue = contactoEditar.pais;
                 DropDownListContactoInterno.SelectedValue = contactoEditar.contactoInterno;
                 DropDownListArea.SelectedValue = contactoEditar.area;
-
 
                 if (contactoEditar.contactoInterno.Equals("Si"))
                 {
@@ -213,6 +216,30 @@ namespace Agenda_EdsaAcademy
         {
             Response.Redirect("ConsultaConMaster.aspx", false);
         }// METODO ENCARGADO DE REDIRECCIONAR A LA PAGINA DE CONSULTA SI SE CANCELA LA OPERACION EN CURSO.
+        public void obtenerCuil (object source, EventArgs e)
+        {
+            if (Application["controlesACargar"].Equals("Editar Contacto"))
+            {
+                Contacto contactoEditar = (Contacto)Application["contactoEditar"];
+
+                if (!contactoEditar.apellidoYnombre.Equals(textBoxApellidoNombre.Text) || !contactoEditar.genero.Equals(DropDownListGenero.SelectedValue))
+                {
+                    IWebServiceCuil cuil = new WebServiceCuilClient();
+
+                    textBoxCuil.Text = cuil.getCuil(contactoEditar.apellidoYnombre, contactoEditar.genero); //LLAMADO A WEB SERVICE CUIL.
+                }
+                else if (contactoEditar.apellidoYnombre.Equals(textBoxApellidoNombre.Text) && contactoEditar.genero.Equals(DropDownListGenero.SelectedValue))
+                {
+                    textBoxCuil.Text = contactoEditar.cuil;
+                }
+            }
+            else if (Application["controlesACargar"].Equals("Nuevo Contacto"))
+            {
+                IWebServiceCuil cuil = new WebServiceCuilClient();
+
+                textBoxCuil.Text = cuil.getCuil(textBoxApellidoNombre.Text, DropDownListGenero.SelectedValue); //LLAMADO A WEB SERVICE CUIL.
+            }
+        }
         public void guardarContacto(object sender, EventArgs e)
         {
             Contacto contacto = new Contacto()
@@ -225,7 +252,8 @@ namespace Agenda_EdsaAcademy
                 telefonoCelular = textBoxTelefonoCelular.Text,
                 telefonoFijoInterno = textBoxTelefonoFijoInterno.Text,
                 contactoInterno = DropDownListContactoInterno.SelectedValue,
-                activo = DropDownListActivo.SelectedValue
+                activo = DropDownListActivo.SelectedValue,
+                cuil = textBoxCuil.Text
             };
 
             if (textBoxLocalidad.Text.Length > 0)

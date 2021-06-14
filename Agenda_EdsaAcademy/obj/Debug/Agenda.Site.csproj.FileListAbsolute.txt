@@ -67,7 +67,6 @@ D:\New folder (6)\MAURO\GitHub\Agenda_EdsaAcademy\Agenda_EdsaAcademy\bin\Newtons
 D:\New folder (6)\MAURO\GitHub\Agenda_EdsaAcademy\Agenda_EdsaAcademy\bin\Antlr3.Runtime.pdb
 D:\New folder (6)\MAURO\GitHub\Agenda_EdsaAcademy\Agenda_EdsaAcademy\bin\Microsoft.AspNet.FriendlyUrls.xml
 D:\New folder (6)\MAURO\GitHub\Agenda_EdsaAcademy\Agenda_EdsaAcademy\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-D:\New folder (6)\MAURO\GitHub\Agenda_EdsaAcademy\Agenda_EdsaAcademy\obj\Debug\Agenda.Site.csprojAssemblyReference.cache
 D:\New folder (6)\MAURO\GitHub\Agenda_EdsaAcademy\Agenda_EdsaAcademy\obj\Debug\Agenda.Site.csproj.CoreCompileInputs.cache
 D:\New folder (6)\MAURO\GitHub\Agenda_EdsaAcademy\Agenda_EdsaAcademy\obj\Debug\Agenda.Site.csproj.CopyComplete
 D:\New folder (6)\MAURO\GitHub\Agenda_EdsaAcademy\Agenda_EdsaAcademy\obj\Debug\Agenda_EdsaAcademy.dll
@@ -81,3 +80,4 @@ D:\New folder (6)\MAURO\GitHub\Agenda_EdsaAcademy\Agenda_EdsaAcademy\bin\Agenda.
 D:\New folder (6)\MAURO\GitHub\Agenda_EdsaAcademy\Agenda_EdsaAcademy\bin\Util.dll
 D:\New folder (6)\MAURO\GitHub\Agenda_EdsaAcademy\Agenda_EdsaAcademy\bin\Agenda.DAL.pdb
 D:\New folder (6)\MAURO\GitHub\Agenda_EdsaAcademy\Agenda_EdsaAcademy\bin\Util.pdb
+D:\New folder (6)\MAURO\GitHub\Agenda_EdsaAcademy\Agenda_EdsaAcademy\obj\Debug\Agenda.Site.csproj.AssemblyReference.cache

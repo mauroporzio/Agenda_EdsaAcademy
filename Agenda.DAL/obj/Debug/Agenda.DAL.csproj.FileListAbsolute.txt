@@ -1,4 +1,3 @@
-D:\New folder (6)\MAURO\GitHub\Agenda_EdsaAcademy\Agenda.DAL\obj\Debug\Agenda.DAL.csprojAssemblyReference.cache
 D:\New folder (6)\MAURO\GitHub\Agenda_EdsaAcademy\Agenda.DAL\obj\Debug\Agenda.DAL.csproj.CoreCompileInputs.cache
 D:\New folder (6)\MAURO\GitHub\Agenda_EdsaAcademy\Agenda.DAL\bin\Debug\Agenda.DAL.dll
 D:\New folder (6)\MAURO\GitHub\Agenda_EdsaAcademy\Agenda.DAL\bin\Debug\Agenda.DAL.pdb
@@ -9,3 +8,4 @@ D:\New folder (6)\MAURO\GitHub\Agenda_EdsaAcademy\Agenda.DAL\obj\Debug\Agenda.DA
 D:\New folder (6)\MAURO\GitHub\Agenda_EdsaAcademy\Agenda.DAL\obj\Debug\Agenda.DAL.pdb
 D:\New folder (6)\MAURO\GitHub\Agenda_EdsaAcademy\Agenda.DAL\bin\Debug\Util.dll
 D:\New folder (6)\MAURO\GitHub\Agenda_EdsaAcademy\Agenda.DAL\bin\Debug\Util.pdb
+D:\New folder (6)\MAURO\GitHub\Agenda_EdsaAcademy\Agenda.DAL\obj\Debug\Agenda.DAL.csproj.AssemblyReference.cache

@@ -1,6 +1,6 @@
 D:\New folder (6)\MAURO\GitHub\Agenda_EdsaAcademy\Agenda.Entity\bin\Debug\Agenda.Entity.dll
 D:\New folder (6)\MAURO\GitHub\Agenda_EdsaAcademy\Agenda.Entity\bin\Debug\Agenda.Entity.pdb
-D:\New folder (6)\MAURO\GitHub\Agenda_EdsaAcademy\Agenda.Entity\obj\Debug\Agenda.Entity.csprojAssemblyReference.cache
 D:\New folder (6)\MAURO\GitHub\Agenda_EdsaAcademy\Agenda.Entity\obj\Debug\Agenda.Entity.csproj.CoreCompileInputs.cache
 D:\New folder (6)\MAURO\GitHub\Agenda_EdsaAcademy\Agenda.Entity\obj\Debug\Agenda.Entity.dll
 D:\New folder (6)\MAURO\GitHub\Agenda_EdsaAcademy\Agenda.Entity\obj\Debug\Agenda.Entity.pdb
+D:\New folder (6)\MAURO\GitHub\Agenda_EdsaAcademy\Agenda.Entity\obj\Debug\Agenda.Entity.csproj.AssemblyReference.cache

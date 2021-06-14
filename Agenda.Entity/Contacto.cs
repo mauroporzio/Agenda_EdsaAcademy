@@ -20,5 +20,6 @@ namespace Agenda.Entity
         public string eMail { get; set; }
         public string cuentaSkype { get; set; }
         public string genero { get; set; }
+        public string cuil { get; set; }
     }
 }

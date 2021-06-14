@@ -403,8 +403,6 @@ namespace Agenda_EdsaAcademy
 
                     Application["contactoAbrir"] = agendaContactos.getContactoById(new Contacto() { id = Int32.Parse(e.CommandArgument.ToString()) });
 
-
-
                     Response.Redirect("ConsultaRedireccionConMaster.aspx", false);
                 }
             }

@@ -86,6 +86,7 @@
                             <asp:BoundField DataField="telefonoCelular" HeaderText="Tel. celular" HeaderStyle-CssClass="HeaderResultadoConsulta" />
                             <asp:BoundField DataField="eMail" HeaderText="E-Mail" HeaderStyle-CssClass="HeaderResultadoConsulta" />
                             <asp:BoundField DataField="cuentaSkype" HeaderText="Cuenta Skype" HeaderStyle-CssClass="HeaderResultadoConsulta" />
+                            <asp:BoundField DataField="cuil" HeaderText="CUIL" HeaderStyle-CssClass="HeaderResultadoConsulta" />
                             <asp:TemplateField>
                                 <ItemTemplate>
                                     <asp:ImageButton ID="ImageButtonBorrarContacto" runat="server"

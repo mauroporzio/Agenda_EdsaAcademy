@@ -15,10 +15,10 @@
                     <tr>
                         <td>
                             <asp:Label ID="lableApellidoNombre" runat="server" Text="Apellido y Nombre *" Width="14%" CssClass="TextoConsulta"></asp:Label>
-                            <asp:TextBox ID="textBoxApellidoNombre" runat="server"></asp:TextBox>
+                            <asp:TextBox ID="textBoxApellidoNombre" runat="server" OnTextChanged="obtenerCuil" AutoPostBack="true"></asp:TextBox>
 
                             <asp:Label ID="LabelGenero" runat="server" Text="Género *" Width="16%" CssClass="TextoConsultaOtraColumna"></asp:Label>
-                            <asp:DropDownList ID="DropDownListGenero" runat="server" Width="10%"></asp:DropDownList>
+                            <asp:DropDownList ID="DropDownListGenero" runat="server" Width="10%" OnSelectedIndexChanged ="obtenerCuil" AutoPostBack="true"></asp:DropDownList>
 
                             <asp:Label ID="LablePais" runat="server" Text="País *" Width="14%" CssClass="TextoConsultaOtraColumna"></asp:Label>
                             <asp:DropDownList ID="DropDownListPais" runat="server" Width="10%"></asp:DropDownList>
@@ -69,6 +69,9 @@
                         <td>
                             <asp:Label ID="LabelSkype" runat="server" Text="Skype" Width="14%" CssClass="TextoConsulta"></asp:Label>
                             <asp:TextBox ID="textBoxSkype" runat="server" Width="9.3%"></asp:TextBox>
+
+                            <asp:Label ID="LabelCuil" runat="server" Text="CUIL" Width="16%" CssClass="TextoConsultaOtraColumna"></asp:Label>
+                            <asp:TextBox ID="textBoxCuil" runat="server" Width="10%"></asp:TextBox>
                         </td>
                     </tr>
                     <tr>
@@ -145,7 +148,6 @@
                 </table>
             </div>
         </div>
-    </form>
 </body>
 </html>
 

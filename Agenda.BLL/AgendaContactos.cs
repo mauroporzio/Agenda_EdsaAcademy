@@ -102,6 +102,7 @@ namespace Agenda.BLL
                     nonNonQwerySentence.Append("'" + contactoInsertar.telefonoCelular + "'" + ", ");
                     nonNonQwerySentence.Append("'" + contactoInsertar.eMail + "'" + ", ");
                     nonNonQwerySentence.Append("'" + contactoInsertar.cuentaSkype + "'" + ", ");
+                    nonNonQwerySentence.Append("'" + contactoInsertar.cuil + "'" + ", ");
                     nonNonQwerySentence.Append("'" + "insertarContacto()" + "'");
 
                     dal.EjecutarExecuteNonQueryConTransaccion(transaccion, connection, nonNonQwerySentence.ToString());
@@ -169,6 +170,7 @@ namespace Agenda.BLL
                     nonNonQwerySentence.Append("'" + contactoModificar.telefonoCelular + "'" + ", ");
                     nonNonQwerySentence.Append("'" + contactoModificar.eMail + "'" + ", ");
                     nonNonQwerySentence.Append("'" + contactoModificar.cuentaSkype + "'" + ", ");
+                    nonNonQwerySentence.Append("'" + contactoModificar.cuil + "'" + ", ");
                     nonNonQwerySentence.Append("'" + "modificarContacto()" + "'");
 
                     dal.EjecutarExecuteNonQueryConTransaccion(transaccion, connection, nonNonQwerySentence.ToString());
@@ -253,6 +255,7 @@ namespace Agenda.BLL
                 eMail = Convert.ToString(row["Email"]),
                 cuentaSkype = Convert.IsDBNull(row["CuentaSkype"]) ? null : Convert.ToString(row["CuentaSkype"]),
                 fechaIngreso = Convert.ToDateTime(row["FechaAltaReg"]),
+                cuil = Convert.ToString(row["Cuil"])
 
             };
 
