@@ -43,8 +43,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AgendaContactosDAL.cs" />
+    <Compile Include="GeneroDAL.cs" />
     <Compile Include="PaisDAL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SiNoDAL.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Agenda.Entity\Agenda.Entity.csproj">

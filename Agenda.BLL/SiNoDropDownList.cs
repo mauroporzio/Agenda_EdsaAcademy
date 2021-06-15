@@ -1,21 +1,24 @@
-﻿using Agenda.DAL;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Data;
+using Agenda.DAL;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using Util;
+using System.Data;
 
 namespace Agenda.BLL
 {
-    public class PaisDropDownList : IDisposable
+    public class SiNoDropDownList : IDisposable
     {
         public List<String> getListaPaises()
         {
             try
             {
-                using (PaisDAL dal = new PaisDAL())
+                using (SiNoDAL dal = new SiNoDAL())
                 {
                     var connection = dal.AbrirConexion();
-                    DataSet ds = dal.EjecutarQueryPaisesADataSet(connection);
+                    DataSet ds = dal.EjecutarQuerySiNoADataSet(connection);
                     return DataSetAListaPaises(ds);
                 }
             }
@@ -36,7 +39,7 @@ namespace Agenda.BLL
             {
                 foreach (DataRow row in ds.Tables[0].Rows)
                 {
-                    listaPaises.Add(DataRowAPais(row));
+                    listaPaises.Add(DataRowASiNo(row));
                 }
                 return listaPaises;
             }
@@ -45,13 +48,13 @@ namespace Agenda.BLL
                 return null;
             }
         }
-        public String DataRowAPais(DataRow row)
+        public String DataRowASiNo(DataRow row)
         {
-            return row["NombrePais"].ToString();
+            return row["Valor"].ToString();
         }
         public void Dispose()
         {
-           
+
         }
     }
 }

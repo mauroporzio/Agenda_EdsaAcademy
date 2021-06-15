@@ -6,17 +6,17 @@ using Util;
 
 namespace Agenda.BLL
 {
-    public class PaisDropDownList : IDisposable
+    public class GeneroDropDownList : IDisposable
     {
-        public List<String> getListaPaises()
+        public List<String> getListaGenero()
         {
             try
             {
-                using (PaisDAL dal = new PaisDAL())
+                using (GeneroDAL dal = new GeneroDAL())
                 {
                     var connection = dal.AbrirConexion();
-                    DataSet ds = dal.EjecutarQueryPaisesADataSet(connection);
-                    return DataSetAListaPaises(ds);
+                    DataSet ds = dal.EjecutarQueryGeneroADataSet(connection);
+                    return DataSetAListaGenero(ds);
                 }
             }
             catch (Exception e)
@@ -28,7 +28,7 @@ namespace Agenda.BLL
                 return null;
             }
         }
-        public List<String> DataSetAListaPaises(DataSet ds)
+        public List<String> DataSetAListaGenero(DataSet ds)
         {
             List<String> listaPaises = new List<string>();
 
@@ -36,7 +36,7 @@ namespace Agenda.BLL
             {
                 foreach (DataRow row in ds.Tables[0].Rows)
                 {
-                    listaPaises.Add(DataRowAPais(row));
+                    listaPaises.Add(DataRowAGenero(row));
                 }
                 return listaPaises;
             }
@@ -45,13 +45,13 @@ namespace Agenda.BLL
                 return null;
             }
         }
-        public String DataRowAPais(DataRow row)
+        public String DataRowAGenero(DataRow row)
         {
-            return row["NombrePais"].ToString();
+            return row["Valor"].ToString();
         }
         public void Dispose()
         {
-           
+
         }
     }
 }

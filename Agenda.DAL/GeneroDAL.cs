@@ -1,18 +1,22 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Diagnostics;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using Util;
 
 namespace Agenda.DAL
 {
-    public class PaisDAL : IDisposable
+    public class GeneroDAL : IDisposable
     {
         public SqlConnection connection;
 
         string connString = ConfigurationManager.ConnectionStrings["connectionDB"].ConnectionString; // PATH DEL CONNECTION PROVENIENTE DEL WEB.CONFIG
-        public PaisDAL()
+        public GeneroDAL()
         {
             connection = new SqlConnection(connString);
         }
@@ -33,7 +37,7 @@ namespace Agenda.DAL
                 return null;
             }
         }
-        public DataSet EjecutarQueryPaisesADataSet(SqlConnection connection)
+        public DataSet EjecutarQueryGeneroADataSet(SqlConnection connection)
         {
             using (SqlDataAdapter dataAdapter = new SqlDataAdapter())
             {
@@ -41,7 +45,7 @@ namespace Agenda.DAL
                 {
                     Connection = connection,
                     CommandType = CommandType.Text,
-                    CommandText = "SELECT * FROM Pais"
+                    CommandText = "SELECT * FROM Genero"
                 };
 
                 DataSet dataSetResultado = new DataSet();

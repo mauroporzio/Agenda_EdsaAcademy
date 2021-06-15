@@ -42,6 +42,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AgendaContactos.cs" />
+    <Compile Include="GeneroDropDownList.cs" />
+    <Compile Include="SiNoDropDownList.cs" />
     <Compile Include="IAgendaContactos.cs" />
     <Compile Include="PaisDropDownList.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

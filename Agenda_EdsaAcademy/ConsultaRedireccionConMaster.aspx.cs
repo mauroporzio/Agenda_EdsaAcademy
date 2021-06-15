@@ -3,10 +3,7 @@ using Agenda.Entity;
 using Agenda.BLL;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
-using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Diagnostics;
 
 namespace Agenda_EdsaAcademy
 {
@@ -31,21 +28,27 @@ namespace Agenda_EdsaAcademy
                 DropDownListPais.DataBind();
             }
 
-            DropDownListActivo.DataSource = (List<String>)Application["listaSiNoTODOS"];
-            DropDownListActivo.DataBind();
+            using (SiNoDropDownList siNo = new SiNoDropDownList())
+            {
+                List<String> SiNoTODOS = siNo.getListaPaises();
+                DropDownListActivo.DataSource = SiNoTODOS;
+                DropDownListActivo.DataBind();
+
+                DropDownListContactoInterno.DataSource = SiNoTODOS;
+                DropDownListContactoInterno.DataBind();
+            }
 
             WSAreasAgendaHija WSAreas = new WSAreasAgendaHija();
             DropDownListArea.DataSource = WSAreas.getAreas().ToList(); // SE PIDE AL WS QUE CARGUE LOS CAMPOS DE LA LISTA DE AREAS
             DropDownListArea.DataBind();
 
-            DropDownListActivo.DataSource = (List<String>)Application["listaSiNo"];
-            DropDownListActivo.DataBind();
+            using (GeneroDropDownList genero = new GeneroDropDownList())
+            {
+                List<String> listaGeneros = genero.getListaGenero();
+                DropDownListGenero.DataSource = listaGeneros;
+                DropDownListGenero.DataBind();
+            }    
 
-            DropDownListContactoInterno.DataSource = (List<String>)Application["listaSiNo"];
-            DropDownListContactoInterno.DataBind();
-
-            DropDownListGenero.DataSource = (List<String>)Application["listaGenero"];
-            DropDownListGenero.DataBind();
         }
         public void cargarControlesPorRedireccion() // SE CARGAN DE MANERA PARTICULAR A CADA CASO DE REDIRECCION, SE HABILITAN Y RESTRINGEN CAMPOS SEGUN SEA NECESARIO.
         {

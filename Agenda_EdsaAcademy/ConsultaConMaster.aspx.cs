@@ -163,17 +163,23 @@ namespace Agenda_EdsaAcademy
                 DropDownListPais.DataBind();
             }
 
-            DropDownActivo.DataSource = (List<String>)Application["listaSiNoTODOS"];
-            DropDownActivo.DataBind();
+            using (SiNoDropDownList siNo = new SiNoDropDownList())
+            {
+                List<String> SiNoTODOS = siNo.getListaPaises();
+                SiNoTODOS.Insert(0, "TODOS");
+                DropDownActivo.DataSource = SiNoTODOS;
+                DropDownActivo.DataBind();
+
+                DropDownContactoInterno.DataSource = SiNoTODOS;
+                DropDownContactoInterno.DataBind();
+            }
 
             WSAreasAgendaHija WSAreas = new WSAreasAgendaHija();
             List<String> listaAreasTODOS = WSAreas.getAreas().ToList(); // SE PIDE AL WS QUE CARGUE LOS CAMPOS DE LA LISTA DE AREAS + OPCION "TODOS".
             listaAreasTODOS.Insert(0, "TODOS");
             DropDownArea.DataSource = listaAreasTODOS;
             DropDownArea.DataBind();
-            
-            DropDownContactoInterno.DataSource = (List<String>)Application["listaSiNoTODOS"];
-            DropDownContactoInterno.DataBind();
+           
         }
         public void cambiarIndicePagina(object sender, GridViewPageEventArgs e) // METODO ENCARGADO DE EL MANEJO DE LAS PAGINAS DE LA GRID VIEW.
         {

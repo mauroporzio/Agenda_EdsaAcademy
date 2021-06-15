@@ -117,7 +117,7 @@
                             <asp:Button ID="Button1" runat="server" Text="Cancelar" CssClass="botonNuevoContacto" OnClick="cancelarCreacion" CausesValidation="False" />
 
 
-                            <asp:Button ID="Button2" runat="server" Text="Guardar" CssClass="botonConsulta" OnClick="guardarContacto" />
+                            <asp:Button ID="Button2" runat="server" Text="Guardar" CssClass="botonConsulta" OnClick="guardarContacto"/>
 
                             <script>
                                 function validateNuevoContacto() {
