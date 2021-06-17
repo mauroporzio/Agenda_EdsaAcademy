@@ -144,6 +144,7 @@ namespace Agenda_EdsaAcademy
                 DropDownListPais.SelectedValue = contactoEditar.pais;
                 DropDownListContactoInterno.SelectedValue = contactoEditar.contactoInterno;
                 DropDownListArea.SelectedValue = contactoEditar.area;
+                DropDownListActivo.SelectedValue = contactoEditar.activo;
 
                 if (contactoEditar.contactoInterno.Equals("Si"))
                 {
